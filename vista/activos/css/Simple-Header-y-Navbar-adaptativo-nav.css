@@ -1,0 +1,220 @@
+body {
+  background-color:#101218;
+}
+body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+  }
+
+  body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+  }
+  .content {
+    flex: 1 0 auto;
+  }
+  .main-content {
+      padding-top: 0px; /* Ajusta este valor según la altura de tu navbar */
+  }
+
+/*
+#navbar {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  will-change: transform, opacity;
+}
+
+#navbar.fixed {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transform: translateY(0);
+  opacity: 1;
+}
+
+#navbar.pre-fixed {
+  transform: translateY(-10px);
+  opacity: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  will-change: transform, opacity;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 10px 0;
+  margin: 0;
+  background: #263238;
+ margin: 0;
+/* Negro con 50% de transparencia */
+ /*color del menu*/
+ /*opacity: 0.9;
+  color: white;
+  text-align: center;
+}
+
+nav ul li {
+  margin: -2px 0;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+}
+
+nav ul li a {
+  text-decoration: none;
+  font-size: 0.85rem;/*tamaño de letras del menu*/
+  /*padding: 10px;
+  display: block;
+  color: white;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  color: #ff6b35;
+}
+
+/* Sección principal */
+
+/* Botón para mostrar menú en móvil */
+/*.handle {
+  width: 100%;
+  text-align: left;
+  box-sizing: border-box;
+  padding: 15px 10px;
+  cursor: pointer;
+  color: white;
+  display: none;
+  background: grey;
+  font-weight: bold;
+  font-size: 1rem;
+}*/
+/*
+@media (max-width: 768px) {
+  .handle {
+    display: block;
+  }
+}
+
+i {
+  display: none;
+}*/
+/*
+.submenu {
+    display: none;
+    position: absolute;
+    background: #4c4c4c;
+    z-index: 9999; /* Asegúrate de que el z-index sea alto, más alto que la marquesina */
+  /*  top: 100%;
+    left: 0;
+    min-width: 250px;
+    font-size: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.has-submenu:hover .submenu {
+    display: block;
+    opacity: 1; /* Asegúrate de que sea visible cuando se pase el ratón */
+}
+
+/* Estilo de los ítems dentro del submenú */
+/*.submenu li {
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+
+.submenu li a {
+  color: white;
+  padding: 3px 13px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  font-size: 0.75rem;
+}
+
+.submenu li a:hover {
+  background-color: #f3ebeb;
+}
+
+/* Responsive */
+/*@media screen and (max-width: 580px) {
+  nav ul {
+    max-height: 0;
+    overflow: hidden;
+  }
+
+  nav ul.showing {
+    max-height: 1000px;
+    overflow: visible;
+  }
+
+  nav ul li {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0;
+    text-align: left;
+  }
+
+  i {
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  .submenu {
+    position: static;
+    width: 100%;
+  }
+}
+
+/*css de conteo de numeros de poblacion altitud*/
+
+  .counter {
+    font-size: 45px;
+    color: #007bff;
+  }
+  .counter-box {
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  .unit {
+    font-size: 1.5rem;
+    margin-left: 5px;
+    color: #555;
+  }
+  .card-hover:hover {
+    transform: translateY(-10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  }
+
+
+
+
+
+
+  h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+  }
