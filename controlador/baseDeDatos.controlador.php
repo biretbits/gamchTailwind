@@ -22,22 +22,12 @@ class BaseDeDatosControlador{
   }
 
   public static function exportarDatos($tables, $handle, $u) {
-
       // Escribe el encabezado del volcado
-      fwrite($handle, "-- MariaDB dump\n");
-      fwrite($handle, "-- Host: localhost    Database: cds\n");
-      fwrite($handle, "-- Server version 10.4.32-MariaDB\n\n");
-
-      fwrite($handle, "/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;\n");
-      fwrite($handle, "/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;\n");
-      fwrite($handle, "/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;\n");
-      fwrite($handle, "/*!40101 SET NAMES utf8mb4 */;\n");
-      fwrite($handle, "/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;\n");
-      fwrite($handle, "/*!40103 SET TIME_ZONE='+00:00' */;\n");
-      fwrite($handle, "/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;\n");
-      fwrite($handle, "/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;\n");
-      fwrite($handle, "/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;\n");
-      fwrite($handle, "/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;\n\n");
+      fwrite($handle, "-- Exportación de la base de datos\n");
+      fwrite($handle, "-- Base de datos: gamch\n");
+      fwrite($handle, "-- Versión: " . mysqli_get_client_version() . "\n\n");
+      // Desactiva las claves foráneas temporalmente
+      fwrite($handle, "SET FOREIGN_KEY_CHECKS = 0;\n");
 
       // Aquí empieza el volcado de las tablas
       foreach ($tables as $table) {
@@ -50,10 +40,6 @@ class BaseDeDatosControlador{
 
           fwrite($handle, "\n-- Dumping data for table `$table`\n\n");
 
-          // Escribe el bloque LOCK TABLES y desactiva las claves
-          fwrite($handle, "LOCK TABLES `$table` WRITE;\n");
-          fwrite($handle, "/*!40000 ALTER TABLE `$table` DISABLE KEYS */;\n");
-
           // Obtiene los datos de la tabla
           $result = $u->seleccionarTablas($table);
           $numFields = $result->field_count;
@@ -65,20 +51,23 @@ class BaseDeDatosControlador{
           while ($row = $result->fetch_row()) {
               $values = [];
               for ($i = 0; $i < $numFields; $i++) {
-                  // Si el valor es nulo, lo reemplaza por una cadena vacía
-                  $value = isset($row[$i]) ? $row[$i] : '';
+                  // Si el valor es nulo, lo reemplaza por NULL
+                  $value = isset($row[$i]) ? $row[$i] : null;
 
-                  // Decodifica las entidades HTML antes de escapar los valores
-                  $value = html_entity_decode((string)$value);
-
-                  // Escapa los valores
-                  $value = addslashes($value);
-
-                  // Si es un valor numérico o null, lo agrega directamente
-                  if ($value === '' || is_numeric($value)) {
+                  // Si es un valor nulo, lo agrega como NULL
+                  if ($value === null) {
+                      $values[] = 'NULL';
+                  } elseif (is_numeric($value)) {
+                      // Si es un valor numérico, lo agrega directamente
                       $values[] = $value;
                   } else {
-                      $values[] = "'" . $value . "'";  // Usando comillas simples
+                      // Si es una cadena, la escapa y la pone entre comillas simples
+                      $escaped_value = "'" . addslashes($value) . "'";
+                      // Reemplaza valores vacíos por NULL si es necesario
+                      if (empty($value)) {
+                          $escaped_value = 'NULL';
+                      }
+                      $values[] = $escaped_value;
                   }
               }
 
@@ -90,28 +79,15 @@ class BaseDeDatosControlador{
           if (!empty($insertValues)) {
               fwrite($handle, "INSERT INTO `$table` VALUES\n" . implode(",\n", $insertValues) . ";\n");
           }
-
-          // Escribe el bloque para habilitar las claves y liberar las tablas
-          fwrite($handle, "/*!40000 ALTER TABLE `$table` ENABLE KEYS */;\n");
-          fwrite($handle, "UNLOCK TABLES;\n\n");
       }
 
-      // Restaurar las configuraciones finales
-      fwrite($handle, "\n/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;\n");
-      fwrite($handle, "/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;\n");
-      fwrite($handle, "/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;\n");
-      fwrite($handle, "/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;\n");
-      fwrite($handle, "/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;\n");
-      fwrite($handle, "/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;\n");
-      fwrite($handle, "/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;\n");
-      fwrite($handle, "/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;\n");
-
+      // Reactiva las claves foráneas
+      fwrite($handle, "SET FOREIGN_KEY_CHECKS = 1;\n"); // Asegúrate de que aquí esté escrito correctamente
+      fwrite($handle, "-- Se exporta la base de datos correctamente\n");
       // Cierra el archivo
       fclose($handle);
+
   }
-
-
-
 
   public static function ImportaRbd(){
     if (isset($_FILES["file"]) && $_FILES["file"]["error"] == 0) {

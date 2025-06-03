@@ -47,13 +47,16 @@ require_once('vista/esquema/header.php');
       const file = fileInput.files[0];
 
       if (!file) {
-          error('Por favor, selecciona un archivo.');
+            alertaValidacion('error','Seleccione un archivo por favor.',"Error");
+            document.getElementById('archivo_importar').value = '';
           return;
       }
 
       const extension = file.name.split('.').pop().toLowerCase();
       if (extension !== 'sql') {
-          error('Solo se permiten archivos con extensión .sql');
+
+          alertaValidacion('error','Solo se permiten archivos con extensión .sql',"Error");
+          document.getElementById('archivo_importar').value = '';
           return;
       }
 
@@ -68,21 +71,30 @@ require_once('vista/esquema/header.php');
           processData: false,
           success: function (response) {
             console.log(response);
-              if (response.trim() === 'correcto') {
-                  correcto("Se importó correctamente");
-                  setTimeout(() => {
-                      $('#exampleModal').modal('hide');
-                  }, 2000);
+              if (response.trim() === 'Correcto') {
+                  alertaValidacion('success','Se importó correctamente','Correcto');
+                  document.getElementById('archivo_importar').value = '';
               } else {
-                  error(response);
+                  alertaValidacion('error',response,"Error");
+                  document.getElementById('archivo_importar').value = '';
               }
           },
           error: function () {
-              error('Error al subir el archivo.');
+              alertaValidacion('error','Error al subir el archivo','Error');
+              document.getElementById('archivo_importar').value = '';
           }
       });
   }
 
+     function alertaValidacion(icono,texto,titulo){
+      Swal.fire({
+       icon: icono,
+       title: titulo,
+       text: texto,
+       showConfirmButton: false,
+       timer: 2000
+     });
+     }
 </script>
 
 <?php
