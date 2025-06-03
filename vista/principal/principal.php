@@ -290,23 +290,30 @@ require_once('vista/esquema/header.php');
           if ($j == 0) {
               ?>
 
-              <div class="news-card big-news border border-red-500">
-                <div class="w-full flex justify-center items-center overflow-hidden">
-                  <img
-                    src="<?php echo ($fil['foto'] != '') ? $fil['foto'] : 'imagenes/img-challapata/banner2.jpg'; ?>"
-                    class="object-contain max-h-full max-w-full"
-                    alt="Imagen dinámica">
+              <div class="flex flex-wrap">
+                <div class="news-card md:w-full p-2 border border-red-500">
+                    <div class="w-full flex justify-center items-center overflow-hidden">
+                        <img
+                            src="<?php echo ($fil['foto'] != '') ? $fil['foto'] : 'imagenes/img-challapata/banner2.jpg'; ?>"
+                            class="object-contain max-h-full max-w-full"
+                            alt="Imagen dinámica">
+                    </div>
+                    <div class="news-overlay w-full flex justify-center items-center">
+                        <a href="#"  onclick="SeguirLeyendo(<?php echo $fil["id"]; ?>)" class="news-title"><?php echo $fil['titulo']; ?></a>
+                    </div>
                 </div>
-                <div class="news-overlay w-full flex justify-center items-center">
-                     <a href="#"  onclick="SeguirLeyendo(<?php echo $fil["id"]; ?>)"class="news-title"><?php echo $fil['titulo']; ?></a>
+
+                <!-- Contenedor de los elementos contenido y fecha con flexbox -->
+                <div class="flex flex-col w-full text-left">
+                    <div class="news-desc3 md:w-full"><?php echo $fil['contenido']; ?></div>
+                    <div class="news-date md:w-full text-left"><?php echo fechaAnoMesDia($fil["fecha"]); ?></div>
+                </div>
+                <!-- Contenedor para el enlace "Ver más" alineado a la derecha -->
+                <div class="text-right w-full">
+                    <a href="#" onclick="SeguirLeyendo(<?php echo $fil["id"]; ?>)" class="text-green-600">Ver más</a>
                 </div>
               </div>
-              <div class="news-desc3"><?php echo $fil['contenido']; ?> </div><div class="news-date"><?php echo fechaAnoMesDia($fil["fecha"]);?></div>
-              <div class="text-right">
-                <a href="#"  onclick="SeguirLeyendo(<?php echo $fil["id"]; ?>)" class="text-green-600">
-                  Ver más
-                </a>
-              </div>
+
               <?php
           } else {
               if ($j % 2 == 1) {

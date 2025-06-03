@@ -59,7 +59,7 @@
     💬
   </button>-->
 
-<nav class="bg-white border-gray-200 dark:bg-gray-900 dark:border-gray-700 sticky top-0 z-[25]">
+<nav class="bg-white border-gray-200 dark:bg-black-900 dark:border-gray-700 sticky top-0 z-[25]">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
     <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
       <img src="imagenes/gamch/Logo%20Alcaldía_Mesa%20de%20trabajo%201%20copia.webp" class="h-8" alt="Flowbite Logo" >
@@ -111,12 +111,19 @@
         </li>
         <li class="relative group">
           <a href="/Noticia" class="w-full flex justify-between items-center px-4 py-2 rounded-md transition bg-gradient-to-r from-blue-50 to-white hover:from-blue-200 hover:to-blue-100 hover:text-blue-700 lg:inline-flex lg:items-center lg:space-x-1">
-          <i class="fa fa-newspaper-o"></i> NOTICIAS
+            <i class="fa fa-newspaper-o"></i> <span class="ml-2">NOTICIAS</span>
+            <svg class="w-4 h-4 ml-2 lg:ml-1 lg:mt-0 mt-1 transform transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
           </a>
         </li>
+
         <li class="relative group">
           <a href="/Servicios" class="w-full flex justify-between items-center px-4 py-2 rounded-md transition bg-gradient-to-r from-blue-50 to-white hover:from-blue-200 hover:to-blue-100 hover:text-blue-700 lg:inline-flex lg:items-center lg:space-x-1">
-          <i class="fa fa-cogs"></i> SERVICIOS
+            <i class="fas fa-briefcase"></i> <span class="ml-1">SERVICIOS</span>
+            <svg class="w-4 h-4 ml-2 lg:ml-1 lg:mt-0 mt-1 transform transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
           </a>
         </li>
         <li class="relative group">
@@ -141,7 +148,7 @@
 
         <li class="relative group">
           <button class="submenu-btn w-full flex justify-between items-center px-4 py-2 rounded-md transition bg-gradient-to-r from-blue-50 to-white hover:from-blue-200 hover:to-blue-100 hover:text-blue-700 lg:inline-flex lg:items-center lg:space-x-1">
-            <i class="fa fa-cogs"></i> <span class="ml-2">NORMATIVA</span>
+            <i class="fas fa-list-alt"></i> <span class="ml-2">NORMATIVA</span>
             <svg class="w-4 h-4 ml-2 lg:ml-1 lg:mt-0 mt-1 transform transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
@@ -158,7 +165,7 @@
         </li>
         <li class="relative group">
           <button class="submenu-btn w-full flex justify-between items-center px-4 py-2 rounded-md transition bg-gradient-to-r from-blue-50 to-white hover:from-blue-200 hover:to-blue-100 hover:text-blue-700 lg:inline-flex lg:items-center lg:space-x-1">
-            <i class="fa fa-cogs"></i> <span class="ml-2">GESTIÓN TRANSPARENTE</span>
+            <i class="fas fa-list-alt"></i> <span class="ml-2">GESTIÓN TRANSPARENTE</span>
             <svg class="w-4 h-4 ml-2 lg:ml-1 lg:mt-0 mt-1 transform transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
@@ -176,7 +183,7 @@
         <?php if (isset($_SESSION['id']) && $_SESSION['id'] != '' && isset($_SESSION['nombre_role']) && $_SESSION['nombre_role'] == 'Admin'): ?>
           <li class="relative group">
             <a href="/panel" class="w-full flex justify-between items-center px-4 py-2 rounded-md transition  to-white hover:from-blue-200 hover:to-blue-100 hover:text-blue-700 lg:inline-flex lg:items-center lg:space-x-1">
-            <i class="fa fa-cogs"></i> PANEL
+              <i class="fas fa-tachometer-alt"></i> <span class="ml-2">PANEL</span>
             </a>
           </li>
         <?php endif; ?>

@@ -32,13 +32,14 @@
 
                     <!-- Campo de búsqueda -->
                     <div class="flex-grow">
-                        <div class="relative">
-                            <input type="text" class="form-input p-2 w-full text-sm pl-10" id="buscar" name="buscar" placeholder="Buscar..." onkeyup="BuscarUsuarios(1)">
-                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted">
+                        <div class="relative inline-flex items-center w-full">
+                            <span class="absolute left-3 text-muted">
                                 <i class="fas fa-search"></i>
                             </span>
+                            <input type="text" class="form-input p-2 w-full text-sm pl-10 placeholder-white" id="buscar" name="buscar" placeholder="Buscar..." onkeyup="BuscarUsuarios(1)">
                         </div>
                     </div>
+
 
                 </div>
             </div>
