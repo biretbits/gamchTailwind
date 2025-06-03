@@ -8,7 +8,7 @@ class BaseDeDatosControlador{
   public static function ExportarBD() {
       $u = new BaseDeDatos();
       $tablas = $u->showTables();  // Asumiendo que esta función retorna una lista de nombres de tablas.
-      $backupArchivo = 'cds_' . date("Y-m-d-H-i-s") . '.sql';
+      $backupArchivo = 'gamch_' . date("Y-m-d-H-i-s") . '.sql';
       $handle = fopen($backupArchivo, 'w+');
       self::exportarDatos($tablas, $handle, $u);
       header('Content-Description: File Transfer');
