@@ -56,123 +56,369 @@ require_once('vista/esquema/header.php');
   </div>
 </div>
 
+
+
 <div class="content">
-  <div class="container1">
-  <div class="col-auto mb-2" style="color:gray">
-    <h5>GESTIÓN DE EMPLEADOS</h5>
-  </div>
-  <div class="border rounded shadow-sm p-3 bg-white">
-
-  <input type="hidden" name="paginas" id='paginas' value="">
-  <div class="row">
-      <label for="selectPage" class="form-label">Página</label>
-      <div class="col-2">
-        <select class="form-select" id="selectList" onchange="BuscarUsuarios(1)" name="selectList">
-          <option>--</option>
-          <option>5</option>
-          <option>10</option>
-          <option>25</option>
-          <option>50</option>
-          <option>100</option>
-          <option>250</option>
-          <option>500</option>
-          <option>1000</option>
-        </select>
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col md:flex-row items-center py-4 text-white">
+      <h5 class="text-lg font-semibold">GESTIÓN DE EMPLEADOS</h5>
+    </div>
+    <div class="border rounded shadow-sm p-4 bg-white">
+      <input type="hidden" name="paginas" id="paginas" value="">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div class="flex flex-col">
+          <select class="form-select" id="selectList" onchange="BuscarUsuarios(1)" name="selectList">
+            <option>Seleccione Listar</option>
+            <option>5</option>
+            <option>10</option>
+            <option>25</option>
+            <option>50</option>
+            <option>100</option>
+            <option>250</option>
+            <option>500</option>
+            <option>1000</option>
+          </select>
+        </div>
+        <div class="flex flex-col">
+          <button type="button"
+                class="py-2 px-2 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600"
+                onclick="openModal(); accionBtnEditar('','','','','','','','','','','')">
+          <i class="fas fa-plus"></i> Nuevo
+        </button>
+        </div>
+        <div class="flex flex-col col-span-2 md:col-span-1">
+          <input type="text" class="form-control mb-3 py-2 px-4 border rounded-md" placeholder="Buscar..." id="buscar" onkeyup="BuscarUsuarios(1)">
+        </div>
       </div>
-      <div class="col-2" title="Registro de nuevo Rol">
 
-        <button type="button" class="form-control btn btn-primary" onclick="accionBtnEditar('','','','','','','','','','','')" class="d-sm-inline-block btn btn-sm btn-success shadow-sm" data-bs-toggle="modal" data-bs-target="#ModalRegistro">
-          <i class="fas fa-plus-circle"></i>
+
+      <!-- Modal -->
+<div id="ModalRegistro" tabindex="-1" aria-hidden="true" class="fixed inset-0 z-50 overflow-y-auto bg-gray-900 bg-opacity-50 hidden">
+  <div class="flex items-center justify-center min-h-screen p-4 text-center">
+    <div class="relative w-full max-w-2xl bg-white rounded-lg shadow-lg">
+      <!-- Modal Header -->
+      <div class="flex justify-between items-center p-4 border-b">
+        <h6 class="text-gray-700 font-semibold" id="miModalRegistro">DATOS DEL EMPLEADO</h6>
+        <button type="button" class="text-gray-500 hover:text-gray-700" onclick="closeModal()">
+          <i class="fas fa-times"></i>
         </button>
       </div>
-      <div class="col-3">
 
-      </div>
-      <div class="col-5">
-        <input type="text" class="form-control mb-3" placeholder="Buscar..." id='buscar' onkeyup="BuscarUsuarios(1)">
-      </div>
-    </div>
-  <div class="modal fade" id="ModalRegistro" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h6 class="modal-title" id="miModalRegistro"style="color:dimgray">DATOS DEL EMPLEADO</h6>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <!-- Modal Body -->
+      <div class="p-4">
+        <div class="space-y-4">
+          <form>
+             <!-- Campos ocultos -->
+             <input type="hidden" name="id" id="id" value="">
+             <input type="hidden" name="id_nivel" id="id_nivel" value="">
+             <input type="hidden" name="id_cargo" id="id_cargo" value="">
+
+             <!-- Select Cargo -->
+             <div class="mb-4">
+               <label for="cargo" class="block text-sm font-semibold text-gray-700">Cargo</label>
+               <select id="cargo" class="form-select w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                 <option value="">Seleccione cargo</option>
+               </select>
+             </div>
+
+             <!-- Select Tipo de Empleado -->
+             <div class="mb-4">
+               <label for="empleado" class="block text-sm font-semibold text-gray-700">Tipo de empleado</label>
+               <select id="empleado" class="form-select w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                 <option value="">Seleccione tipo de empleado</option>
+                 <option value="autoridad">Autoridad</option>
+                 <option value="normal">Normal</option>
+               </select>
+             </div>
+
+             <!-- Nombre -->
+             <div class="mb-4">
+               <label for="nombre" class="block text-sm font-semibold text-gray-700">Nombre</label>
+               <input type="text" class="form-input w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="nombre" name="nombre" placeholder="Ponga nombre" required>
+             </div>
+
+             <!-- Apellido Paterno -->
+             <div class="mb-4">
+               <label for="apellido_p" class="block text-sm font-semibold text-gray-700">Apellido Paterno</label>
+               <input type="text" class="form-input w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="apellido_p" name="apellido_p" placeholder="Ponga apellido paterno" required>
+             </div>
+
+             <!-- Apellido Materno -->
+             <div class="mb-4">
+               <label for="apellido_m" class="block text-sm font-semibold text-gray-700">Apellido Materno</label>
+               <input type="text" class="form-input w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="apellido_m" name="apellido_m" placeholder="Ponga apellido materno" required>
+             </div>
+
+             <!-- Select Sexo -->
+             <div class="mb-4">
+               <label for="sexo" class="block text-sm font-semibold text-gray-700">Sexo</label>
+               <select id="sexo" class="form-select w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                 <option value="">Seleccione sexo</option>
+                 <option value="Masculino">Masculino</option>
+                 <option value="Femenino">Femenino</option>
+               </select>
+             </div>
+
+             <!-- Dirección -->
+             <div class="mb-4">
+               <label for="direccion" class="block text-sm font-semibold text-gray-700">Dirección</label>
+               <input type="text" class="form-input w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="direccion" name="direccion" placeholder="Ponga la Dirección" required>
+             </div>
+
+             <!-- Teléfono -->
+             <div class="mb-4">
+               <label for="telefono" class="block text-sm font-semibold text-gray-700">Teléfono</label>
+               <input type="number" class="form-input w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" id="telefono" name="telefono" placeholder="Ponga el teléfono" required>
+             </div>
+
+             <!-- Correo Electrónico -->
+             <div class="mb-4">
+               <label for="gmail" class="block text-sm font-semibold text-gray-700">Correo Electrónico</label>
+               <input type="email" class="form-input w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" name="gmail" id="gmail" placeholder="ejemplo@gmail.com" required>
+             </div>
+
+             <!-- Foto de Perfil -->
+             <div class="mb-4">
+               <label for="upload" class="block text-sm font-semibold text-gray-700">Selecciona tu foto (JPG o PNG, optimizada)</label>
+               <input type="file" accept="image/jpeg, image/png" class="form-input w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" name="upload" id="upload" required>
+               <div id="preview-container" class="mt-2">
+                 <img id="avatar" class="avatar-preview" style="display:none;" alt="Vista previa">
+               </div>
+             </div>
+
+          </form>
+
         </div>
-        <!-- Contenido del modal -->
-        <div class="modal-body">
-          <div class="card shadow-lg">
-           <div class="card-body">
-             <form>
-
-               <input type="hidden" name="id" id='id' value="">
-               <input type="hidden" name="id_nivel" id='id_nivel' value="">
-               <input type="hidden" name="id_cargo" id='id_cargo' value="">
-
-               <div class="input-group input-group-sm mb-3">
-                 <select id="cargo" class="form-select select2" required>
-                   <option value="">Seleccione cargo</option>
-                </select>
-               </div>
-
-              <div class="input-group input-group-sm mb-3">
-                <select id="empleado" class="form-control" required>
-                  <option value="">Seleccione tipo de empleado</option>
-                  <option value="Autoridad">Autoridad</option>
-                  <option value="Normal">Normal</option>
-                </select>
-              </div>
-               <div class="mb-3">
-                 <input type="text"class="form-control mayu" id="nombre" name='nombre' placeholder="Ponga nombre">
-               </div>
-               <div class="mb-3">
-                 <input type="text"class="form-control mayu" id="apellido_p" name='apellido_p' placeholder="Ponga apellido paterno">
-               </div>
-               <div class="mb-3">
-                 <input type="text"class="form-control mayu" id="apellido_m" name='apellido_m' placeholder="Ponga apellido materno">
-               </div>
-               <div class="input-group input-group-sm mb-3">
-                 <select id="sexo" class="form-select select2" required>
-                   <option value="">Seleccione sexo</option>
-                   <option value="Masculino">Masculino</option>
-                   <option value="Femenino">Femenino</option>
-                 </select>
-               </div>
-
-               <div class="mb-3">
-                 <input type="text"class="form-control" id="direccion" name='direccion' placeholder="Ponga la Direccióno">
-               </div>
-
-               <div class="mb-3">
-                 <input type="number" class="form-control mayu" id="telefono" name='telefono' placeholder="Ponga el Telefono">
-               </div>
-               <div class="mb-3">
-                 <input type="email" class="form-control" name="gmail" id="gmail"
-                        required
-
-                        placeholder="ejemplo@gmail.com">
-              </div>
-               <div class="mb-3">
-                 <h6>Selecciona tu foto (JPG o PNG, optimizada)</h6>
-                 <input type="file"accept="image/jpeg, image/png"  class="form-control" name="upload" id='upload' required>
-                  <div id="preview-container">
-                    <img id="avatar" class="avatar-preview" style="display:none;">
-                  </div>
-               </div>
-
-
-             </form>
-           </div>
-         </div>
-        <!-- Pie de página del modal -->
       </div>
-        <div class="modal-footer">
-          <button title='Guardar'type="button" class="btn btn-primary" onclick="registrar()"><i class="fas fa-save"></i></button>
-         <button title='cerrar'type="button" class="btn btn-danger" data-bs-dismiss="modal"><i class="fas fa-times"></i></button>
-        </div>
+
+      <!-- Modal Footer -->
+      <div class="flex justify-end space-x-2 p-4 border-t">
+        <button type="button" class="btn btn-primary py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600" onclick="registrar()">
+          <i class="fas fa-save"></i> Guardar
+        </button>
+        <button type="button" class="btn btn-secondary py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600" onclick="closeModal()">
+          <i class="fas fa-times"></i> Cerrar
+        </button>
       </div>
     </div>
   </div>
+</div>
+
+      <!-- Tabla -->
+      <div class="verDatos" id="verDatos">
+        <div class="overflow-x-auto">
+          <table class="table-auto w-full text-sm text-left border-collapse">
+            <thead>
+              <tr>
+                <th class="px-4 py-2 border">N°</th>
+                <th class="px-4 py-2 border">Nombre</th>
+                <th class="px-4 py-2 border">Apellido P.</th>
+                <th class="px-4 py-2 border">Apellido M.</th>
+                <th class="px-4 py-2 border">Tipo Empleado</th>
+                <th class="px-4 py-2 border">Sexo</th>
+                <th class="px-4 py-2 border">Dirección</th>
+                <th class="px-4 py-2 border">Telefono</th>
+                <th class="px-4 py-2 border">Gmail</th>
+                <th class="px-4 py-2 border">Foto</th>
+                <th class="px-4 py-2 border">Nivel</th>
+                <th class="px-4 py-2 border">Cargo</th>
+                <th class="px-4 py-2 border">Fecha Reg.</th>
+                <th class="px-4 py-2 border">Ultima Actualización</th>
+                <th class="px-4 py-2 border">Acción</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php
+              if ($resul && mysqli_num_rows($resul) > 0) {
+                  $i = $inicioList;
+                  while($fi = mysqli_fetch_array($resul)){
+                      echo "<tr>";
+                      echo "<td class='px-4 py-2 border'>".($i+1)."</td>";
+                      echo "<td class='px-4 py-2 border'>".$fi['nombre']."</td>";
+                      echo "<td class='px-4 py-2 border'>".$fi['apellido_p']."</td>";
+                      echo "<td class='px-4 py-2 border'>".$fi['apellido_m']."</td>";
+                      echo "<td class='px-4 py-2 border'>".$fi['tipo_empleado']."</td>";
+                      echo "<td class='px-4 py-2 border'>".$fi['sexo']."</td>";
+                      echo "<td class='px-4 py-2 border'>".$fi['direccion']."</td>";
+                      echo "<td class='px-4 py-2 border'>".$fi['telefono']."</td>";
+                      echo "<td class='px-4 py-2 border'>".$fi['correo_electronico']."</td>";
+
+                      // Foto
+                      if($fi['foto'] == "default.jpg" || $fi['foto'] == ""){
+                          echo "<td class='flex justify-center items-center w-24 h-24'>
+                              <img src='imagenes/user.png' alt='foto' class='rounded-full object-cover w-full h-full'>
+                          </td>";
+                      } else {
+                          echo "<td class='flex justify-center items-center w-24 h-24'>
+                              <img src='".$fi['foto']."' alt='foto' class='rounded-full object-cover w-full h-full'>
+                          </td>";
+                      }
+
+                      echo "<td class='px-4 py-2 border'>".$fi['nivel_empleado']."</td>";
+                      echo "<td class='px-4 py-2 border'>".$fi['cargo_empleado']."</td>";
+                      echo "<td class='px-4 py-2 border'>".$fi['creado_en']."</td>";
+                      echo "<td class='px-4 py-2 border'>".$fi['actualizado_en']."</td>";
+
+                      // Botones de acción
+                      echo "<td class='px-4 py-2 border'>
+                          <div class='flex gap-2'>
+                              <button type='button' class='px-4 py-2 bg-blue-500 text-white rounded-md shadow-sm' title='Editar' data-bs-toggle='modal' data-bs-target='#ModalRegistro' onclick='openModal();accionBtnEditar(
+                                  \"".$fi["id"]."\",
+                                  \"".$fi["nivel_id"]."\",
+                                  \"".$fi["cargo_id"]."\",
+                                  \"".$fi["tipo_empleado"]."\",
+                                  \"".$fi["nombre"]."\",
+                                  \"".$fi["apellido_p"]."\",
+                                  \"".$fi["apellido_m"]."\",
+                                  \"".$fi["sexo"]."\",
+                                  \"".$fi["direccion"]."\",
+                                  \"".$fi["telefono"]."\",
+                                  \"".$fi["correo_electronico"]."\"
+                              )'>
+                                  <i class='fas fa-edit'></i> Editar
+                              </button>
+                              <button type='button' class='px-4 py-2 bg-red-500 text-white rounded-md shadow-sm' title='Eliminar' onclick='accionBtnActivarDesactivar(1, ".$fi["id"].")'>
+                                  <i class='fas fa-trash'></i> Eliminar
+                              </button>
+                          </div>
+                      </td>";
+
+                      echo "</tr>";
+                      $i++;
+                  }
+              } else {
+                  echo "<tr>";
+                  echo "<td colspan='15' class='text-center text-gray-500'>No se encontraron resultados</td>";
+                  echo "</tr>";
+              }
+              ?>
+
+            </tbody>
+          </table>
+        </div>
+        <?php
+    if ($TotalPaginas != 0) {
+        $adjacents = 1;
+        $anterior = "&lsaquo; Anterior";
+        $siguiente = "Siguiente &rsaquo;";
+
+        echo "<div class='row'>
+                <div class='col'>";
+
+        echo "<div class='flex flex-wrap justify-between items-center mb-6 bg-gray-100 rounded-lg'>";
+
+        // Información de la página
+        echo '<ul class="pagination text-gray-600 text-sm flex items-center space-x-3">';
+        echo "Página &nbsp;".$pagina."&nbsp;de&nbsp;".$TotalPaginas."&nbsp;con&nbsp;";
+        echo '<li class="active text-white bg-blue-600 px-1 py-1"><span class="page-link">'.($TotalPaginas).'</span></li>';
+        echo " &nbsp;de&nbsp;".$num_filas_total." registros";
+        echo '</ul>';
+
+
+        echo '<ul class="pagination flex space-x-2 items-center justify-center bg-gray-100 p-3 rounded-lg shadow-lg">';
+
+        // Primer botón (<<)
+        if ($pagina != 1) {
+            echo "<li class='page-item'>
+                    <a class='page-link text-blue-600 hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out transform hover:scale-110 py-2 px-4 rounded-lg'
+                       onclick=\"BuscarUsuarios(1)\"><span aria-hidden='true'>&laquo;</span></a>
+                  </li>";
+        }
+
+        // Botón anterior
+        if ($pagina == 1) {
+            echo "<li class='page-item'><a class='page-link text-gray-400 cursor-not-allowed py-2 px-4 rounded-lg'>$anterior</a></li>";
+        } else if ($pagina == 2) {
+            echo "<li class='page-item'><a href='javascript:void(0);' onclick=\"BuscarUsuarios(1)\"
+                    class='page-link text-blue-600 hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out py-2 px-4 rounded-lg'>$anterior</a></li>";
+        } else {
+            echo "<li class='page-item'>
+                    <a href='javascript:void(0);' class='page-link text-blue-600 hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out py-2 px-4 rounded-lg'
+                       onclick=\"BuscarUsuarios($pagina-1)\">$anterior</a>
+                  </li>";
+        }
+
+        // Enlace de la primera página
+        if ($pagina > ($adjacents + 1)) {
+            echo "<li class='page-item'>
+                    <a href='javascript:void(0);' class='page-link text-blue-600 hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out py-2 px-4 rounded-lg'
+                       onclick=\"BuscarUsuarios(1)\">1</a>
+                  </li>";
+        }
+
+        // Intervalo
+        if ($pagina > ($adjacents + 2)) {
+            echo "<li class='page-item'>
+                    <span class='page-link py-2 px-4 text-gray-400'>...</span>
+                  </li>";
+        }
+
+        // Páginas cercanas
+        $pmin = ($pagina > $adjacents) ? ($pagina - $adjacents) : 1;
+        $pmax = ($pagina < ($TotalPaginas - $adjacents)) ? ($pagina + $adjacents) : $TotalPaginas;
+
+        for ($i = $pmin; $i <= $pmax; $i++) {
+            if ($i == $pagina) {
+                echo "<li class='page-item'>
+                        <span class='page-link text-white bg-blue-600 py-2 px-4 rounded-lg'>$i</span>
+                      </li>";
+            } else {
+                echo "<li class='page-item'>
+                        <a href='javascript:void(0);' class='page-link text-blue-600 hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out py-2 px-4 rounded-lg'
+                           onclick=\"BuscarUsuarios($i)\">$i</a>
+                      </li>";
+            }
+        }
+
+        // Intervalo
+        if ($pagina < ($TotalPaginas - $adjacents - 1)) {
+            echo "<li class='page-item'>
+                    <span class='page-link py-2 px-4 text-gray-400'>...</span>
+                  </li>";
+        }
+
+        // Enlace de la última página
+        if ($pagina < ($TotalPaginas - $adjacents)) {
+            echo "<li class='page-item'>
+                    <a href='javascript:void(0);' class='page-link text-blue-600 hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out py-2 px-4 rounded-lg'
+                       onclick=\"BuscarUsuarios($TotalPaginas)\">$TotalPaginas</a>
+                  </li>";
+        }
+
+        // Botón siguiente
+        if ($pagina < $TotalPaginas) {
+            echo "<li class='page-item'>
+                    <a href='javascript:void(0);' class='page-link text-blue-600 hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out py-2 px-4 rounded-lg'
+                       onclick=\"BuscarUsuarios($pagina+1)\">$siguiente</a>
+                  </li>";
+        } else {
+            echo "<li class='page-item'>
+                    <a class='page-link text-gray-400 cursor-not-allowed py-2 px-4 rounded-lg'>$siguiente</a>
+                  </li>";
+        }
+
+        // Última página (>>)
+        if ($pagina != $TotalPaginas) {
+            echo "<li class='page-item'>
+                    <a class='page-link text-blue-600 hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out py-2 px-4 rounded-lg'
+                       onclick=\"BuscarUsuarios($TotalPaginas)\"><span aria-hidden='true'>&raquo;</span></a>
+                  </li>";
+        }
+
+        echo "</ul>";
+        echo "</div>";
+
+        echo "</div>
+        </div>";
+    }
+    ?>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
 
 
 
@@ -214,190 +460,6 @@ require_once('vista/esquema/header.php');
      reader.readAsDataURL(file);
    });
  </script>
-  <div class="verDatos" id="verDatos">
-    <div class="row">
-      <div class="col">
-        <div class="table-responsive">
-        <table class="table" style='font-size:12px'>
-          <thead>
-            <tr>
-              <th>N°</th>
-              <th>Nombre</th>
-              <th>Apellido P.</th>
-              <th>Apellido M.</th>
-              <th>Tipo Empleado</th>
-              <th>Sexo</th>
-              <th>Dirección</th>
-              <th>Telefono</th>
-              <th>Gmail</th>
-              <th>Foto</th>
-              <th>Nivel</th>
-              <th>Cargo</th>
-              <th>Fecha Reg.</th>
-              <th>Ultima Actualización</th>
-              <th>Acción</th>
-            </tr>
-          </thead>
-          <tbody>
-      <?php
-
-      if ($resul && mysqli_num_rows($resul) > 0) {
-        $i = $inicioList;
-         while($fi = mysqli_fetch_array($resul)){
-            echo "<tr>";
-              echo "<td>".($i+1)."</td>";
-              echo "<td>".$fi['nombre']."</td>";
-              echo "<td>".$fi['apellido_p']."</td>";
-              echo "<td>".$fi['apellido_m']."</td>";
-              echo "<td>".$fi['tipo_empleado']."</td>";
-              echo "<td>".$fi['sexo']."</td>";
-              echo "<td>".$fi['direccion']."</td>";
-              echo "<td>".$fi['telefono']."</td>";
-              echo "<td>".$fi['correo_electronico']."</td>";
-              if($fi['foto'] == "default.jpg" || $fi['foto'] == ""){
-                echo "<td class='d-flex justify-content-center align-items-center' style='width: 100px; height: 100px;'>
-                  <img src='imagenes/user.png' alt='foto' class='img-fluid rounded-circle' style='object-fit: cover; width: 100%; height: 100%;'>
-                </td>";
-              }else{
-                echo "<td class='d-flex justify-content-center align-items-center' style='width: 100px; height: 100px;'>
-                  <img src='".$fi['foto']."' alt='foto' class='img-fluid rounded-circle' style='object-fit: cover; width: 100%; height: 100%;'>
-                </td>";
-              }
-              echo "<td>".$fi['nivel_empleado']."</td>";
-              echo "<td>".$fi['cargo_empleado']."</td>";
-              echo "<td>".$fi['creado_en']."</td>";
-
-              echo "<td>".$fi['actualizado_en']."</td>";
-              echo "<td>";
-              $id_u = '';
-                echo "<div class='btn-group' role='group' aria-label='Basic mixed styles example'>
-                <button type='button'
-             class='btn btn-info btn-sm shadow-sm'
-             title='Editar'
-             data-bs-toggle='modal'
-             data-bs-target='#ModalRegistro'
-             onclick='accionBtnEditar(
-                \"".$fi["id"]."\",
-                \"".$fi["nivel_id"]."\",
-                \"".$fi["cargo_id"]."\",
-                \"".$fi["tipo_empleado"]."\",
-                \"".$fi["nombre"]."\",
-                \"".$fi["apellido_p"]."\",
-                \"".$fi["apellido_m"]."\",
-                \"".$fi["sexo"]."\",
-                \"".$fi["direccion"]."\",
-                \"".$fi["telefono"]."\",
-                \"".$fi["correo_electronico"]."\"
-              )'>
-         <i class='fas fa-edit'></i></button>";
-
-                echo "</div>";
-              echo "</td>";
-            echo "</tr>";
-            $i++;
-          }
-        }else{
-          echo "<tr>";
-          echo "<td colspan='15' align='center'>No se encontraron resultados</td>";
-          echo "</tr>";
-        }
-
-         ?>
-        </tbody>
-      </table>
-      </div>
-    </div>
-  </div>
-  <?php
-  if($TotalPaginas!=0){
-    $adjacents=1;
-    $anterior = "&lsaquo; Anterior";
-    $siguiente = "Siguiente &rsaquo;";
-echo "<div class='row'>
-      <div class='col'>";
-
-    echo "<div class='d-flex flex-wrap flex-sm-row justify-content-between'>";
-      echo '<ul class="pagination">';
-        echo "pagina &nbsp;".$pagina."&nbsp;con&nbsp;";
-          $total=$inicioList+$pagina;
-          if($TotalPaginas > $num_filas_total){
-            $TotalPaginas = $num_filas_total;
-          }
-        echo '<li class="page-item active"><a class=" href="#"> '.($TotalPaginas).' </a></li> ';
-        echo " &nbsp;de&nbsp;".$num_filas_total." registros";
-      echo '</ul>';
-
-      echo '<ul class="pagination d-flex flex-wrap">';
-
-      // previous label
-      if ($pagina != 1) {
-        echo "<li class='page-item'><a class='page-link'  onclick=\"BuscarUsuarios(1)\"><span aria-hidden='true'>&laquo;</span></a></li>";
-      }
-      if($pagina==1) {
-        echo "<li class='page-item'><a class='page-link text-muted'>$anterior</a></li>";
-      } else if($pagina==2) {
-        echo "<li class='page-item'><a href='javascript:void(0);' onclick=\"BuscarUsuarios(1)\" class='page-link'>$anterior</a></li>";
-      }else {
-        echo "<li class='page-item'><a href='javascript:void(0);'class='page-link' onclick=\"BuscarUsuarios($pagina-1)\">$anterior</a></li>";
-
-      }
-      // first label
-      if($pagina>($adjacents+1)) {
-        echo "<li class='page-item'><a href='javascript:void(0);' class='page-link' onclick=\"BuscarUsuarios(1)\">1</a></li>";
-      }
-      // interval
-      if($pagina>($adjacents+2)) {
-        echo"<li class='page-item'><a class='page-link'>...</a></li>";
-      }
-
-      // pages
-
-      $pmin = ($pagina>$adjacents) ? ($pagina-$adjacents) : 1;
-      $pmax = ($pagina<($TotalPaginas-$adjacents)) ? ($pagina+$adjacents) : $TotalPaginas;
-      for($i=$pmin; $i<=$pmax; $i++) {
-        if($i==$pagina) {
-          echo "<li class='page-item active'><a class='page-link'>$i</a></li>";
-        }else if($i==1) {
-          echo"<li class='page-item'><a href='javascript:void(0);' class='page-link'onclick=\"BuscarUsuarios(1)\">$i</a></li>";
-        }else {
-          echo "<li class='page-item'><a href='javascript:void(0);' onclick=\"BuscarUsuarios(".$i.")\" class='page-link'>$i</a></li>";
-        }
-      }
-
-      // interval
-
-      if($pagina<($TotalPaginas-$adjacents-1)) {
-        echo "<li class='page-item'><a class='page-link'>...</a></li>";
-      }
-      // last
-
-      if($pagina<($TotalPaginas-$adjacents)) {
-        echo "<li class='page-item'><a href='javascript:void(0);'class='page-link ' onclick=\"BuscarUsuarios($TotalPaginas)\">$TotalPaginas</a></li>";
-      }
-      // next
-
-      if($pagina<$TotalPaginas) {
-        echo "<li class='page-item'><a href='javascript:void(0);'class='page-link' onclick=\"BuscarUsuarios($pagina+1)\">$siguiente</a></li>";
-      }else {
-        echo "<li class='page-item'><a class='page-link text-muted'>$siguiente</a></li>";
-      }
-      if ($pagina != $TotalPaginas) {
-        echo "<li class='page-item'><a class='page-link' onclick=\"BuscarUsuarios($TotalPaginas)\"><span aria-hidden='true'>&raquo;</span></a></li>";
-      }
-
-      echo "</ul>";
-      echo "</div>";
-
-echo "</div>
-    </div>";
-
-  }
-   ?>
- </div>
-</div>
- </div>
- </div>
-
  <?php
  // Incluir el archivo footer.php desde la carpeta diseno
  require_once('vista/esquema/footeruni.php');
@@ -428,7 +490,7 @@ function BuscarUsuarios(page){
   }
 
   function verificarList(valor){
-    if(valor != "" && valor != "--"){
+    if(valor != "" && valor != "--" && valor != 'Seleccione Listar'){
       return valor;
     }else{
       return 5;
@@ -602,12 +664,12 @@ function BuscarUsuarios(page){
          var pagina = document.getElementById("paginas").value;
          if(pagina==''){pagina=1;}
          BuscarUsuarios(pagina);
-           $('#ModalRegistro').modal('hide');
+           closeModal();
        }, 1500);
      }else{
        setTimeout(() => {
          location.href="/empleado";
-           $('#ModalRegistro').modal('hide');
+           closeModal();
        }, 1500);
      }
    }
@@ -656,4 +718,12 @@ function BuscarUsuarios(page){
           'border-radius': '.375rem',
         });
       });
+
+      function openModal() {
+        document.getElementById("ModalRegistro").classList.remove("hidden");
+      }
+
+      function closeModal() {
+        document.getElementById("ModalRegistro").classList.add("hidden");
+      }
 </script>

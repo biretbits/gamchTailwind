@@ -73,6 +73,9 @@
 </footer>
 
   <!-- Tailwind CSS CDN -->
+
+  <script src='/vista/activos/browser@4.js'></script>
+
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
   <!-- jQuery (debe ir antes que Select2) -->
@@ -93,8 +96,6 @@
 
   <!-- Tu archivo JS personalizado -->
   <script src="/vista/activos/app.js"></script>
-  <script src='/vista/activos/browser@4.js'></script>
-
 </body>
 
 </html>

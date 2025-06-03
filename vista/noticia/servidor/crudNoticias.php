@@ -180,7 +180,13 @@ require_once('vista/esquema/header.php');
                     echo "<tr>";
                     echo "<td class='px-4 py-2 border'>".($i+1)."</td>";
                     echo "<td class='px-4 py-2 border'>".$fi['titulo']."</td>";
-                    echo "<td class='px-4 py-2 border'>".$fi['contenido']."</td>";
+                    echo "<td class='px-4 py-2'>";
+                    echo "<p id='descripcion-" . $fi['id'] . "' class='text-sm text-gray-500 mt-2 line-clamp-2'>";
+                    echo htmlspecialchars($fi['contenido']);
+                    echo "</p>";
+                    // Botón para alternar entre "ver más" y "ver menos"
+                    echo "<button id='verMasBtn-" . $fi['id'] . "' class='text-blue-500 hover:text-blue-700 mt-2' onclick='toggleDescripcion(" . $fi['id'] . ")'>Ver más</button>";
+                    echo "</td>";
                     echo "<td class='px-4 py-2 border'><img src='" . $fi['foto'] . "' alt='Foto' class='w-20 h-auto'></td>";
                     echo "<td class='px-4 py-2 border'>".$fi['usuario_usuario']."</td>";
                     echo "<td class='px-4 py-2 border'>".$fi['fecha']."</td>";
@@ -557,6 +563,20 @@ function BuscarUsuarios(page){
 
    function closeModal() {
      document.getElementById("ModalRegistro").classList.add("hidden");
+   }
+
+   function toggleDescripcion(id) {
+       const descripcion = document.getElementById('descripcion-' + id);
+       const btn = document.getElementById('verMasBtn-' + id);
+
+       // Si el texto está recortado, mostramos todo el texto y cambiamos el botón
+       if (descripcion.classList.contains('line-clamp-2')) {
+           descripcion.classList.remove('line-clamp-2');
+           btn.innerText = 'Ver menos';
+       } else {
+           descripcion.classList.add('line-clamp-2');
+           btn.innerText = 'Ver más';
+       }
    }
 
 

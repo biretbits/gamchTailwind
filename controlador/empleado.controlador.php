@@ -113,182 +113,208 @@ class EmpleadoControlador{
     $inicioList = ($pagina - 1) * $listarDeCuanto;
 
     $resul = $us->SeleccionarEmpleado($buscar,$inicioList,$listarDeCuanto);
-    echo "
-    <div class='row'>
-      <div class='col'>
-        <div class='table-responsive'>
-        <table class='table' style='font-size:12px'>
-          <thead>
-            <tr>
-            <th>N°</th>
-            <th>Nombre</th>
-            <th>Apellido P.</th>
-            <th>Apellido M.</th>
-            <th>Tipo Empleado</th>
-            <th>Sexo</th>
-            <th>Dirección</th>
-            <th>Telefono</th>
-            <th>Gmail</th>
-            <th>Foto</th>
-            <th>Nivel</th>
-            <th>Cargo</th>
-            <th>Fecha Reg.</th>
-            <th>Ultima Actualización</th>
-            <th>Acción</th>
-            </tr>
-          </thead>
-          <tbody>";
-
-                if ($resul && mysqli_num_rows($resul) > 0) {
+    echo '<div class="overflow-x-auto">
+          <table class="table-auto w-full text-sm text-left border-collapse">
+            <thead>
+              <tr>
+                <th class="px-4 py-2 border">N°</th>
+                <th class="px-4 py-2 border">Nombre</th>
+                <th class="px-4 py-2 border">Apellido P.</th>
+                <th class="px-4 py-2 border">Apellido M.</th>
+                <th class="px-4 py-2 border">Tipo Empleado</th>
+                <th class="px-4 py-2 border">Sexo</th>
+                <th class="px-4 py-2 border">Dirección</th>
+                <th class="px-4 py-2 border">Telefono</th>
+                <th class="px-4 py-2 border">Gmail</th>
+                <th class="px-4 py-2 border">Foto</th>
+                <th class="px-4 py-2 border">Nivel</th>
+                <th class="px-4 py-2 border">Cargo</th>
+                <th class="px-4 py-2 border">Fecha Reg.</th>
+                <th class="px-4 py-2 border">Ultima Actualización</th>
+                <th class="px-4 py-2 border">Acción</th>
+              </tr>
+            </thead>
+            <tbody>';
+              if ($resul && mysqli_num_rows($resul) > 0) {
                   $i = $inicioList;
-                   while($fi = mysqli_fetch_array($resul)){
+                  while($fi = mysqli_fetch_array($resul)){
                       echo "<tr>";
-                        echo "<td>".($i+1)."</td>";
-                        echo "<td>".$fi['nombre']."</td>";
-                        echo "<td>".$fi['apellido_p']."</td>";
-                        echo "<td>".$fi['apellido_m']."</td>";
-                        echo "<td>".$fi['tipo_empleado']."</td>";
-                        echo "<td>".$fi['sexo']."</td>";
-                        echo "<td>".$fi['direccion']."</td>";
-                        echo "<td>".$fi['telefono']."</td>";
-                        echo "<td>".$fi['correo_electronico']."</td>";
-                        if($fi['foto'] == "default.jpg" || $fi['foto'] == ""){
-                          echo "<td class='d-flex justify-content-center align-items-center' style='width: 100px; height: 100px;'>
-                            <img src='imagenes/user.png' alt='foto' class='img-fluid rounded-circle' style='object-fit: cover; width: 100%; height: 100%;'>
-                          </td>";
-                        }else{
-                          echo "<td class='d-flex justify-content-center align-items-center' style='width: 100px; height: 100px;'>
-                            <img src='".$fi['foto']."' alt='foto' class='img-fluid rounded-circle' style='object-fit: cover; width: 100%; height: 100%;'>
-                          </td>";
-                        }
-                        echo "<td>".$fi['nivel_empleado']."</td>";
-                        echo "<td>".$fi['cargo_empleado']."</td>";
-                        echo "<td>".$fi['creado_en']."</td>";
+                      echo "<td class='px-4 py-2 border'>".($i+1)."</td>";
+                      echo "<td class='px-4 py-2 border'>".$fi['nombre']."</td>";
+                      echo "<td class='px-4 py-2 border'>".$fi['apellido_p']."</td>";
+                      echo "<td class='px-4 py-2 border'>".$fi['apellido_m']."</td>";
+                      echo "<td class='px-4 py-2 border'>".$fi['tipo_empleado']."</td>";
+                      echo "<td class='px-4 py-2 border'>".$fi['sexo']."</td>";
+                      echo "<td class='px-4 py-2 border'>".$fi['direccion']."</td>";
+                      echo "<td class='px-4 py-2 border'>".$fi['telefono']."</td>";
+                      echo "<td class='px-4 py-2 border'>".$fi['correo_electronico']."</td>";
 
-                        echo "<td>".$fi['actualizado_en']."</td>";
-                        echo "<td>";
-                        $id_u = '';
-                          echo "<div class='btn-group' role='group' aria-label='Basic mixed styles example'>
-                          <button type='button'
-                       class='btn btn-info btn-sm shadow-sm'
-                       title='Editar'
-                       data-bs-toggle='modal'
-                       data-bs-target='#ModalRegistro'
-                       onclick='accionBtnEditar(
-                          \"".$fi["id"]."\",
-                          \"".$fi["nivel_id"]."\",
-                          \"".$fi["cargo_id"]."\",
-                          \"".$fi["tipo_empleado"]."\",
-                          \"".$fi["nombre"]."\",
-                          \"".$fi["apellido_p"]."\",
-                          \"".$fi["apellido_m"]."\",
-                          \"".$fi["sexo"]."\",
-                          \"".$fi["direccion"]."\",
-                          \"".$fi["telefono"]."\",
-                          \"".$fi["correo_electronico"]."\"
-                        )'>
-                   <i class='fas fa-edit'></i></button>";
+                      // Foto
+                      if($fi['foto'] == "default.jpg" || $fi['foto'] == ""){
+                          echo "<td class='flex justify-center items-center w-24 h-24'>
+                              <img src='imagenes/user.png' alt='foto' class='rounded-full object-cover w-full h-full'>
+                          </td>";
+                      } else {
+                          echo "<td class='flex justify-center items-center w-24 h-24'>
+                              <img src='".$fi['foto']."' alt='foto' class='rounded-full object-cover w-full h-full'>
+                          </td>";
+                      }
 
-                          echo "</div>";
-                        echo "</td>";
+                      echo "<td class='px-4 py-2 border'>".$fi['nivel_empleado']."</td>";
+                      echo "<td class='px-4 py-2 border'>".$fi['cargo_empleado']."</td>";
+                      echo "<td class='px-4 py-2 border'>".$fi['creado_en']."</td>";
+                      echo "<td class='px-4 py-2 border'>".$fi['actualizado_en']."</td>";
+
+                      // Botones de acción
+                      echo "<td class='px-4 py-2 border'>
+                          <div class='flex gap-2'>
+                              <button type='button' class='px-4 py-2 bg-blue-500 text-white rounded-md shadow-sm' title='Editar' data-bs-toggle='modal' data-bs-target='#ModalRegistro' onclick='openModal();accionBtnEditar(
+                                  \"".$fi["id"]."\",
+                                  \"".$fi["nivel_id"]."\",
+                                  \"".$fi["cargo_id"]."\",
+                                  \"".$fi["tipo_empleado"]."\",
+                                  \"".$fi["nombre"]."\",
+                                  \"".$fi["apellido_p"]."\",
+                                  \"".$fi["apellido_m"]."\",
+                                  \"".$fi["sexo"]."\",
+                                  \"".$fi["direccion"]."\",
+                                  \"".$fi["telefono"]."\",
+                                  \"".$fi["correo_electronico"]."\"
+                              )'>
+                                  <i class='fas fa-edit'></i> Editar
+                              </button>
+                              <button type='button' class='px-4 py-2 bg-red-500 text-white rounded-md shadow-sm' title='Eliminar' onclick='accionBtnActivarDesactivar(1, ".$fi["id"].")'>
+                                  <i class='fas fa-trash'></i> Eliminar
+                              </button>
+                          </div>
+                      </td>";
+
                       echo "</tr>";
                       $i++;
-                    }
-                  }else{
-                    echo "<tr>";
-                    echo "<td colspan='15' align='center'>No se encontraron resultados</td>";
-                    echo "</tr>";
                   }
+              } else {
+                  echo "<tr>";
+                  echo "<td colspan='15' class='text-center text-gray-500'>No se encontraron resultados</td>";
+                  echo "</tr>";
+              }
+            echo "</tbody>
+          </table>
+        </div>";
+      if ($TotalPaginas != 0) {
+        $adjacents = 1;
+        $anterior = "&lsaquo; Anterior";
+        $siguiente = "Siguiente &rsaquo;";
 
-        echo "
-        </tbody>
-      </table>
-      </div>
-    </div>
-  </div>";
-  if($TotalPaginas!=0){
-    $adjacents=1;
-    $anterior = "&lsaquo; Anterior";
-    $siguiente = "Siguiente &rsaquo;";
-echo "<div class='row'>
-      <div class='col'>";
+        echo "<div class='row'>
+                <div class='col'>";
 
-    echo "<div class='d-flex flex-wrap flex-sm-row justify-content-between'>";
-      echo '<ul class="pagination">';
-        echo "pagina &nbsp;".$pagina."&nbsp;con&nbsp;";
-          $total=$inicioList+$pagina;
-          if($TotalPaginas > $num_filas_total){
-            $TotalPaginas = $num_filas_total;
-          }
-        echo '<li class="page-item active"><a class=" href="#"> '.($TotalPaginas).' </a></li> ';
+        echo "<div class='flex flex-wrap justify-between items-center mb-6 bg-gray-100 rounded-lg'>";
+
+        // Información de la página
+        echo '<ul class="pagination text-gray-600 text-sm flex items-center space-x-3">';
+        echo "Página &nbsp;".$pagina."&nbsp;de&nbsp;".$TotalPaginas."&nbsp;con&nbsp;";
+        echo '<li class="active text-white bg-blue-600 px-1 py-1"><span class="page-link">'.($TotalPaginas).'</span></li>';
         echo " &nbsp;de&nbsp;".$num_filas_total." registros";
-      echo '</ul>';
+        echo '</ul>';
 
-      echo '<ul class="pagination d-flex flex-wrap">';
 
-      // previous label
-      if ($pagina != 1) {
-        echo "<li class='page-item'><a class='page-link'  onclick=\"BuscarUsuarios(1)\"><span aria-hidden='true'>&laquo;</span></a></li>";
-      }
-      if($pagina==1) {
-        echo "<li class='page-item'><a class='page-link text-muted'>$anterior</a></li>";
-      } else if($pagina==2) {
-        echo "<li class='page-item'><a href='javascript:void(0);' onclick=\"BuscarUsuarios(1)\" class='page-link'>$anterior</a></li>";
-      }else {
-        echo "<li class='page-item'><a href='javascript:void(0);'class='page-link' onclick=\"BuscarUsuarios($pagina-1)\">$anterior</a></li>";
+        echo '<ul class="pagination flex space-x-2 items-center justify-center bg-gray-100 p-3 rounded-lg shadow-lg">';
 
-      }
-      // first label
-      if($pagina>($adjacents+1)) {
-        echo "<li class='page-item'><a href='javascript:void(0);' class='page-link' onclick=\"BuscarUsuarios(1)\">1</a></li>";
-      }
-      // interval
-      if($pagina>($adjacents+2)) {
-        echo"<li class='page-item'><a class='page-link'>...</a></li>";
-      }
-
-      // pages
-
-      $pmin = ($pagina>$adjacents) ? ($pagina-$adjacents) : 1;
-      $pmax = ($pagina<($TotalPaginas-$adjacents)) ? ($pagina+$adjacents) : $TotalPaginas;
-      for($i=$pmin; $i<=$pmax; $i++) {
-        if($i==$pagina) {
-          echo "<li class='page-item active'><a class='page-link'>$i</a></li>";
-        }else if($i==1) {
-          echo"<li class='page-item'><a href='javascript:void(0);' class='page-link'onclick=\"BuscarUsuarios(1)\">$i</a></li>";
-        }else {
-          echo "<li class='page-item'><a href='javascript:void(0);' onclick=\"BuscarUsuarios(".$i.")\" class='page-link'>$i</a></li>";
+        // Primer botón (<<)
+        if ($pagina != 1) {
+            echo "<li class='page-item'>
+                    <a class='page-link text-blue-600 hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out transform hover:scale-110 py-2 px-4 rounded-lg'
+                       onclick=\"BuscarUsuarios(1)\"><span aria-hidden='true'>&laquo;</span></a>
+                  </li>";
         }
-      }
 
-      // interval
+        // Botón anterior
+        if ($pagina == 1) {
+            echo "<li class='page-item'><a class='page-link text-gray-400 cursor-not-allowed py-2 px-4 rounded-lg'>$anterior</a></li>";
+        } else if ($pagina == 2) {
+            echo "<li class='page-item'><a href='javascript:void(0);' onclick=\"BuscarUsuarios(1)\"
+                    class='page-link text-blue-600 hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out py-2 px-4 rounded-lg'>$anterior</a></li>";
+        } else {
+            echo "<li class='page-item'>
+                    <a href='javascript:void(0);' class='page-link text-blue-600 hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out py-2 px-4 rounded-lg'
+                       onclick=\"BuscarUsuarios($pagina-1)\">$anterior</a>
+                  </li>";
+        }
 
-      if($pagina<($TotalPaginas-$adjacents-1)) {
-        echo "<li class='page-item'><a class='page-link'>...</a></li>";
-      }
-      // last
+        // Enlace de la primera página
+        if ($pagina > ($adjacents + 1)) {
+            echo "<li class='page-item'>
+                    <a href='javascript:void(0);' class='page-link text-blue-600 hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out py-2 px-4 rounded-lg'
+                       onclick=\"BuscarUsuarios(1)\">1</a>
+                  </li>";
+        }
 
-      if($pagina<($TotalPaginas-$adjacents)) {
-        echo "<li class='page-item'><a href='javascript:void(0);'class='page-link ' onclick=\"BuscarUsuarios($TotalPaginas)\">$TotalPaginas</a></li>";
-      }
-      // next
+        // Intervalo
+        if ($pagina > ($adjacents + 2)) {
+            echo "<li class='page-item'>
+                    <span class='page-link py-2 px-4 text-gray-400'>...</span>
+                  </li>";
+        }
 
-      if($pagina<$TotalPaginas) {
-        echo "<li class='page-item'><a href='javascript:void(0);'class='page-link' onclick=\"BuscarUsuarios($pagina+1)\">$siguiente</a></li>";
-      }else {
-        echo "<li class='page-item'><a class='page-link text-muted'>$siguiente</a></li>";
-      }
-      if ($pagina != $TotalPaginas) {
-        echo "<li class='page-item'><a class='page-link' onclick=\"BuscarUsuarios($TotalPaginas)\"><span aria-hidden='true'>&raquo;</span></a></li>";
-      }
+        // Páginas cercanas
+        $pmin = ($pagina > $adjacents) ? ($pagina - $adjacents) : 1;
+        $pmax = ($pagina < ($TotalPaginas - $adjacents)) ? ($pagina + $adjacents) : $TotalPaginas;
 
-      echo "</ul>";
-      echo "</div>";
+        for ($i = $pmin; $i <= $pmax; $i++) {
+            if ($i == $pagina) {
+                echo "<li class='page-item'>
+                        <span class='page-link text-white bg-blue-600 py-2 px-4 rounded-lg'>$i</span>
+                      </li>";
+            } else {
+                echo "<li class='page-item'>
+                        <a href='javascript:void(0);' class='page-link text-blue-600 hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out py-2 px-4 rounded-lg'
+                           onclick=\"BuscarUsuarios($i)\">$i</a>
+                      </li>";
+            }
+        }
 
-      echo "</div>
-    </div>";
+        // Intervalo
+        if ($pagina < ($TotalPaginas - $adjacents - 1)) {
+            echo "<li class='page-item'>
+                    <span class='page-link py-2 px-4 text-gray-400'>...</span>
+                  </li>";
+        }
+
+        // Enlace de la última página
+        if ($pagina < ($TotalPaginas - $adjacents)) {
+            echo "<li class='page-item'>
+                    <a href='javascript:void(0);' class='page-link text-blue-600 hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out py-2 px-4 rounded-lg'
+                       onclick=\"BuscarUsuarios($TotalPaginas)\">$TotalPaginas</a>
+                  </li>";
+        }
+
+        // Botón siguiente
+        if ($pagina < $TotalPaginas) {
+            echo "<li class='page-item'>
+                    <a href='javascript:void(0);' class='page-link text-blue-600 hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out py-2 px-4 rounded-lg'
+                       onclick=\"BuscarUsuarios($pagina+1)\">$siguiente</a>
+                  </li>";
+        } else {
+            echo "<li class='page-item'>
+                    <a class='page-link text-gray-400 cursor-not-allowed py-2 px-4 rounded-lg'>$siguiente</a>
+                  </li>";
+        }
+
+        // Última página (>>)
+        if ($pagina != $TotalPaginas) {
+            echo "<li class='page-item'>
+                    <a class='page-link text-blue-600 hover:bg-blue-500 hover:text-white transition duration-300 ease-in-out py-2 px-4 rounded-lg'
+                       onclick=\"BuscarUsuarios($TotalPaginas)\"><span aria-hidden='true'>&raquo;</span></a>
+                  </li>";
+        }
+
+        echo "</ul>";
+        echo "</div>";
+
+        echo "</div>
+        </div>";
+    }
   }
-}
 }
 
 

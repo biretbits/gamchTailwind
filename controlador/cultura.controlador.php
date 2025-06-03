@@ -129,7 +129,13 @@ class CulturaControlador{
 
                   echo "<td class='px-4 py-2'>" . htmlspecialchars($fi['nombre_actividad']) . "</td>"; // Nombre Actividad
                   echo "<td class='px-4 py-2'>" . htmlspecialchars($fi['tipo_actividad']) . "</td>";   // Tipo de Actividad
-                  echo "<td class='px-4 py-2'>" . htmlspecialchars($fi['descripcion']) . "</td>";      // Descripción
+                  echo "<td class='px-4 py-2'>";
+                  echo "<p id='descripcion-" . $fi['id'] . "' class='text-sm text-gray-500 mt-2 line-clamp-2'>";
+                  echo htmlspecialchars($fi['descripcion']);
+                  echo "</p>";
+                  // Botón para alternar entre "ver más" y "ver menos"
+                  echo "<button id='verMasBtn-" . $fi['id'] . "' class='text-blue-500 hover:text-blue-700 mt-2' onclick='toggleDescripcion(" . $fi['id'] . ")'>Ver más</button>";
+                  echo "</td>";
                   echo "<td class='px-4 py-2'>" . htmlspecialchars($fi['fecha_inicio']) . "</td>";     // Fecha Inicio
                   echo "<td class='px-4 py-2'>" . htmlspecialchars($fi['fecha_fin']) . "</td>";        // Fecha fin
                   echo "<td class='px-4 py-2'>" . htmlspecialchars($fi['ubicacion']) . "</td>";        // Ubicación

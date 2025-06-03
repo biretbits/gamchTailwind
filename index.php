@@ -21,6 +21,7 @@ require_once "controlador/normativa.controlador.php";
 require_once "controlador/transparente.controlador.php";
 require_once "controlador/secretaria.controlador.php";
 require_once "controlador/chat.controlador.php";
+require_once "controlador/baseDeDatos.controlador.php";
     //require('vista/principal/sql.php');
     //include('vista/principal/principalClinica.php');
 
@@ -273,6 +274,17 @@ if (isset($_SESSION["usuario"]) && $_SESSION["usuario"] !='') {
     if($_GET["accion"] == "eliminarDocumentosTransparente"){
       TransparenteControlador::eliminarDocumentosTra($_POST["id"]);return;
     }
+    if($_GET["accion"] == "baseDeDatos"){
+      BaseDeDatosControlador::visualizarBaseDeDatos();return;
+    }
+    if($_GET["accion"] == "exportarBd"){
+      BaseDeDatosControlador::ExportarBD();return;
+    }
+    if($_GET["accion"] == "ImportarBD"){
+      BaseDeDatosControlador::ImportaRbd();return;
+    }
+
+
 }
 
 
