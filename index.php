@@ -389,6 +389,8 @@ if (
 }
 else if($_GET["accion"] == "ALCALDE"){
   NosotrosControlador::VisualizaRAlcalde();
+}else if($_GET["accion"] == "CHALLAPATA"){
+  NosotrosControlador::VisualizaRChallapata();
 }
 else {
     IndexControlador::visualizarPrincipal();

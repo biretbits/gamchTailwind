@@ -163,78 +163,70 @@ require_once('vista/esquema/header.php');
 
      ?>
 <br>
-<div class="grid grid-cols-12 gap-4">
-  <!-- Espacio izquierdo -->
-  <div class="col-span-1"></div>
+<div class="p-0 bg-cover bg-center bg-no-repeat" style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('img-challapata/challapata-portadaweb.jpg');">
+  <!-- Encabezado -->
+  <div class="text-center py-10">
+    <h1 class="text-4xl md:text-5xl font-bold text-white tracking-widest" style="font-family: 'Aldrich', sans-serif;">Destacados</h1>
+    <hr class="mx-auto w-1/4 border border-yellow-500 opacity-100 mt-4" />
+  </div>
 
-  <!-- Sección izquierda: destacados -->
-  <div class="col-span-12 md:col-span-7 mb-4">
-    <div class="bg-gray-500 bg-cover bg-center bg-no-repeat rounded-md p-4">
-      <hr class="mt-0 border-white">
-      <h3 class="mt-[45px] h-[35px] text-white text-center font-aldrich text-xl">Destacados</h3>
-      <div class="mt-8 text-white font-aldrich">
-        <div class="flex flex-wrap justify-center gap-4">
-          <!-- Item 1 -->
-          <div class="w-full sm:w-1/2 md:w-2/5 lg:w-1/4">
-            <div class="bg-black/40 rounded-lg text-white shadow-md hover:shadow-lg hover:-translate-y-1 transition duration-300 text-center p-4">
-              <i class="fas fa-users text-[50px] mb-4 text-orange-500"></i>
-              <h4 class="text-lg font-semibold">Desarrollo Humano y Social</h4>
-              <a href="/SDHS" class="font-bold text-orange-500 hover:underline">Ver más »</a>
-            </div>
-          </div>
-          <!-- Item 2 -->
-          <div class="w-full sm:w-1/2 md:w-2/5 lg:w-1/4">
-            <div class="bg-black/40 rounded-lg text-white shadow-md hover:shadow-lg hover:-translate-y-1 transition duration-300 text-center p-4">
-              <i class="fa fa-leaf text-[50px] mb-4 text-green-600"></i>
-              <h4 class="text-lg font-semibold">Desarrollo Productivo</h4>
-              <a href="/SDP" class="font-bold text-blue-600 hover:underline">Ver más »</a>
-            </div>
-          </div>
-          <!-- Item 3 -->
-          <div class="w-full sm:w-1/2 md:w-2/5 lg:w-1/4">
-            <div class="bg-black/40 rounded-lg text-white shadow-md hover:shadow-lg hover:-translate-y-1 transition duration-300 text-center p-4">
-              <i class="fas fa-hard-hat text-[50px] mb-4 text-yellow-500"></i>
-              <h4 class="text-lg font-semibold">Obras Públicas</h4>
-              <a href="/SOP" class="font-bold text-green-700 hover:underline">Ver más »</a>
-            </div>
-          </div>
-          <!-- Item 4 -->
-          <div class="w-full sm:w-1/2 md:w-2/5 lg:w-1/4">
-            <div class="bg-black/40 rounded-lg text-white shadow-md hover:shadow-lg hover:-translate-y-1 transition duration-300 text-center p-4">
-              <i class="fa fa-plane text-[50px] mb-4 text-teal-400"></i>
-              <h4 class="text-lg font-semibold">Turismo</h4>
-              <a href="/turismo" class="font-bold text-teal-400 hover:underline">Ver más »</a>
-            </div>
-          </div>
-          <!-- Item 5 -->
-          <div class="w-full sm:w-1/2 md:w-2/5 lg:w-1/4">
-            <div class="bg-black/40 rounded-lg text-white shadow-md hover:shadow-lg hover:-translate-y-1 transition duration-300 text-center p-4">
-              <i class="fa fa-theater-masks text-[50px] mb-4 text-purple-600"></i>
-              <h4 class="text-lg font-semibold">Cultura</h4>
-              <a href="/cultura" class="font-bold text-purple-600 hover:underline">Ver más »</a>
-            </div>
-          </div>
+  <!-- Contenido principal -->
+  <div class="container mx-auto py-10 px-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Item 1 -->
+      <div class="flex">
+        <div class="bg-black bg-opacity-80 text-white rounded-2xl shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl w-full flex flex-col items-center text-center p-6">
+          <i class="fas fa-users text-3xl text-yellow-400 mb-4"></i>
+          <h4 class="text-xl font-bold mb-2" style="font-family: 'Aldrich', sans-serif;">Desarrollo Humano y Social</h4>
+          <p class="text-gray-400 mb-4">Descripción breve sobre este tema.</p>
+          <a href="/SDHS" class="btn border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black mt-auto px-4 py-2 rounded transition">Ver más »</a>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="flex">
+        <div class="bg-black bg-opacity-80 text-white rounded-2xl shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl w-full flex flex-col items-center text-center p-6">
+          <i class="fas fa-cloud-upload-alt text-3xl text-yellow-400 mb-4"></i>
+          <h4 class="text-xl font-bold mb-2" style="font-family: 'Aldrich', sans-serif;">Desarrollo Productivo</h4>
+          <p class="text-gray-400 mb-4">Descripción breve sobre este tema.</p>
+          <a href="/SDP" class="btn border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black mt-auto px-4 py-2 rounded transition">Ver más »</a>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="flex">
+        <div class="bg-black bg-opacity-80 text-white rounded-2xl shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl w-full flex flex-col items-center text-center p-6">
+          <i class="fas fa-leaf text-3xl text-yellow-400 mb-4"></i>
+          <h4 class="text-xl font-bold mb-2" style="font-family: 'Aldrich', sans-serif;">Obras Públicas</h4>
+          <p class="text-gray-400 mb-4">Descripción breve sobre este tema.</p>
+          <a href="/SOP" class="btn border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black mt-auto px-4 py-2 rounded transition">Ver más »</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Segunda fila centrada con 2 elementos -->
+    <div class="flex flex-wrap justify-center gap-8 mt-10">
+      <!-- Item 4 -->
+      <div class="w-full sm:w-2/5 lg:w-1/3">
+        <div class="bg-black bg-opacity-80 text-white rounded-2xl shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl h-full flex flex-col items-center text-center p-6">
+          <i class="fas fa-plane text-3xl text-yellow-400 mb-4"></i>
+          <h4 class="text-xl font-bold mb-2" style="font-family: 'Aldrich', sans-serif;">Turismo</h4>
+          <p class="text-gray-400 mb-4">Descripción breve sobre este tema.</p>
+          <a href="/turismo" class="btn border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black mt-auto px-4 py-2 rounded transition">Ver más »</a>
+        </div>
+      </div>
+
+      <!-- Item 5 -->
+      <div class="w-full sm:w-2/5 lg:w-1/3">
+        <div class="bg-black bg-opacity-80 text-white rounded-2xl shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl h-full flex flex-col items-center text-center p-6">
+          <i class="fas fa-theater-masks text-3xl text-yellow-400 mb-4"></i>
+          <h4 class="text-xl font-bold mb-2" style="font-family: 'Aldrich', sans-serif;">Cultura</h4>
+          <p class="text-gray-400 mb-4">Descripción breve sobre este tema.</p>
+          <a href="/cultura" class="btn border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black mt-auto px-4 py-2 rounded transition">Ver más »</a>
         </div>
       </div>
     </div>
   </div>
-
-  <!-- Sección derecha: video -->
-  <div class="col-span-12 md:col-span-3">
-    <h3 class="text-center mb-4 font-semibold">Video Destacado</h3>
-    <div class="aspect-w-16 aspect-h-9">
-      <iframe
-        class="w-full h-full"
-        src="https://www.youtube.com/embed/AORqZVVmrwU"
-        title="Video destacado de Challapata"
-        allowfullscreen
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      ></iframe>
-    </div>
-  </div>
-
-  <!-- Espacio derecho -->
-  <div class="col-span-2"></div>
 </div>
 
 

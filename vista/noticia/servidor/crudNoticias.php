@@ -477,18 +477,29 @@ function BuscarUsuarios(page){
          data = $.trim(data);
          //alert(data);
          if(data == "correcto"){
-           alert("accion realizada con exito");
+           alertaValidacion("success","Acción realizada con éxito","Correcto");
+           IRalLink(id);
         }else if(data == "error"){
-           alert("ocurio un error al insertar datos");
+           alertaValidacion("error","Ocurrio algun error","Error");
+        }else if(data == "vacio"){
+          alertaValidacion("info","Algun campo vacio","Vacio");
         }else{
-          alert(data);
+          alertaValidacion("warning",data,"Error");
         }
-        IRalLink(id);
        }
      });
 
    }
 
+   function alertaValidacion(icono,texto,titulo){
+    Swal.fire({
+     icon: icono,
+     title: titulo,
+     text: texto,
+     showConfirmButton: false,
+     timer: 2000
+   });
+   }
    function IRalLink(id_usuario){
      if(id_usuario!=''){
        setTimeout(() => {

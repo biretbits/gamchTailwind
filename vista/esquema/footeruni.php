@@ -1,24 +1,34 @@
-
 <script>
+  // Captura el offcanvas, el botón de abrir y el botón de cerrar
   const offcanvas = document.getElementById('offcanvasWithBackdrop');
-  const openBtn = document.getElementById('openOffcanvasBtn');
+  const openLink = document.getElementById('openOffcanvasLink'); // El enlace del header
+  const openBtn = document.getElementById('openOffcanvasBtn'); // El botón debajo del header
   const closeBtn = document.getElementById('closeOffcanvasBtn');
 
+  // Evento para abrir el offcanvas desde el enlace
+  openLink.addEventListener('click', () => {
+    offcanvas.classList.remove('-translate-x-full');
+    offcanvas.setAttribute('aria-hidden', 'false');
+    openBtn.setAttribute('aria-expanded', 'true');
+  });
+
+  // Evento para abrir el offcanvas desde el botón
   openBtn.addEventListener('click', () => {
     offcanvas.classList.remove('-translate-x-full');
     offcanvas.setAttribute('aria-hidden', 'false');
     openBtn.setAttribute('aria-expanded', 'true');
   });
 
+  // Evento para cerrar el offcanvas
   closeBtn.addEventListener('click', () => {
     offcanvas.classList.add('-translate-x-full');
     offcanvas.setAttribute('aria-hidden', 'true');
     openBtn.setAttribute('aria-expanded', 'false');
   });
 
-  // Cierra si clickeas fuera
+  // Cierra el offcanvas si se hace clic fuera de él
   window.addEventListener('click', (e) => {
-    if (!offcanvas.contains(e.target) && !openBtn.contains(e.target)) {
+    if (!offcanvas.contains(e.target) && !openBtn.contains(e.target) && !openLink.contains(e.target)) {
       if (!offcanvas.classList.contains('-translate-x-full')) {
         offcanvas.classList.add('-translate-x-full');
         offcanvas.setAttribute('aria-hidden', 'true');
@@ -27,6 +37,7 @@
     }
   });
 </script>
+
 
 </div>
 </div>
@@ -37,6 +48,7 @@
       <a
         href="https://www.facebook.com/people/Gobierno-Aut%C3%B3nomo-Municipal-de-Challapata/100076076944999/"
         role="button"
+         target="_blank"
         aria-label="Facebook"
         class="inline-flex items-center justify-center w-10 h-10 m-1 border border-white rounded-full text-white hover:bg-white hover:text-gray-900 transition"
       >
@@ -47,6 +59,7 @@
       <a
         href="#!"
         role="button"
+         target="_blank"
         aria-label="WhatsApp"
         class="inline-flex items-center justify-center w-10 h-10 m-1 border border-white rounded-full text-white hover:bg-white hover:text-gray-900 transition"
       >
@@ -57,6 +70,7 @@
       <a
         href="https://www.youtube.com/@GAM-Challapata"
         role="button"
+         target="_blank"
         aria-label="YouTube"
         class="inline-flex items-center justify-center w-10 h-10 m-1 border border-white rounded-full text-white hover:bg-white hover:text-gray-900 transition"
       >

@@ -1,8 +1,9 @@
 <?php require("vista/esquema/header.php"); ?>
 
-<!-- Sección de Misión y Visión -->
-<section class="container mx-auto px-4 py-8">
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-center">
+<!-- Sección de Misión y Visión centrada -->
+
+<section class="min-h-screen flex items-center justify-center bg-red px-4 py-8">
+  <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-6 text-center">
     <div class="mb-4" data-aos="fade-up" data-aos-duration="600">
       <div class="card h-full shadow-sm border">
         <div class="card-body p-6">
@@ -33,5 +34,4 @@
     </div>
   </div>
 </section>
-
 <?php require("vista/esquema/footeruni.php"); ?>

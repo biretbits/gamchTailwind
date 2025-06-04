@@ -31,11 +31,21 @@ require_once('vista/esquema/header.php');
         aria-expanded="false"
         aria-haspopup="true"
       >
-        <i class="fas fa-user-circle mr-2"></i>
-        <span id="username">Administrador</span>
-        <svg class="ml-2 -mr-1 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-        </svg>
+      <?php
+        if (isset($_SESSION['usuario']) && $_SESSION['usuario'] != '') {
+          $name = $_SESSION['usuario'];
+          echo "<span class='text-white text-xs mr-2'>";  // Estilo con Tailwind: fuente blanca, tamaño pequeño, margen a la derecha
+          if ($_SESSION['foto'] == "default.jpg" || $_SESSION['foto'] == "") {
+            echo "<img src='imagenes/user.png' alt='foto' class='rounded-full w-5 h-5 object-cover mr-1'>";  // Clases Tailwind para la imagen
+          } else {
+            echo "Hola ".$_SESSION["usuario"]."<img src='" . $_SESSION['foto'] . "' alt='foto' class='rounded-full w-5 h-5 object-cover mr-1'>";  // Clases Tailwind para la imagen
+          }
+        } else {
+          // Si no está logueado, muestra algo aquí
+        }
+      ?>
+
+
       </button>
 
       <ul

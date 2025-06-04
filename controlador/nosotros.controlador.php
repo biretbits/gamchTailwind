@@ -26,6 +26,9 @@ class NosotrosControlador{
     require("vista/nosotros/NuestroAlcalde.php");
   }
 
+  public static function VisualizaRChallapata(){
+    require("vista/nosotros/challapata.php");
+  }
 }
 
 

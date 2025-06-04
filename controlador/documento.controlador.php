@@ -328,7 +328,25 @@ class DocumentoControlador{
     $us = new Documento();
     $r = "vista/activos/NoticiasImagen/";
     $usuario_id = $_SESSION["usuario_id"];
-
+    $a=array("id"=>$_POST["id"],
+    "titulo"=>$_POST["titulo"],
+    "contenido"=>$_POST["contenido"],
+    "fecha"=>$_POST["fecha"],
+    "ruta"=>$_POST["ruta"],
+  );
+    $ve = [];
+    $ve=["titulo","contenido","fecha"];
+    $vacio = false;
+    for($i=0;$i<count($ve);$i++){
+      if($a[$ve[$i]] == ''){
+        $vacio = true;
+        break;
+      }
+    }
+    if($vacio == true){
+      echo "vacio";
+      exit;
+    }
     if (isset($_FILES['archivo'])) {
         $archivo = $_FILES['archivo'];
         $mime = $archivo['type'];

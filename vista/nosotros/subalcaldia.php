@@ -44,6 +44,20 @@ $subalcaldias = [
     "oficina" => "Oficina planta baja",
     "imagen" => "imagenes/subalcaldias/ancacato.jpeg"
   ],
+
+  [
+    "titulo" => "SUB ALCALDIA DE TOLAPALCA",
+    "direccion" => "Plaza Eduardo Avaroa, Esquina Av. Mariano Baptista",
+    "oficina" => "Oficina planta baja",
+    "imagen" => "imagenes/subalcaldias/tolapalca.jpeg"
+  ],
+
+  [
+    "titulo" => "SUB ALCALDIA DE AGUAS CALIENTES",
+    "direccion" => "Plaza Eduardo Avaroa, Esquina Av. Mariano Baptista",
+    "oficina" => "Oficina planta baja",
+    "imagen" => "imagenes/subalcaldias/aguasCalientes.jpeg"
+  ],
 ];
 ?>
 

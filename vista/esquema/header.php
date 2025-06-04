@@ -107,6 +107,7 @@
             <li><a href="/ORGANIGRAMA" class="block px-3 py-1 rounded hover:bg-blue-100 hover:text-blue-700 transition">ORGANIGRAMA</a></li>
             <li><a href="/SUBALCALDIA" class="block px-3 py-1 rounded hover:bg-blue-100 hover:text-blue-700 transition">SUB ALCALDIAS</a></li>
             <li><a href="/ALCALDE" class="block px-3 py-1 rounded hover:bg-blue-100 hover:text-blue-700 transition">ALCALDE MUNICIPAL</a></li>
+            <li><a href="/CHALLAPATA" class="block px-3 py-1 rounded hover:bg-blue-100 hover:text-blue-700 transition">CHALLAPATA</a></li>
           </ul>
         </li>
         <li class="relative group">
@@ -182,15 +183,29 @@
 
         <?php if (isset($_SESSION['id']) && $_SESSION['id'] != '' && isset($_SESSION['nombre_role']) && $_SESSION['nombre_role'] == 'Admin'): ?>
           <li class="relative group">
-            <a href="/panel" class="w-full flex justify-between items-center px-4 py-2 rounded-md transition  to-white hover:from-blue-200 hover:to-blue-100 hover:text-blue-700 lg:inline-flex lg:items-center lg:space-x-1">
+            <button class="submenu-btn w-full flex justify-between items-center px-4 py-2 rounded-md transition bg-gradient-to-r from-blue-50 to-white hover:from-blue-200 hover:to-blue-100 hover:text-blue-700 lg:inline-flex lg:items-center lg:space-x-1">
               <i class="fas fa-tachometer-alt"></i> <span class="ml-2">PANEL</span>
-            </a>
+              <svg class="w-4 h-4 ml-2 lg:ml-1 lg:mt-0 mt-1 transform transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <ul class="submenu-content hidden lg:absolute lg:left-0 lg:mt-2 bg-white border border-gray-300 shadow-lg space-y-3 py-3 px-6 text-left z-50 rounded-lg min-w-[180px]">
+              <li><a href="/panel" class="block px-3 py-1 rounded hover:bg-blue-100 hover:text-blue-700 transition">PANEL DE CONTROL</a></li>
+              <li>
+                <a href="javascript:void(0);"
+                   id="openOffcanvasLink"
+                   class="block px-3 py-1 rounded hover:bg-blue-100 hover:text-blue-700 transition">
+                  MENU PANEL
+                </a>
+              </li>
+            </ul>
           </li>
         <?php endif; ?>
       </ul>
     </div>
   </div>
 </nav>
+
 
 <!-- Script para manejar la visibilidad de los submenús -->
 <script>
@@ -226,66 +241,49 @@
   });
 </script>
 
+<!-- Tailwind requiere que agregues esta animación en tu archivo de configuración -->
+<style>
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
 
+  .animate-scroll-left {
+    animation: scroll-left 44s linear infinite;
+  }
+</style>
 
-  <div  style="width: 100%; overflow: hidden; background-color: transparent; position: fixed; top: 66px; left: 0; z-index: 1;">
-    <!-- Fila superior con flexbox -->
-    <div style="display: flex; align-items: center; background-color: #383838;">
-      <!-- Banner Rojo Estático -->
-      <div style="background-color: red; color: white; font-size: 15px; font-weight: bold; margin-right: 10px; padding: 3px">
-        Noticias:
+<div class="w-full overflow-hidden bg-transparent fixed top-[66px] left-0 z-[1]">
+  <!-- Fila superior con flexbox -->
+  <div class="flex items-center bg-[#383838]">
+    <!-- Banner Rojo Estático -->
+    <div class="bg-red-600 text-white text-[15px] font-bold mr-[10px] px-2 py-[3px]">
+      Noticias:
+    </div>
+
+    <?php
+    $titulos = $_SESSION['TITULOS'];
+    ?>
+
+    <!-- Marquesina -->
+    <div class="overflow-hidden whitespace-nowrap bg-black relative w-full">
+      <div class="inline-block whitespace-nowrap animate-scroll-left">
+        <?php
+        for ($j = 0; $j < 10; $j++){
+        for ($i = 0; $i < count($titulos); $i++) {
+          $titulo = $titulos[$i]; ?>
+          <span class="text-red-600 text-[16px] mx-[10px]">●</span>
+          <span class="text-white text-[13px] font-bold mr-[110px]"><?php echo htmlspecialchars($titulo["titulo"]); ?></span>
+        <?php } ?>
+        <?php } ?>
       </div>
-
-      <style>
-        .marquee-content {
-          display: inline-block;
-          white-space: nowrap;
-          animation: scroll-left 30s linear infinite;
-        }
-        .bullet {
-          color: red;
-          font-size: 16px;
-          margin: 0 10px;
-        }
-        .message {
-          color: white;
-          font-size: 13px;
-          font-weight: bold;
-          margin-right: 110px;
-        }
-
-        @keyframes scroll-left {
-          0% {
-            transform: translateX(0%);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-      </style>
-
-      <?php
-      $titulos = $_SESSION['TITULOS'];
-      ?>
-
-      <!-- Marquesina -->
-      <div style="overflow: hidden; white-space: nowrap; background-color: black; position: relative;">
-        <div class="marquee-content">
-          <?php for ($i = 0; $i < count($titulos); $i++) {
-            $titulo = $titulos[$i]; ?>
-            <span class="bullet">●</span>
-            <span class="message"><?php echo htmlspecialchars($titulo["titulo"]); ?></span>
-          <?php } ?>
-          <?php for ($i = 0; $i < count($titulos); $i++) {
-            $titulo = $titulos[$i]; ?>
-            <span class="bullet">●</span>
-            <span class="message"><?php echo htmlspecialchars($titulo["titulo"]); ?></span>
-          <?php } ?>
-        </div>
-      </div>
-
     </div>
   </div>
+</div>
 
     <div style="margin-top: 20px;"> <!-- Ajusta este valor para que esté justo debajo del otro div -->
       <!-- Tu contenido aquí -->
