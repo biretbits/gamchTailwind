@@ -2,9 +2,9 @@
 
 <!-- Sección de Misión y Visión centrada -->
 
-<section class="min-h-screen flex items-center justify-center bg-red px-4 py-8">
+<section class="min-h-screen flex items-center justify-center bg-red px-4 py-8 "  style="font-family: cursive;background-image: url('imagenes/fondo/fondo3.svg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
   <div class="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-6 text-center">
-    <div class="mb-4" data-aos="fade-up" data-aos-duration="600">
+    <div class="mb-4 bg-[#0D0502] rounded-3xl  border border-[#FF6326]" data-aos="fade-up" data-aos-duration="600">
       <div class="card h-full shadow-sm border">
         <div class="card-body p-6">
           <h3 class="text-2xl text-blue-600">Misión</h3>
@@ -17,7 +17,7 @@
         </div>
       </div>
     </div>
-    <div class="mb-4" data-aos="fade-up" data-aos-duration="800">
+    <div class="mb-4 bg-[#0D0502] rounded-3xl" data-aos="fade-up" data-aos-duration="800">
       <div class="card h-full shadow-sm border">
         <div class="card-body p-6">
           <h3 class="text-2xl text-green-600">Visión</h3>

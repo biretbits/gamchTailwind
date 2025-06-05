@@ -15,7 +15,7 @@
 </div>
 <br>
 
-<div class="container mx-auto px-4">
+<div class="container mx-auto px-4 bg-[#101218]/90 rounded-2x1 p-1">
   <div class="grid grid-cols-12 gap-4">
 
     <!-- margen izquierdo: oculto en móvil, visible en lg -->

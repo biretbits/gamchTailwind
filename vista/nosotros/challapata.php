@@ -3,7 +3,7 @@
 require_once('vista/esquema/header.php');
 ?>
 
-<main class="container mx-auto my-10 px-4 bg-gray-100" style="font-family: 'Georgia', serif;">
+<main class="container mx-auto  px-1 bg-gray-100/90 shadow-md" style="font-family: 'Georgia', serif;">
   <header class="hero py-20 text-white text-center">
       <div class="bg-black bg-opacity-50 py-16"style="font-family: 'Georgia', serif;">
           <h1 class="text-5xl font-bold mb-4">Challapata</h1>
@@ -147,7 +147,7 @@ require_once('vista/esquema/header.php');
     </section>
 
 
-    <section class="mb-12">
+    <section class="">
 
         <h2 class="section-title text-3xl font-bold text-amber-800 relative inline-flex items-center" style="font-family: 'Georgia', serif;">
             <span class="mr-3">|</span>Economía y Recursos</h2>

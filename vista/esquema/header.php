@@ -54,7 +54,18 @@
     </style>
 </head>
 
-<body class="bg-[#101218]">
+<body class="bg-[#101218]" style="
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.04),
+    rgba(255, 255, 255, 0.04) 1px,
+    transparent 1px,
+    transparent 10px
+  );
+">
+
+
+
 <!--  <button type="button" id="openChatbot" class="bg-teal-600 text-white text-xl px-4 py-2 rounded-full shadow hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-400">
     💬
   </button>-->
