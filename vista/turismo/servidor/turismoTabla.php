@@ -591,17 +591,28 @@ function BuscarUsuarios(page){
          data = $.trim(data);
          console.log(data);
          if (data == "correcto") {
-           alert("Acción realizada con éxito");
+           alertaValidacion("success","Acción realizada con éxito.","Correcto");
+            IRalLink(id);
          } else if (data == "error") {
-           alert("Ocurrió un error al insertar datos");
-         } else {
-           alert(data);
+           alertaValidacion("error","Ocurrio un error.","Error");
+         } else if(data == "vacio") {
+           alertaValidacion("info","Algun campo vacio","Vacio")
+         }else{
+           alertaValidacion("error",data,"Error");
          }
-         IRalLink(id); // solo si deseas redireccionar o hacer algo después
+        // solo si deseas redireccionar o hacer algo después
        }
      });
    }
-
+   function alertaValidacion(icono,texto,titulo){
+    Swal.fire({
+     icon: icono,
+     title: titulo,
+     text: texto,
+     showConfirmButton: false,
+     timer: 2000
+   });
+   }
 
    function IRalLink(id_usuario){
      if(id_usuario!=''){
@@ -609,12 +620,12 @@ function BuscarUsuarios(page){
          var pagina = document.getElementById("paginas").value;
          if(pagina==''){pagina=1;}
          BuscarUsuarios(pagina);
-           openModal();
+           closeModal();
        }, 1500);
      }else{
        setTimeout(() => {
          location.href="/gTurismo";
-           openModal();
+           closeModal();
        }, 1500);
      }
    }

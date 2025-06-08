@@ -4,7 +4,7 @@ require_once('vista/esquema/header.php');
 ?>
 
 <main class="container mx-auto  px-1 bg-gray-100/90 shadow-md" style="font-family: 'Georgia', serif;">
-  <header class="hero py-20 text-white text-center">
+  <header class="hero py-20 text-white text-center" data-aos="fade-down" data-aos-duration="1200">
       <div class="bg-black bg-opacity-50 py-16"style="font-family: 'Georgia', serif;">
           <h1 class="text-5xl font-bold mb-4">Challapata</h1>
           <p class="text-xl">La Joya del Altiplano Boliviano</p>
@@ -28,7 +28,7 @@ require_once('vista/esquema/header.php');
     </section>
 
     <!-- Historia -->
-    <section id="historia" class="mb-12">
+    <section id="historia" class="mb-12" data-aos="fade-down" data-aos-duration="1200">
         <h2 class="section-title text-3xl font-bold text-amber-800 relative inline-flex items-center" style="font-family: 'Georgia', serif;">
             <span class="mr-3">|</span>Historia y Fundaciones</h2>
         <div class="space-y-6 p-8">
@@ -52,7 +52,7 @@ require_once('vista/esquema/header.php');
     </section>
 
     <!-- Cultura -->
-    <section id="cultura" class="mb-12">
+    <section id="cultura" class="mb-12" data-aos="fade-down" data-aos-duration="1200">
         <h2 class="section-title text-3xl font-bold text-amber-800 relative inline-flex items-center" style="font-family: 'Georgia', serif;">
             <span class="mr-3">|</span>Cultura y Población</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 p-8">
@@ -79,7 +79,7 @@ require_once('vista/esquema/header.php');
     </section>
 
     <!-- Turismo -->
-    <section id="turismo" class="mb-12">
+    <section id="turismo" class="mb-12" data-aos="fade-down" data-aos-duration="1200">
       <h2 class="section-title text-3xl font-bold text-amber-800 relative inline-flex items-center" style="font-family: 'Georgia', serif;">
           <span class="mr-3">|</span>Turismo y Recursos</h2>
 
@@ -115,7 +115,7 @@ require_once('vista/esquema/header.php');
     </section>
 
     <!-- Clima y Ecología -->
-    <section class="mb-12">
+    <section class="mb-12" data-aos="fade-down" data-aos-duration="1200">
 
         <h2 class="section-title text-3xl font-bold text-amber-800 relative inline-flex items-center" style="font-family: 'Georgia', serif;">
             <span class="mr-3">|</span>Clima y Ecología</h2>
@@ -147,7 +147,7 @@ require_once('vista/esquema/header.php');
     </section>
 
 
-    <section class="">
+    <section class="" data-aos="fade-down" data-aos-duration="1200">
 
         <h2 class="section-title text-3xl font-bold text-amber-800 relative inline-flex items-center" style="font-family: 'Georgia', serif;">
             <span class="mr-3">|</span>Economía y Recursos</h2>

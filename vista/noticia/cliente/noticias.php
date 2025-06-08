@@ -3,30 +3,32 @@
 
 <!-- Banner superior -->
 <br>
-<div class="bg-white">
-  <div class="flex justify-center">
-      <div class="text-center" data-aos="fade-down" data-aos-duration="1200">
-        <div class="mb-4">
-          <h1 class="text-4xl font-bold uppercase text-gray-800">NOTICIAS</h1>
-          <h6 class="text-lg text-gray-500 italic">Gobierno Autónomo Municipal de Challapata</h6>
-        </div>
-      </div>
-    </div>
-</div>
-<br>
+<div class="w-full px-4 py-4 ">
+  <div class="flex flex-wrap">
+    <div class="w-full md:w-1/12"></div>
 
-<div class="container mx-auto px-4 bg-[#101218]/90 rounded-2x1 p-1">
+    <div class="w-full md:w-10/12">
+      <h3 class="text-left text-xl text-white font-semibold">
+        <span class="bg-[#DC191B] px-1">Noticias.</span>
+      </h3>
+      <hr class="border-t-2 border-blue my-2">
+    </div>
+    <div class="w-full md:w-1/12"></div>
+  </div>
+</div>
+
+<div class="container mx-auto px-4 p-3 bg-[#CFCFCF]/90  rounded-2xl">
   <div class="grid grid-cols-12 gap-4">
 
     <!-- margen izquierdo: oculto en móvil, visible en lg -->
     <div class="hidden sm:block col-span-0 lg:col-span-1"></div>
 
     <!-- contenido principal: ocupa todo en móvil, 8 columnas en lg -->
-    <div class="col-span-12 lg:col-span-8">
+    <div class="col-span-12 lg:col-span-8 p-1">
       <?php
       function mostrarNoticia($fil, $tamanoClase = 'medium-news') {
           ?>
-          <div class="md:w-1/2 p-3 border border-red-500">
+          <div class="md:w-1/2 p-3 border border-red-500 ">
               <div class="news-card <?php echo $tamanoClase; ?>">
                 <div class="w-full flex justify-center items-center overflow-hidden">
                   <img
@@ -35,14 +37,14 @@
                     alt="Imagen dinámica">
                 </div>
                 <div class="news-overlay">
-                  <a href="#" class="news-title" onclick="SeguirLeyendo(<?php echo $fil["id"]; ?>)"><?php echo $fil['titulo']; ?></a>
+                  <a href="#" class="news-title stroke-text " onclick="SeguirLeyendo(<?php echo $fil["id"]; ?>)"><?php echo $fil['titulo']; ?></a>
                 </div>
               </div>
-              <div class="news-desc3"><?php echo $fil['contenido']; ?></div>
-              <div class="news-date">Fecha:
+              <div class="news-desc3 text-[#0F1618]"><?php echo $fil['contenido']; ?></div>
+              <div class="news-date text-[#0F1618]">Fecha:
                 <?php echo fechaAnoMesDia($fil["fecha"]); ?></div>
               <div class="text-right">
-                <a href="#" onclick="SeguirLeyendo(<?php echo $fil["id"]; ?>)" class="text-green-600">Ver más</a>
+                <a href="#" onclick="SeguirLeyendo(<?php echo $fil["id"]; ?>)" class="text-white bg-[#DC191B] p-1 rounded-lg hover:bg-[#A30716]">Ver más</a>
               </div>
           </div>
           <?php
@@ -53,6 +55,7 @@
       while ($fil = mysqli_fetch_assoc($resul)) {
           if ($j == 0) {
               ?>
+
               <div class="flex flex-wrap">
                 <div class="news-card md:w-full p-2 border border-red-500">
                     <div class="w-full flex justify-center items-center overflow-hidden">
@@ -62,20 +65,20 @@
                             alt="Imagen dinámica">
                     </div>
                     <div class="news-overlay w-full flex justify-center items-center">
-                        <a href="#"  onclick="SeguirLeyendo(<?php echo $fil["id"]; ?>)" class="news-title"><?php echo $fil['titulo']; ?></a>
+                        <a href="#"  onclick="SeguirLeyendo(<?php echo $fil["id"]; ?>)" class="news-title stroke-text "><?php echo $fil['titulo']; ?></a>
                     </div>
                 </div>
 
                 <!-- Contenedor de los elementos contenido y fecha con flexbox -->
                 <div class="flex flex-col w-full text-left">
-                    <div class="news-desc3 md:w-full"><?php echo $fil['contenido']; ?></div>
-                    <div class="news-date md:w-full text-left"><?php echo fechaAnoMesDia($fil["fecha"]); ?></div>
+                    <div class="news-desc3 md:w-full text-[#0F1618]"><?php echo $fil['contenido']; ?></div>
+                    <div class="news-date md:w-full text-left text-[#0F1618]"><?php echo fechaAnoMesDia($fil["fecha"]); ?></div>
                 </div>
                 <!-- Contenedor para el enlace "Ver más" alineado a la derecha -->
-                <div class="text-right w-full">
-                    <a href="#" onclick="SeguirLeyendo(<?php echo $fil["id"]; ?>)" class="text-green-600">Ver más</a>
+                <div class="text-right w-full p-1">
+                    <a href="#" onclick="SeguirLeyendo(<?php echo $fil["id"]; ?>)" class="text-white bg-[#DC191B] p-1 rounded-lg hover:bg-[#A30716]">Ver más</a>
                 </div>
-            </div>
+              </div>
 
               <?php
           } else {
@@ -98,9 +101,9 @@
     </div>
 
     <!-- noticias pasadas: ocupa todo en móvil, 2 columnas en lg -->
-    <div class="col-span-12 lg:col-span-2">
+    <div class="col-span-12 lg:col-span-2 p-1">
       <div class="space-y-2">
-        <h6 class="text-green-600">Noticias Pasadas</h6>
+        <h6 class="text-white bg-[#DC191B] p-1">Noticias Pasadas</h6>
         <?php if(mysqli_num_rows($resulNo) > 0){?>
           <?php while($fi = mysqli_fetch_assoc($resulNo)){?>
             <div class="border-t border-red-500 py-0">
@@ -111,10 +114,10 @@
                 class="object-contain max-w-full max-h-40" />
             </div>
             <a href="#" onclick="SeguirLeyendo(<?php echo $fi["id"]; ?>)"
-               class="block mt-2 mb-1 text-base font-semibold truncate news-title">
+               class="block mt-2 mb-1 text-base font-semibold truncate news-title1 text-[#0F1618]">
               <?php echo $fi["titulo"]; ?>
             </a>
-            <div class="text-sm text-gray-600">
+            <div class="text-sm text-[#0F1618] ">
               Fecha: <?php echo fechaAnoMesDia($fi["fecha"]); ?>
             </div>
           </div>

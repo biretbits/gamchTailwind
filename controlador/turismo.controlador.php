@@ -22,7 +22,6 @@ class TurismoControlador{
   //funcion para insertar en la tabla turismo los datos
   public static function RegistrarDatosTurismo($a) {
     $us = new Turismo();  // Creando una nueva instancia de la clase Usuario
-
     $campos = ["nombre_destino", "descripcion", "tipo_destino", "ubicacion", "contacto"];
     $datos = [];
     $vacio = false;
@@ -36,6 +35,7 @@ class TurismoControlador{
     }
     if ($vacio) {
         echo "vacio";
+        exit();
     } else {
         $archivoRuta = '';
 
@@ -48,12 +48,11 @@ class TurismoControlador{
             // Comprobar que el tipo de archivo es válido
             if (in_array($tipoArchivo, $permitidos)) {
                 // Validar el tamaño del archivo (opcional, ejemplo: máximo 30 MB)
-                $maxSize = 30 * 1024 * 1024; // 30MB (Revisar si esto es lo que quieres)
+                $maxSize = 4 * 1024 * 1024; // 30MB (Revisar si esto es lo que quieres)
                 if ($_FILES['imagen_url']['size'] > $maxSize) {
-                    echo "El archivo es demasiado grande. El tamaño máximo permitido es 30 MB.";
-                    return;
+                    echo "El archivo es demasiado grande. El tamaño máximo permitido es 4 MB.";
+                    exit();
                 }
-
                 // Definir el directorio de destino y sanitizar el nombre del archivo
                 $directorioDestino = "vista/activos/turismoImagen/";
                 $extension = pathinfo($_FILES["imagen_url"]["name"], PATHINFO_EXTENSION);
@@ -67,11 +66,11 @@ class TurismoControlador{
                     $archivoRuta = $archivoDestino;
                 } else {
                     echo "Error al mover el archivo.";
-                    return;
+                    exit();
                 }
             } else {
                 echo "El tipo de archivo no está permitido. Solo se permiten imágenes JPG, PNG o GIF.";
-                return;
+                exit();
             }
         }
         // Llamar a la función de inserción pasando la ruta del archivo

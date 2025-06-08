@@ -595,15 +595,27 @@ function registrarDatos(id, nombre_actividad, descripcion, tipo_actividad, fecha
       data = $.trim(data);
       console.log(data);
       if (data == "correcto") {
-        alert("Acción realizada con éxito");
+        alertaValidacion("success","Acción realizada con éxito.","Correcto");
+         IRalLink(id);
       } else if (data == "error") {
-        alert("Ocurrió un error al insertar datos");
-      } else {
-        alert(data);
-      }
-      IRalLink(id); // Si necesitas redirigir luego
+        alertaValidacion("error","Ocurrio un error.","Error");
+      } else if(data == "vacio") {
+        alertaValidacion("info","Algun campo vacio","Vacio")
+      }else{
+        alertaValidacion("error",data,"Error");
+      }// Si necesitas redirigir luego
     }
   });
+}
+
+function alertaValidacion(icono,texto,titulo){
+ Swal.fire({
+  icon: icono,
+  title: titulo,
+  text: texto,
+  showConfirmButton: false,
+  timer: 2000
+});
 }
 
 
@@ -613,12 +625,12 @@ function registrarDatos(id, nombre_actividad, descripcion, tipo_actividad, fecha
          var pagina = document.getElementById("paginas").value;
          if(pagina==''){pagina=1;}
          BuscarUsuarios(pagina);
-           openModal();
+           closeModal();
        }, 1500);
      }else{
        setTimeout(() => {
          location.href="/gCultura";
-           openModal();
+           closeModal();
        }, 1500);
      }
    }

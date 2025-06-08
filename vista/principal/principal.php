@@ -166,7 +166,7 @@ require_once('vista/esquema/header.php');
 <div class="p-0 bg-cover bg-center bg-no-repeat" style="font-family: cursive;background-image: url('imagenes/fondo/fondo3.svg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
   <!-- Encabezado -->
   <div class="text-center py-10">
-    <h1  data-aos="zoom-in" data-aos-duration="600" class="text-4xl md:text-5xl font-bold text-yellow-400 tracking-widest transform transition-all duration-300 hover:scale-110 hover:text-yellow-300 font-serif"
+    <h1  data-aos="zoom-in" data-aos-duration="600" class="text-4xl md:text-5xl font-bold text-[#DC191B] tracking-widest transform transition-all duration-300 hover:scale-110 hover:text-[#A30734] font-serif"
         style="font-family: cursive;
                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), 0 0 25px rgba(255, 255, 255, 0.1), 0 0 5px rgba(0, 0, 0, 0.2);">
         Destacados
@@ -248,15 +248,17 @@ require_once('vista/esquema/header.php');
     <div class="w-full md:w-1/12"></div>
 
     <div class="w-full md:w-10/12">
-      <h3 class="text-left text-xl text-[#CAD5E2] font-semibold">Noticias.</h3>
-      <hr class="border-t-2 border-blue-500 my-2">
+      <h3 class="text-left text-xl text-white font-semibold">
+        <span class="bg-[#DC191B] px-1">Noticias.</span>
+      </h3>
+      <hr class="border-t-2 border-[#DC191B] my-2">
     </div>
 
     <div class="w-full md:w-1/12"></div>
   </div>
 </div>
 
-<div class="container mx-auto px-4 p-3 bg-[#101218]/90 rounded-2x1">
+<div class="container mx-auto px-4 p-3 bg-[#CFCFCF]/90  rounded-2xl">
   <div class="grid grid-cols-12 gap-4">
 
     <!-- margen izquierdo: oculto en móvil, visible en lg -->
@@ -276,14 +278,14 @@ require_once('vista/esquema/header.php');
                     alt="Imagen dinámica">
                 </div>
                 <div class="news-overlay">
-                  <a href="#" class="news-title" onclick="SeguirLeyendo(<?php echo $fil["id"]; ?>)"><?php echo $fil['titulo']; ?></a>
+                  <a href="#" class="news-title stroke-text" onclick="SeguirLeyendo(<?php echo $fil["id"]; ?>)"><?php echo $fil['titulo']; ?></a>
                 </div>
               </div>
-              <div class="news-desc3"><?php echo $fil['contenido']; ?></div>
-              <div class="news-date">Fecha:
+              <div class="news-desc3 text-[#0F1618]"><?php echo $fil['contenido']; ?></div>
+              <div class="news-date text-[#0F1618]">Fecha:
                 <?php echo fechaAnoMesDia($fil["fecha"]); ?></div>
               <div class="text-right">
-                <a href="#" onclick="SeguirLeyendo(<?php echo $fil["id"]; ?>)" class="text-green-600">Ver más</a>
+                <a href="#" onclick="SeguirLeyendo(<?php echo $fil["id"]; ?>)" class="text-white bg-[#DC191B] p-1 rounded-lg hover:bg-[#A30716]">Ver más</a>
               </div>
           </div>
           <?php
@@ -304,18 +306,18 @@ require_once('vista/esquema/header.php');
                             alt="Imagen dinámica">
                     </div>
                     <div class="news-overlay w-full flex justify-center items-center">
-                        <a href="#"  onclick="SeguirLeyendo(<?php echo $fil["id"]; ?>)" class="news-title"><?php echo $fil['titulo']; ?></a>
+                        <a href="#"  onclick="SeguirLeyendo(<?php echo $fil["id"]; ?>)" class="news-title stroke-text "><?php echo $fil['titulo']; ?></a>
                     </div>
                 </div>
 
                 <!-- Contenedor de los elementos contenido y fecha con flexbox -->
                 <div class="flex flex-col w-full text-left">
-                    <div class="news-desc3 md:w-full"><?php echo $fil['contenido']; ?></div>
-                    <div class="news-date md:w-full text-left"><?php echo fechaAnoMesDia($fil["fecha"]); ?></div>
+                    <div class="news-desc3 md:w-full text-[#0F1618]"><?php echo $fil['contenido']; ?></div>
+                    <div class="news-date md:w-full text-left text-[#0F1618]"><?php echo fechaAnoMesDia($fil["fecha"]); ?></div>
                 </div>
                 <!-- Contenedor para el enlace "Ver más" alineado a la derecha -->
-                <div class="text-right w-full">
-                    <a href="#" onclick="SeguirLeyendo(<?php echo $fil["id"]; ?>)" class="text-green-600">Ver más</a>
+                <div class="text-right w-full p-1">
+                    <a href="#" onclick="SeguirLeyendo(<?php echo $fil["id"]; ?>)" class="text-white bg-[#DC191B] p-1 rounded-lg hover:bg-[#A30716]">Ver más</a>
                 </div>
               </div>
 
@@ -342,7 +344,7 @@ require_once('vista/esquema/header.php');
     <!-- noticias pasadas: ocupa todo en móvil, 2 columnas en lg -->
     <div class="col-span-12 lg:col-span-2 p-1">
       <div class="space-y-2">
-        <h6 class="text-green-600">Noticias Pasadas</h6>
+        <h6 class="text-white bg-[#DC191B] p-1">Noticias Pasadas</h6>
         <?php if(mysqli_num_rows($resulNo) > 0){?>
           <?php while($fi = mysqli_fetch_assoc($resulNo)){?>
             <div class="border-t border-red-500 py-0">
@@ -353,10 +355,10 @@ require_once('vista/esquema/header.php');
                 class="object-contain max-w-full max-h-40" />
             </div>
             <a href="#" onclick="SeguirLeyendo(<?php echo $fi["id"]; ?>)"
-               class="block mt-2 mb-1 text-base font-semibold truncate news-title">
+               class="block mt-2 mb-1 text-base font-semibold truncate news-title1 text-[#0F1618]">
               <?php echo $fi["titulo"]; ?>
             </a>
-            <div class="text-sm text-gray-600">
+            <div class="text-sm text-[#0F1618] ">
               Fecha: <?php echo fechaAnoMesDia($fi["fecha"]); ?>
             </div>
           </div>
@@ -373,7 +375,7 @@ require_once('vista/esquema/header.php');
 </div>
 
 <div class="w-full text-center my-4">
-  <button onclick="abriMasNoticias()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 shadow rounded-full transition duration-300">
+  <button onclick="abriMasNoticias()" class="bg-[#DC191B] hover:bg-[#A30716] text-white px-6 py-3 shadow rounded-full transition duration-300">
     Ver más Noticias
   </button>
 </div>
@@ -382,7 +384,7 @@ require_once('vista/esquema/header.php');
 
     <!-- Columna izquierda (texto) -->
     <div class="bg-gray-900 text-white flex flex-col justify-center p-6">
-      <h1 class="text-4xl font-bold typewriter text-white mb-4">Challapata</h1>
+      <h1 class="text-4xl font-bold typewriter text-[#DC191B] mb-4">Challapata</h1>
       <hr class="border-t border-white mb-4">
       <p class="text-justify text-gray-300 mb-6">
         Challapata, capital de la provincia Eduardo Abaroa en el Departamento de Oruro, Bolivia, es un municipio que encapsula la esencia de la cultura andina, la historia heroica y la autenticidad de un destino aún por descubrir. Fundado en 1896, este enclave de aproximadamente 29,000 habitantes, se erige como un símbolo de resistencia y legado, honrando la memoria de Eduardo Abaroa, prócer boliviano cuyo nombre identifica a la provincia.
@@ -412,7 +414,7 @@ require_once('vista/esquema/header.php');
         <div>
           <span class="counter text-red-600 text-4xl font-bold" data-target="35339">0</span>
         </div>
-        <p class="text-[#CAD5E2]">POBLACIÓN</p>
+        <p class="text-black">POBLACIÓN</p>
       </div>
     </div>
 
@@ -421,9 +423,9 @@ require_once('vista/esquema/header.php');
       <div class="bg-transparent">
         <div>
           <span class="counter text-orange-500 text-4xl font-bold" data-target="3738">0</span>
-          <span class="unit text-white"> Msnm</span>
+          <span class="unit text-[#DC191B]"> Msnm</span>
         </div>
-        <p class="text-[#CAD5E2]">ALTITUD</p>
+        <p class="text-black">ALTITUD</p>
       </div>
     </div>
 
@@ -432,9 +434,9 @@ require_once('vista/esquema/header.php');
       <div class="bg-transparent">
         <div>
           <span class="counter text-green-600 text-4xl font-bold" data-target="2815">0</span>
-          <span class="unit text-red"> km²</span>
+          <span class="unit text-[#DC191B]"> km²</span>
         </div>
-        <p class="text-[#CAD5E2]">SUPERFICIE</p>
+        <p class="text-black">SUPERFICIE</p>
       </div>
     </div>
 

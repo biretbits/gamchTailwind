@@ -8,7 +8,7 @@
       <div class="card h-full shadow-sm border">
         <div class="card-body p-6">
           <h3 class="text-2xl text-blue-600">Misión</h3>
-          <p class="text-justify text-gray-700">
+          <p class="text-justify text-white">
             "El Gobierno Autónomo Municipal tiene la misión de representar al municipio de Challapata con pleno
             ejercicio de su autonomía, con capacidad técnica, administrativa, con gestión financiera sana, políticas
             públicas y privadas coordinadas con el nivel departamental y nacional con protagonismo en el
@@ -21,7 +21,7 @@
       <div class="card h-full shadow-sm border">
         <div class="card-body p-6">
           <h3 class="text-2xl text-green-600">Visión</h3>
-          <p class="text-justify text-gray-700">
+          <p class="text-justify text-white">
             "Challapata municipio dinámico mejor posicionado para hacer frente a los desafíos del futuro,
             habitable, saludable, culto, agrícola, ganadero y próspero con un gobierno municipal responsable,
             organizado, eficiente, eficaz, transparente, equitativo, impulsor del desarrollo social y económico,

@@ -56,6 +56,24 @@ require_once('vista/esquema/header.php');
           })">Más Información</button>
       </div>
     </div>
+
+
+        <div class="w-full sm:w-1/3 mb-8">
+          <div class="flex flex-col h-full bg-white rounded-lg shadow-xl p-6 hover:shadow-2xl transition-shadow duration-300">
+            <h3 class="text-xl font-semibold text-center text-gray-800">Canal Múnicipal</h3>
+            <p class="text-center text-gray-600 mt-4">Pagos</p>
+            <button class="bg-indigo-600 text-white px-6 py-2 rounded mt-6 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 transition duration-300"
+              onclick="openModal({
+                descripcion: 'Medio oficial del municipio para informar a la comunidad sobre servicios, actividades, avisos y decisiones del gobierno local.',
+                titulo: 'CANAL MÚNICIPAL',
+                requisitos: 'servicio de propaganda.',
+                contacto: '',
+                correo: '',
+                horario: 'Lunes a Viernes, Mañana de 8:00 a 12:00 AM - Tarde 2:00 a 6:00 PM',
+                imagen: 'imagenes/img-challapata/RUAT.jpg'
+              })">Más Información</button>
+          </div>
+        </div>
   </div>
 </div>
 

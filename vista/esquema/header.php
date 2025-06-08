@@ -54,19 +54,11 @@
     </style>
 </head>
 
-<body class="bg-[#101218]" style="
-  background-image: repeating-linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 0.04),
-    rgba(255, 255, 255, 0.04) 1px,
-    transparent 1px,
-    transparent 10px
-  );
-">
+<body class="bg-[#EDEDED]">
 
 
 
-<!--  <button type="button" id="openChatbot" class="bg-teal-600 text-white text-xl px-4 py-2 rounded-full shadow hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-400">
+<!-- #ECEFFC <button type="button" id="openChatbot" class="bg-teal-600 text-white text-xl px-4 py-2 rounded-full shadow hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-400">
     💬
   </button>-->
 
@@ -125,7 +117,6 @@
           <a href="/Noticia" class="w-full flex justify-between items-center px-4 py-2 rounded-md transition bg-gradient-to-r from-blue-50 to-white hover:from-blue-200 hover:to-blue-100 hover:text-blue-700 lg:inline-flex lg:items-center lg:space-x-1">
             <i class="fa fa-newspaper-o"></i> <span class="ml-2">NOTICIAS</span>
             <svg class="w-4 h-4 ml-2 lg:ml-1 lg:mt-0 mt-1 transform transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
           </a>
         </li>
@@ -134,7 +125,6 @@
           <a href="/Servicios" class="w-full flex justify-between items-center px-4 py-2 rounded-md transition bg-gradient-to-r from-blue-50 to-white hover:from-blue-200 hover:to-blue-100 hover:text-blue-700 lg:inline-flex lg:items-center lg:space-x-1">
             <i class="fas fa-briefcase"></i> <span class="ml-1">SERVICIOS</span>
             <svg class="w-4 h-4 ml-2 lg:ml-1 lg:mt-0 mt-1 transform transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
             </svg>
           </a>
         </li>

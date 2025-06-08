@@ -9,7 +9,7 @@ require_once('vista/esquema/header.php');
     <div class="flex justify-center items-center">
       <div class="mr-3">
         <!-- Icono de la secretaría -->
-        <img src="imagenes/secretarias/sdhs.png" alt="Icono Secretaría" width="100" height="100" class="mr-3">
+        <img src="imagenes/secretarias/op.png" alt="Icono Secretaría" width="100" height="100" class="mr-3">
       </div>
       <div class="text-left">
         <h1 class="text-4xl font-bold">Secretaría Municipal de Obras Públicas</h1>
