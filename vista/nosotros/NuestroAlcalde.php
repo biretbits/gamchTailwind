@@ -15,8 +15,8 @@ require_once('vista/esquema/header.php');
         </div>
       </div>
       <div class="lg:w-2/3 lg:ml-8">
-        <p class="text-white text-2xl leading-relaxed">Nuestro alcalde, Técnico Superior Marcos Choqueticlla Tito, nació en Challapata. Desde joven ha estado comprometido con el desarrollo de nuestro municipio, impulsando proyectos sociales, educativos y culturales.</p>
-        <p class="text-white mt-4 text-xl">Ha ocupado diversos cargos en el ámbito público y, como alcalde, ha logrado [Mencionar logros importantes].</p>
+        <p class="text-black text-2xl leading-relaxed">Nuestro alcalde, Técnico Superior Marcos Choqueticlla Tito, nació en Challapata. Desde joven ha estado comprometido con el desarrollo de nuestro municipio, impulsando proyectos sociales, educativos y culturales.</p>
+        <p class="text-black mt-4 text-xl">Ha ocupado diversos cargos en el ámbito público y, como alcalde, ha logrado [Mencionar logros importantes].</p>
       </div>
     </div>
   </div>

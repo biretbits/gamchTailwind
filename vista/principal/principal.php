@@ -8,7 +8,7 @@ require_once('vista/esquema/header.php');
 <div class="relative w-full overflow-hidden h-[35vh] sm:h-[90vh]">
   <div id="carouselSlides" class="relative h-full">
     <div class="carousel-item absolute inset-0 transition-opacity duration-700 opacity-100">
-      <img src="imagenes/img-challapata/banner1.webp" alt="Imagen 1" class="w-full h-full object-cover object-center" />
+      <img src="imagenes/img-challapata/Banner1.webp" alt="Imagen 1" class="w-full h-full object-cover object-center" />
     </div>
     <div class="carousel-item absolute inset-0 transition-opacity duration-700 opacity-0 pointer-events-none">
       <img src="imagenes/img-challapata/banner2.jpg" alt="Imagen 2" class="w-full h-full object-cover object-center" />
@@ -163,11 +163,11 @@ require_once('vista/esquema/header.php');
 
      ?>
 <br>
-<div class="p-0 bg-cover bg-center bg-no-repeat" style="font-family: cursive;background-image: url('imagenes/fondo/fondo3.svg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+<div class="p-0 bg-cover bg-center bg-no-repeat" style="font-family: "Homer Simpson UI";background-image: url('imagenes/fondo/fondo3.svg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
   <!-- Encabezado -->
   <div class="text-center py-10">
     <h1  data-aos="zoom-in" data-aos-duration="600" class="text-4xl md:text-5xl font-bold text-[#DC191B] tracking-widest transform transition-all duration-300 hover:scale-110 hover:text-[#A30734] font-serif"
-        style="font-family: cursive;
+        style="font-family:  "Homer Simpson UI";
                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), 0 0 25px rgba(255, 255, 255, 0.1), 0 0 5px rgba(0, 0, 0, 0.2);">
         Destacados
     </h1>
@@ -182,7 +182,7 @@ require_once('vista/esquema/header.php');
     <div class="flex" data-aos="zoom-in" data-aos-duration="600">
       <div class="bg-black bg-opacity-80 text-white rounded-2xl shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl w-full flex flex-col items-center text-center p-6">
         <i class="fas fa-users text-3xl text-yellow-400 mb-4"></i>
-        <h4 class="text-xl font-bold mb-2" style="font-family: cursive;">Desarrollo Humano y Social</h4>
+        <h4 class="text-xl font-bold mb-2" style="font-family: "Homer Simpson UI";">Desarrollo Humano y Social</h4>
         <p class="text-gray-400 mb-4">La Secretaria de Desarrollo Humano y social del G.A.M.CH. es una dependencia que busca mejorar la calidad de vida de los ciudadanos del municipio de Challapata mediante la gestión de servicios de salud y protección de grupos vulnerables deportes alimentacion escolar y desarrollo integral de capacidades humanas.</p>
         <a href="/SDHS" class="btn border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black mt-auto px-4 py-2 rounded transition">Ver más »</a>
       </div>
@@ -192,7 +192,7 @@ require_once('vista/esquema/header.php');
     <div class="flex" data-aos="zoom-in" data-aos-duration="600">
       <div class="bg-black bg-opacity-80 text-white rounded-2xl shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl w-full flex flex-col items-center text-center p-6">
         <i class="fas fa-leaf text-3xl text-yellow-400 mb-4"></i>
-        <h4 class="text-xl font-bold mb-2" style="font-family: cursive;">Desarrollo Productivo</h4>
+        <h4 class="text-xl font-bold mb-2" style="font-family: "Homer Simpson UI";">Desarrollo Productivo</h4>
         <p class="text-gray-400 mb-4">La finalidad de la secretaría de Desarrollo Productivo y Medio Ambiente es gestionar programas y proyectos de desarrollo forestal, agroforestal y manejo de recursos naturales que promuevan actividades productivas sostenibles mientras se conservan los suelos, cuencas y se cumple con las normas ambientales municipales.</p>
         <a href="/SDP" class="btn border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black mt-auto px-4 py-2 rounded transition">Ver más »</a>
       </div>
@@ -202,7 +202,7 @@ require_once('vista/esquema/header.php');
     <div class="flex" data-aos="zoom-in" data-aos-duration="600">
       <div class="bg-black bg-opacity-80 text-white rounded-2xl shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl w-full flex flex-col items-center text-center p-6">
         <i class="fas fa-hard-hat text-3xl text-yellow-400 mb-4"></i>
-        <h4 class="text-xl font-bold mb-2" style="font-family: cursive;">Obras Públicas</h4>
+        <h4 class="text-xl font-bold mb-2" style="font-family: "Homer Simpson UI";">Obras Públicas</h4>
         <p class="text-gray-400 mb-4">La finalidad de la Secretaria de Obras Públicas es planificar ejecutar y administrar la construcción y mantenimiento de infraestructuras públicas, para mejorar las condiciones de vida de los habitantes y promover el desarrollo socio economico del municipio.</p>
         <a href="/SOP" class="btn border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black mt-auto px-4 py-2 rounded transition">Ver más »</a>
       </div>
@@ -212,9 +212,9 @@ require_once('vista/esquema/header.php');
     <div class="flex" data-aos="zoom-in" data-aos-duration="600">
       <div class="bg-black bg-opacity-80 text-white rounded-2xl shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl w-full flex flex-col items-center text-center p-6">
         <i class="fas fa-dollar-sign text-3xl text-yellow-400 mb-4"></i>
-        <h4 class="text-xl font-bold mb-2" style="font-family: cursive;">Finanzas</h4>
+        <h4 class="text-xl font-bold mb-2" style="font-family: "Homer Simpson UI";">Finanzas</h4>
         <p class="text-gray-400 mb-4">La finalidad de la Secretaría de Finanzas es administrar los recursos económicos municipales mediante la planificación, ejecución y control del presupuesto, la recaudación de ingresos y la gestión del gasto público para garantizar la sostenibilidad financiera y el cumplimiento de los objetivos municipales.</p>
-        <a href="/finanzas" class="btn border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black mt-auto px-4 py-2 rounded transition">Ver más »</a>
+        <a href="/SF" class="btn border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black mt-auto px-4 py-2 rounded transition">Ver más »</a>
       </div>
     </div>
 
@@ -222,7 +222,7 @@ require_once('vista/esquema/header.php');
     <div class="flex" data-aos="zoom-in" data-aos-duration="600">
       <div class="bg-black bg-opacity-80 text-white rounded-2xl shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl w-full flex flex-col items-center text-center p-6">
         <i class="fas fa-plane text-3xl text-yellow-400 mb-4"></i>
-        <h4 class="text-xl font-bold mb-2" style="font-family: cursive;">Turismo</h4>
+        <h4 class="text-xl font-bold mb-2" style="font-family: "Homer Simpson UI";">Turismo</h4>
         <p class="text-gray-400 mb-4">Turismo es implementar políticas que promuevan el desarrollo turístico del municipio de Challapata, aprovechando sus atractivos naturales y culturales para generar oportunidades económicas y mejorar la calidad de vida de los habitantes.</p>
         <a href="/turismo" class="btn border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black mt-auto px-4 py-2 rounded transition">Ver más »</a>
       </div>
@@ -232,7 +232,7 @@ require_once('vista/esquema/header.php');
     <div class="flex" data-aos="zoom-in" data-aos-duration="600">
       <div class="bg-black bg-opacity-80 text-white rounded-2xl shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl w-full flex flex-col items-center text-center p-6">
         <i class="fas fa-theater-masks text-3xl text-yellow-400 mb-4"></i>
-        <h4 class="text-xl font-bold mb-2" style="font-family: cursive;">Cultura</h4>
+        <h4 class="text-xl font-bold mb-2" style="font-family: "Homer Simpson UI";">Cultura</h4>
         <p class="text-gray-400 mb-4">La finalidad de Cultura es fomentar el desarrollo de las ciencias, letras y artes en servicio de la cultura nacional, preservando el patrimonio cultural local y promoviendo actividades artísticas y culturales que fortalezcan la identidad del municipio.</p>
         <a href="/cultura" class="btn border border-yellow-400 text-yellow-400 hover:bg-yellow-400 hover:text-black mt-auto px-4 py-2 rounded transition">Ver más »</a>
       </div>

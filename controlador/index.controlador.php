@@ -6,6 +6,13 @@ class IndexControlador{
     $u = new Index();
     $resul = $u->SeleccionarNoticiasNuevas(0,5);
     $resulAlert = $u->SeleccionarNoticiasNuevas(0,2);
+
+    $resulNo = $u->SeleccionarNoticiasDeDosDias(5);//seleccionar noticias pasadas
+    require("vista/principal/principal.php");
+  }
+
+  public static function SeleccionarSession(){
+    $u = new Index();
     $res = $u->SeleccionarNoticiasNuevas(0,3);
     if ($res->num_rows > 0) {
         // Guardar los resultados en un array
@@ -33,8 +40,6 @@ class IndexControlador{
       );
       $_SESSION["TITULOS"] = $resu;
     }
-    $resulNo = $u->SeleccionarNoticiasDeDosDias(5);//seleccionar noticias pasadas
-    require("vista/principal/principal.php");
   }
 }
 

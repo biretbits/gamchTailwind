@@ -63,9 +63,9 @@
   </button>-->
 
 <nav class="bg-white border-gray-200 dark:bg-black-900 dark:border-gray-700 sticky top-0 z-[25]">
-  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
     <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
-      <img src="imagenes/gamch/Logo%20Alcaldía_Mesa%20de%20trabajo%201%20copia.webp" class="h-8" alt="Flowbite Logo" >
+      <img src="imagenes/gamch/Logo%20Alcaldía_Mesa%20de%20trabajo%201%20copia.webp" class="h-12" alt="Flowbite Logo" >
       <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"></span>
     </a>
 
@@ -182,7 +182,7 @@
           </ul>
         </li>
 
-        <?php if (isset($_SESSION['id']) && $_SESSION['id'] != '' && isset($_SESSION['nombre_role']) && $_SESSION['nombre_role'] == 'Admin'): ?>
+        <?php if (isset($_SESSION['id']) && $_SESSION['id'] != '' && isset($_SESSION['nombre_role']) && $_SESSION['nombre_role'] != ''): ?>
           <li class="relative group">
             <button class="submenu-btn w-full flex justify-between items-center px-4 py-2 rounded-md transition bg-gradient-to-r from-blue-50 to-white hover:from-blue-200 hover:to-blue-100 hover:text-blue-700 lg:inline-flex lg:items-center lg:space-x-1">
               <i class="fas fa-tachometer-alt"></i> <span class="ml-2">PANEL</span>
@@ -254,7 +254,7 @@
   }
 
   .animate-scroll-left {
-    animation: scroll-left 44s linear infinite;
+    animation: scroll-left 54s linear infinite;
   }
 </style>
 
@@ -361,51 +361,78 @@
             </div>
             <div class="p-4">
               <div class="flex flex-col space-y-2">
-                <?php if(isset($_SESSION['nombre_role']) && $_SESSION['nombre_role'] == 'Admin'){ ?>
-                  <div data-role="admin,developer">
-                    <a class="flex items-center text-gray-700 hover:text-blue-600" href="/empleado"><i class="fas fa-users-cog mr-3"></i> Gestión de empleados</a>
-                  </div>
-                  <div data-role="admin,developer">
-                    <a class="flex items-center text-gray-700 hover:text-blue-600" href="/usuarios"><i class="fas fa-users-cog mr-3"></i> Gestión de Usuarios</a>
-                  </div>
-                  <div data-role="admin,developer">
-                    <a class="flex items-center text-gray-700 hover:text-blue-600" href="/rolU"><i class="fas fa-users-cog mr-3"></i> Gestión de Role Usuarios</a>
-                  </div>
-                  <div data-role="admin,developer">
-                    <a class="flex items-center text-gray-700 hover:text-blue-600" href="/rol"><i class="fas fa-file-alt mr-3"></i> Gestión de Roles</a>
-                  </div>
-                  <div data-role="employee,admin,developer">
-                    <a class="flex items-center text-gray-700 hover:text-blue-600" href="/Doc"><i class="fas fa-plus-circle mr-3"></i> Gestión Documentos</a>
-                  </div>
-                  <div data-role="employee,admin,developer">
-                    <a class="flex items-center text-gray-700 hover:text-blue-600" href="/Normas"><i class="fas fa-plus-circle mr-3"></i> Gestión de Normativas</a>
-                  </div>
-                  <div data-role="employee,admin,developer">
-                    <a class="flex items-center text-gray-700 hover:text-blue-600" href="/Transparente"><i class="fas fa-plus-circle mr-3"></i> Gestión de Transparencia</a>
-                  </div>
-                  <div data-role="employee,admin,developer">
-                    <a class="flex items-center text-gray-700 hover:text-blue-600" href="/RegNot"><i class="fas fa-plus-circle mr-3"></i> Gestión Noticias</a>
-                  </div>
-                  <div data-role="admin,developer">
-                    <a class="flex items-center text-gray-700 hover:text-blue-600" href="/gTurismo"><i class="fas fa-plane mr-3"></i> Gestión de Turismo</a>
-                  </div>
-                  <div data-role="admin,developer">
-                    <a class="flex items-center text-gray-700 hover:text-blue-600" href="/gCultura"><i class="fas fa-theater-masks mr-3"></i> Gestión de Cultura</a>
-                  </div>
-                  <div data-role="developer">
-                    <a class="flex items-center text-gray-700 hover:text-blue-600" href="#reportes"><i class="fas fa-chart-pie mr-3"></i> Reportes</a>
-                  </div>
-                  <div data-role="developer">
-                    <a class="flex items-center text-gray-700 hover:text-blue-600" href="/baseDeDatos"><i class="fas fa-chart-pie mr-3"></i> Gestión de Base de Datos</a>
-                  </div>
-                <?php } else if(isset($_SESSION['nombre_role']) && $_SESSION['nombre_role'] == 'patrimonio'){ ?>
-                  <div data-role="admin,developer">
-                    <a class="flex items-center text-gray-700 hover:text-blue-600" href="/gTurismo"><i class="fas fa-plane mr-3"></i> Gestión de Turismo</a>
-                  </div>
-                  <div data-role="admin,developer">
-                    <a class="flex items-center text-gray-700 hover:text-blue-600" href="/gCultura"><i class="fas fa-theater-masks mr-3"></i> Gestión de Cultura</a>
-                  </div>
-                <?php } ?>
+                  <?php if(isset($_SESSION['nombre_role']) && $_SESSION['nombre_role'] == 'Admin'){ ?>
+                    <div data-role="admin,developer">
+                      <a class="flex items-center text-gray-700 hover:text-blue-600" href="/empleado"><i class="fas fa-users-cog mr-3"></i> Gestión de empleados</a>
+                    </div>
+                  <?php } ?>
+
+                  <?php if(isset($_SESSION['nombre_role']) && in_array($_SESSION['nombre_role'], ['Admin', 'Developer'])) { ?>
+                    <div data-role="admin,developer">
+                      <a class="flex items-center text-gray-700 hover:text-blue-600" href="/usuarios"><i class="fas fa-users-cog mr-3"></i> Gestión de Usuarios</a>
+                    </div>
+                  <?php } ?>
+
+                  <?php if(isset($_SESSION['nombre_role']) && in_array($_SESSION['nombre_role'], ['Admin', 'Developer'])) { ?>
+                    <div data-role="admin,developer">
+                      <a class="flex items-center text-gray-700 hover:text-blue-600" href="/rolU"><i class="fas fa-users-cog mr-3"></i> Gestión de Role Usuarios</a>
+                    </div>
+                  <?php } ?>
+
+                  <?php if(isset($_SESSION['nombre_role']) && in_array($_SESSION['nombre_role'], ['Admin', 'Developer'])) { ?>
+                    <div data-role="admin,developer">
+                      <a class="flex items-center text-gray-700 hover:text-blue-600" href="/rol"><i class="fas fa-file-alt mr-3"></i> Gestión de Roles</a>
+                    </div>
+                  <?php } ?>
+
+                  <?php if(isset($_SESSION['nombre_role']) && in_array($_SESSION['nombre_role'], ['Employee', 'Admin', 'Developer','Documentos'])) { ?>
+                    <div data-role="employee,admin,developer">
+                      <a class="flex items-center text-gray-700 hover:text-blue-600" href="/Doc"><i class="fas fa-plus-circle mr-3"></i> Gestión Documentos</a>
+                    </div>
+                  <?php } ?>
+
+                  <?php if(isset($_SESSION['nombre_role']) && in_array($_SESSION['nombre_role'], ['Employee', 'Admin', 'Developer','Documentos'])) { ?>
+                    <div data-role="employee,admin,developer">
+                      <a class="flex items-center text-gray-700 hover:text-blue-600" href="/Normas"><i class="fas fa-plus-circle mr-3"></i> Gestión de Normativas</a>
+                    </div>
+                  <?php } ?>
+
+                  <?php if(isset($_SESSION['nombre_role']) && in_array($_SESSION['nombre_role'], ['Employee', 'Admin', 'Developer','Documentos'])) { ?>
+                    <div data-role="employee,admin,developer">
+                      <a class="flex items-center text-gray-700 hover:text-blue-600" href="/Transparente"><i class="fas fa-plus-circle mr-3"></i> Gestión de Transparencia</a>
+                    </div>
+                  <?php } ?>
+
+                  <?php if(isset($_SESSION['nombre_role']) && in_array($_SESSION['nombre_role'], ['Employee', 'Admin', 'Developer'])) { ?>
+                    <div data-role="employee,admin,developer">
+                      <a class="flex items-center text-gray-700 hover:text-blue-600" href="/RegNot"><i class="fas fa-plus-circle mr-3"></i> Gestión Noticias</a>
+                    </div>
+                  <?php } ?>
+
+                  <?php if(isset($_SESSION['nombre_role']) && in_array($_SESSION['nombre_role'], ['Admin', 'Developer'])) { ?>
+                    <div data-role="admin,developer">
+                      <a class="flex items-center text-gray-700 hover:text-blue-600" href="/gTurismo"><i class="fas fa-plane mr-3"></i> Gestión de Turismo</a>
+                    </div>
+                  <?php } ?>
+
+                  <?php if(isset($_SESSION['nombre_role']) && in_array($_SESSION['nombre_role'], ['Admin', 'Developer'])) { ?>
+                    <div data-role="admin,developer">
+                      <a class="flex items-center text-gray-700 hover:text-blue-600" href="/gCultura"><i class="fas fa-theater-masks mr-3"></i> Gestión de Cultura</a>
+                    </div>
+                  <?php } ?>
+
+                  <?php if(isset($_SESSION['nombre_role']) && in_array($_SESSION['nombre_role'], ['Admin', 'Developer'])){ ?>
+                    <div data-role="developer">
+                      <a class="flex items-center text-gray-700 hover:text-blue-600" href="#reportes"><i class="fas fa-chart-pie mr-3"></i> Reportes</a>
+                    </div>
+                  <?php } ?>
+
+                  <?php if(isset($_SESSION['nombre_role']) && in_array($_SESSION['nombre_role'], ['Admin', 'Developer'])){ ?>
+                    <div data-role="developer">
+                      <a class="flex items-center text-gray-700 hover:text-blue-600" href="/baseDeDatos"><i class="fas fa-chart-pie mr-3"></i> Gestión de Base de Datos</a>
+                    </div>
+                  <?php } ?>
+
               </div>
             </div>
           </div>

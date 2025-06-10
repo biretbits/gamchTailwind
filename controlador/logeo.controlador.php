@@ -21,14 +21,16 @@ class LogeoControlador{
 	        } else {
 	  					if (password_verify($contrasena, $fila['contrasena'])) {
 								$id_usuario = $fila["id"];
+								$id_empleado = $fila["empleado_id"];
 									//obtener las credenciales de tipo de usuario y tambien de permisos
 									$resu = $us->rolePermisos($id_usuario);
 									$fi = mysqli_fetch_array($resu);
-									$rr=$us->DatosEmpleado($id_usuario);
+
+									$rr=$us->DatosEmpleado($id_empleado);
 									$fii = mysqli_fetch_array($rr);
-									$_SESSION["nivel_id_emp "]=$fii["nivel_id"];
-									$_SESSION["cargo_id_emp "]=$fii["cargo_id"];
-									$_SESSION["tipo_empleado_emp "]=$fii["tipo_empleado"];
+									$_SESSION["nivel_id_emp"]=$fii["nivel_id"];
+									$_SESSION["cargo_id_emp"]=$fii["cargo_id"];
+									$_SESSION["tipo_empleado_emp"]=$fii["tipo_empleado"];
 									$_SESSION["nombre_emp"]=$fii["nombre"];
 									$_SESSION["apellido_p_emp"]=$fii["apellido_p"];
 									$_SESSION["apellido_m_emp"]=$fii["apellido_m"];
@@ -57,7 +59,7 @@ class LogeoControlador{
 									$_SESSION["creado_en"]=$fi["creado_en"];
 									$_SESSION["actualizado_en"]=$fi["actualizado_en"];
 									$_SESSION["especial"]=$fi["especial"];
-									
+
 									echo "correcto";
 	            } else {
 	                echo 'error'.$usuario."  ".$contrasena;

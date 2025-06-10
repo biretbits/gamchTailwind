@@ -25,6 +25,7 @@ require_once "controlador/baseDeDatos.controlador.php";
     //require('vista/principal/sql.php');
     //include('vista/principal/principalClinica.php');
 
+IndexControlador::SeleccionarSession();
 
 if(isset($_GET["accion"])){
 $_GET["accion"]=$_GET["accion"];

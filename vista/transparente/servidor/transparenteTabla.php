@@ -58,7 +58,7 @@ require_once('vista/esquema/header.php');
 
 <div class="content">
   <div class="container mx-auto px-4">
-    <div class="flex flex-col md:flex-row items-center py-4 text-white">
+    <div class="flex flex-col md:flex-row items-center py-4 text-black">
       <h5 class="text-lg font-semibold">DOCUMENTOS GESTIÓN TRANSPARENTE</h5>
     </div>
     <div class="border rounded shadow-sm p-4 bg-white">

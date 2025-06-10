@@ -22,7 +22,7 @@ require_once('vista/esquema/header.php');
 <!-- Sección de Unidades -->
 <!-- ======= UNIDADES DE LA SECRETARÍA ======= -->
 <section class="container mx-auto py-12">
-  <h2 class="text-center text-3xl mb-8 text-white">Unidades de la Secretaría</h2>
+  <h2 class="text-center text-3xl mb-8 text-[#DC191B]">Unidades de la Secretaría</h2>
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
     <?php
@@ -41,8 +41,8 @@ require_once('vista/esquema/header.php');
 
     foreach ($unidades as $index => $unidad) {
       echo "<div class='col-span-1'>
-              <div class='bg-white bg-opacity-10 border border-white border-opacity-20 rounded-lg p-4 transform transition duration-300 hover:scale-105'>
-                <h5 class='text-lg font-medium text-white'>{$unidad}</h5>
+              <div class='bg-opacity-10 border border-black border-opacity-20 rounded-lg p-4 transform transition duration-300 hover:scale-105'>
+                <h5 class='text-lg font-medium text-black'>{$unidad}</h5>
               </div>
             </div>";
     }

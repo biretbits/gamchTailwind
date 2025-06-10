@@ -62,21 +62,18 @@ class Usuario
     $lis = "select count(*) from usuario where usuario='".$usuario."' and estado='activo'";
     $resul = $this->con->query($lis);
     return $resul;
-    mysqli_close($this->con);
   }
 
   public function validarBDTodo($usuario) {
     $lis = "select * from usuarios where usuario='".$usuario."' and estado='activo'";
     $resul = $this->con->query($lis);
     return $resul;
-    mysqli_close($this->con);
   }
 
   public function DatosEmpleado($id) {
     $lis = "select * from empleados where id = $id";
     $resul = $this->con->query($lis);
     return $resul;
-    mysqli_close($this->con);
   }
 
   public function rolePermisos($id) {
