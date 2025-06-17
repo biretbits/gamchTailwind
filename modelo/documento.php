@@ -260,21 +260,31 @@ class Documento
           public function SeleccionarNoticiasDeDosDias($limite) {
               // Calcular la fecha de hace 5 días (el rango inferior)
             //  $fechaLimite5Dias = date('Y-m-d H:i:s', strtotime('-5 days'));
+            // Rango de fechas: desde hace 5 días hasta hoy
+            $sql = "SELECT MAX(fecha) AS ultima_fecha FROM nuevas_paginas";
+            $resultado = $this->con->query($sql);
 
-              // Calcular la fecha de hace 1 día (el rango superior)
-              //$fechaLimite1Dia = date('Y-m-d H:i:s', strtotime('-2 days'));
-              $fechaLimite5Dias = date('Y-m-d', strtotime('-5 days'));
+            if ($fila = $resultado->fetch_assoc()) {
+                $ultimaFecha = $fila['ultima_fecha']; // string tipo '2025-06-14'
+                //echo "Última fecha:<br><br><br><br> " . $ultimaFecha;
 
-              // Calcular la fecha de hace 1 día (el rango superior)
-              $fechaLimite1Dia = date('Y-m-d', strtotime('-2 days'));
+                // Convertir a timestamp
+                $timestampUltima = strtotime($ultimaFecha);
 
-              // Consulta SQL para obtener noticias entre hace 5 días y hace 1 día
-              $consulta = "SELECT * FROM nuevas_paginas WHERE fecha BETWEEN '$fechaLimite5Dias' AND '$fechaLimite1Dia' ORDER BY id DESC LIMIT $limite";
+                // Calcular rango
+                $fechaInicio = date('Y-m-d', strtotime('-65 days', $timestampUltima));
+                $fechaFin    = date('Y-m-d', strtotime('-4 days', $timestampUltima)); // hace 1 día desde la última
+                //echo "ddd  ".$fechaInicio."     ".$fechaFin;
+                // Consulta con BETWEEN
+                $consulta = "SELECT * FROM nuevas_paginas
+                             WHERE fecha BETWEEN '$fechaInicio' AND '$fechaFin'
+                             ORDER BY id DESC
+                             LIMIT $limite";
 
-              // Ejecutar la consulta y devolver el resultado
-              return $this->con->query($consulta);
+                return $this->con->query($consulta);
+            }
+
           }
-
 
 }
 

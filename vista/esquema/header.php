@@ -52,15 +52,59 @@
         }
 
     </style>
+    <!-- Modal Loader con Tailwind -->
+
 </head>
-
 <body class="bg-[#EDEDED]">
-
-
-
 <!-- #ECEFFC <button type="button" id="openChatbot" class="bg-teal-600 text-white text-xl px-4 py-2 rounded-full shadow hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-400">
     💬
   </button>-->
+  <div id="loaderModal" class="fixed inset-0 z-50 flex items-center justify-center bg-white">
+    <div class="flex flex-col items-center">
+      <!-- Bandera SVG -->
+      <svg viewBox="0 0 600 400" class="w-24 h-16 border-l-4 border-gray-800 shadow" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="flagGradient" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="#d10000" />
+            <stop offset="50%" stop-color="#d10000" />
+            <stop offset="50%" stop-color="#0047ab" />
+            <stop offset="100%" stop-color="#0047ab" />
+          </linearGradient>
+        </defs>
+        <path id="flagPath" fill="url(#flagGradient)" />
+      </svg>
+      <p class="mt-2 text-sm text-gray-600 animate-pulse">Cargando...</p>
+    </div>
+  </div>
+
+  <script>
+    const path = document.getElementById("flagPath");
+    let t = 0;
+
+    function animateFlag() {
+      const wave = (x, amp, freq) => Math.sin(x * freq + t) * amp;
+      let top = "M0,0 ";
+      for (let x = 0; x <= 600; x += 100) {
+        const y = 20 + wave(x / 100, 20, 0.5);
+        top += `Q${x + 50},${y} ${x + 100},0 `;
+      }
+
+      let bottom = "L600,400 ";
+      for (let x = 600; x >= 0; x -= 100) {
+        const y = 400 - wave(x / 100, 20, 0.5);
+        bottom += `Q${x - 50},${y} ${x - 100},400 `;
+      }
+
+      path.setAttribute("d", top + bottom + "Z");
+      t += 0.05;
+      requestAnimationFrame(animateFlag);
+    }
+
+    animateFlag();
+
+    // Ocultar loader cuando todo haya cargado
+
+  </script>
 
 <nav class="bg-white border-gray-200 dark:bg-black-900 dark:border-gray-700 sticky top-0 z-[25]">
   <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">

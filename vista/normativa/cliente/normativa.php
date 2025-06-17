@@ -183,9 +183,10 @@
                                         <?php echo $fila["titulo"]; ?>
                                     </h6>
                                     <!-- Contenido ajustado -->
-                                    <p class="text-xs text-gray-500" style="white-space: normal; overflow-wrap: break-word;">
-                                        <?php echo $fila["contenido"]; ?>
+                                    <p class="text-xs text-gray-500 line-clamp-2">
+                                      <?php echo $fila["contenido"]; ?>
                                     </p>
+
                                     <a href="#" class='text-red-500' onclick="SeguirLeyendo(<?php echo $fila["id"]; ?>)">Ver mas</a>
                                 </div>
                             </div>

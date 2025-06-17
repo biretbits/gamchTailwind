@@ -1,4 +1,16 @@
 <script>
+window.addEventListener("load", () => {
+  const modal = document.getElementById("loaderModal");
+
+  // Esperar 2 segundos antes de comenzar a ocultar el modal
+  setTimeout(() => {
+    modal.classList.add("opacity-0", "pointer-events-none");
+
+    // Esperar animación de salida (fade-out), luego quitar del DOM
+    setTimeout(() => modal.remove(), 500); // 500ms = duración de transición opcional
+  }, 800); // ⏱ 2 segundos de espera extra
+});
+
   // Captura el offcanvas, el botón de abrir y el botón de cerrar
   const offcanvas = document.getElementById('offcanvasWithBackdrop');
   const openLink = document.getElementById('openOffcanvasLink'); // El enlace del header

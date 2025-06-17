@@ -41,6 +41,10 @@ class IndexControlador{
       $_SESSION["TITULOS"] = $resu;
     }
   }
+
+  public static function cargarLoader(){
+    require_once("vista/nosotros/cargar.php");
+  }
 }
 
 

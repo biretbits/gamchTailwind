@@ -107,20 +107,21 @@
         <?php if(mysqli_num_rows($resulNo) > 0){?>
           <?php while($fi = mysqli_fetch_assoc($resulNo)){?>
             <div class="border-t border-red-500 py-0">
-            <div class="flex justify-center items-center overflow-hidden">
-              <img
-                src="<?php echo ($fi['foto'] != '') ? $fi['foto'] : 'imagenes/img-challapata/banner2.jpg'; ?>"
-                alt="Imagen dinámica"
-                class="object-contain max-w-full max-h-40" />
+              <div class="w-full flex justify-center items-center overflow-hidden">
+                <img
+                  src="<?php echo ($fi['foto'] != '') ? $fi['foto'] : 'imagenes/img-challapata/banner2.jpg'; ?>"
+                  alt="Imagen dinámica"
+                  class="object-contain max-h-full max-w-full" />
+              </div>
+              <a href="#" onclick="SeguirLeyendo(<?php echo $fi["id"]; ?>)"
+                 class="block mt-2 mb-1 text-base font-semibold truncate news-title1 text-[#0F1618]">
+                <?php echo $fi["titulo"]; ?>
+              </a>
+              <div class="text-sm text-[#0F1618]">
+                Fecha: <?php echo fechaAnoMesDia($fi["fecha"]); ?>
+              </div>
             </div>
-            <a href="#" onclick="SeguirLeyendo(<?php echo $fi["id"]; ?>)"
-               class="block mt-2 mb-1 text-base font-semibold truncate news-title1 text-[#0F1618]">
-              <?php echo $fi["titulo"]; ?>
-            </a>
-            <div class="text-sm text-[#0F1618] ">
-              Fecha: <?php echo fechaAnoMesDia($fi["fecha"]); ?>
-            </div>
-          </div>
+
 
           <?php } ?>
         <?php } ?>

@@ -82,86 +82,132 @@ require_once('vista/esquema/header.php');
   showSlide(currentIndex);
   intervalId = setInterval(nextSlide, 5000);
 </script>
-
-
 <style>
-        /* Estilos adicionales para hacer que la imagen ocupe casi todo el modal */
-        .swal2-image {
-          width: 100%;
-          height: auto;
-          max-height: 500px; /* Limita el alto de la imagen */
-          object-fit: cover; /* Asegura que la imagen se ajuste bien al contenedor */
+  /* Estilo para mostrar solo 3 líneas de contenido */
+  .swal2-content-clamp {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-height: 60px; /* Fija altura máxima */
+  }
+
+  /* Botón pequeño para cerrar */
+  .swal2-close-button-sm .swal2-confirm {
+    font-size: 12px !important;
+    padding: 6px 12px !important;
+  }
+
+  /* Botón de "Ver más" */
+  .swal2-view-more-button .swal2-cancel {
+    background-color: #3085d6;
+    color: white;
+    font-size: 12px;
+    padding: 6px 12px;
+    margin-right: 10px;
+  }
+
+  .swal2-small-button {
+    font-size: 12px !important;
+    padding: 4px 10px !important;
+    height: auto !important;
+    line-height: 1.2 !important;
+  }
+
+  /* Limitar tamaño del modal */
+  .swal2-popup {
+    max-width: 400px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  /* Control de imagen */
+  .swal2-image {
+    max-width: 100% !important;
+    height: auto !important;
+    border-radius: 4px;
+    margin: 0 auto 10px auto;
+    display: block;
+  }
+
+  /* Limitar el contenido HTML dentro del modal */
+  .swal2-html-container {
+    max-height: 150px;
+    overflow: hidden;
+    padding: 0 15px;
+  }
+</style>
+
+<?php
+if (mysqli_num_rows($resulAlert) > 0) {
+  $fila = mysqli_fetch_assoc($resulAlert);
+
+  // Limitar el contenido a las primeras 3 líneas
+  $contenido = $fila["contenido"];
+  $lineas = explode("\n", $contenido);
+  $contenidoLimitado = implode("\n", array_slice($lineas, 0, 3)); // Solo 3 líneas
+  $id = $fila["id"];
+  echo '<script>
+    window.onload = function() {
+      Swal.fire({
+        html: `
+          <div class="swal2-date-time" style="text-align: left; font-size: 12px;">' . fechaAnoMesDia($fila["fecha"]) . '</div>
+          <div class="swal2-title" style="text-align:center; font-size: 16px; font-weight: bold; margin-top: 10px;">' . $fila["titulo"] . '</div>
+          <div class="swal2-content-clamp">' . nl2br(htmlspecialchars($contenidoLimitado)) . '</div>
+        `,
+        imageUrl: "' . $fila["foto"] . '",
+        imageWidth: "100%",
+        imageHeight: "auto",
+        imageAlt: "Imagen de alerta",
+        showCancelButton: true,
+        cancelButtonText: "Ver más",
+        confirmButtonText: "Cerrar",
+        heightAuto: false,
+        customClass: {
+          htmlContainer: "swal2-html-container",
+          confirmButton: "swal2-small-button",
+          cancelButton: "swal2-small-button"
+        },
+        timer: 9000,
+        timerProgressBar: true,
+      }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.cancel) {
+          SeguirLeyendo(' . $id . ');
         }
-      </style>
-    <!-- Script para mostrar la alerta al cargar la página -->
-    <?php
-    // Simulación de variable que indica si el usuario es admin
-    $esAdmin = true; // o false
+      });
+    };
+  </script>';
+} else {
+  echo '<script>
+    window.onload = function() {
+      Swal.fire({
+        html: `
+          <div class="swal2-date-time" style="text-align: left; font-size: 12px;">' . fechaAnoMesDia(date("Y-m-d")) . '</div>
+          <div class="swal2-title" style="text-align:center; font-size: 16px; font-weight: bold; margin-top: 10px;">Gobierno Autónomo Municipal de Challapata</div>
+          <div class="swal2-content-clamp">Por un municipio saludable, fuerte y con mente productiva</div>
+        `,
+        imageUrl: "/imagenes/gamch/EscudoChallapata2024mediano2.png",
+        imageWidth: "100%",
+        imageHeight: "auto",
+        imageAlt: "Imagen de alerta",
+        showCancelButton: true,
+        confirmButtonText: "Cerrar",
+        heightAuto: false,
+        customClass: {
+          htmlContainer: "swal2-html-container",
+          confirmButton: "swal2-small-button"
+        },
+        timer: 9000,
+        timerProgressBar: true,
+      });
+    };
+  </script>';
+}
+?>
 
-    // Generar el HTML/JS
-    ?>
-    <?php
-      if(mysqli_num_rows($resulAlert)>0){
-        $fila = mysqli_fetch_assoc($resulAlert);
-
-        // Limitar el contenido a las primeras 4 líneas
-        $contenido = $fila["contenido"];
-        $lineas = explode("\n", $contenido);  // Dividir el contenido en líneas
-        $contenidoLimitado = implode("\n", array_slice($lineas, 0, 4));  // Tomar las primeras 4 líneas
-
-        echo '<script>
-        window.onload = function() {
-          const dateTimeText = "Fecha y Hora: 12/01/2025 00:00";
-          Swal.fire({
-            html: `
-              <div class="swal2-date-time" style="text-align: left; font-size: 12px;">' . fechaAnoMesDia($fila["fecha"]) . '</div>
-              <div class="swal2-title" style="text-align:center; font-size: 16px; font-weight: bold; margin-top: 10px;">' . $fila["titulo"] . '</div>
-              <div style="text-align:center; margin-top: 10px;">' . nl2br(htmlspecialchars($contenidoLimitado)) . '</div>  <!-- Mostrar solo las primeras 4 líneas -->
-            `,
-            imageUrl: "' . $fila["foto"] . '",
-            imageWidth: "100%",
-            imageHeight: "auto",
-            imageAlt: "Imagen de alerta",
-            confirmButtonText: "Cerrar",
-            showConfirmButton: true,
-            heightAuto: false,
-            customClass: {
-              htmlContainer: "swal2-html-container"
-            },
-            timer: 9000,
-            timerProgressBar: true,
-          });
-        };
-        </script>';
-      }else{
-        echo '<script>
-        window.onload = function() {
-          const dateTimeText = "Fecha y Hora: 12/01/2025 00:00";
-          Swal.fire({
-            html: `
-              <div class="swal2-date-time" style="text-align: left; font-size: 12px;">' . fechaAnoMesDia(date("Y-m-d")) . '</div>
-              <div class="swal2-title" style="text-align:center; font-size: 16px; font-weight: bold; margin-top: 10px;">Gobierno Aútonomo Municipal de Challapata</div>
-              <div style="text-align:center; margin-top: 10px;">Por un municipio saludable, fuerte y con mente productiva</div>  <!-- Mostrar solo las primeras 4 líneas -->
-            `,
-            imageUrl: "/imagenes/gamch/EscudoChallapata2024mediano2.png",
-            imageWidth: "100%",
-            imageHeight: "auto",
-            imageAlt: "Imagen de alerta",
-            confirmButtonText: "Cerrar",
-            showConfirmButton: true,
-            heightAuto: false,
-            customClass: {
-              htmlContainer: "swal2-html-container"
-            },
-            timer: 9000,
-            timerProgressBar: true,
-          });
-        };
-        </script>';
-
-      }
-
-     ?>
 <br>
 <div class="p-0 bg-cover bg-center bg-no-repeat" style="font-family: "Homer Simpson UI";background-image: url('imagenes/fondo/fondo3.svg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
   <!-- Encabezado -->
@@ -348,20 +394,20 @@ require_once('vista/esquema/header.php');
         <?php if(mysqli_num_rows($resulNo) > 0){?>
           <?php while($fi = mysqli_fetch_assoc($resulNo)){?>
             <div class="border-t border-red-500 py-0">
-            <div class="flex justify-center items-center overflow-hidden">
-              <img
-                src="<?php echo ($fi['foto'] != '') ? $fi['foto'] : 'imagenes/img-challapata/banner2.jpg'; ?>"
-                alt="Imagen dinámica"
-                class="object-contain max-w-full max-h-40" />
+              <div class="w-full flex justify-center items-center overflow-hidden">
+                <img
+                  src="<?php echo ($fi['foto'] != '') ? $fi['foto'] : 'imagenes/img-challapata/banner2.jpg'; ?>"
+                  alt="Imagen dinámica"
+                  class="object-contain max-h-full max-w-full" />
+              </div>
+              <a href="#" onclick="SeguirLeyendo(<?php echo $fi["id"]; ?>)"
+                 class="block mt-2 mb-1 text-base font-semibold truncate news-title1 text-[#0F1618]">
+                <?php echo $fi["titulo"]; ?>
+              </a>
+              <div class="text-sm text-[#0F1618]">
+                Fecha: <?php echo fechaAnoMesDia($fi["fecha"]); ?>
+              </div>
             </div>
-            <a href="#" onclick="SeguirLeyendo(<?php echo $fi["id"]; ?>)"
-               class="block mt-2 mb-1 text-base font-semibold truncate news-title1 text-[#0F1618]">
-              <?php echo $fi["titulo"]; ?>
-            </a>
-            <div class="text-sm text-[#0F1618] ">
-              Fecha: <?php echo fechaAnoMesDia($fi["fecha"]); ?>
-            </div>
-          </div>
 
           <?php } ?>
         <?php } ?>
