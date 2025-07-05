@@ -43,6 +43,9 @@ class Index
     $resultado = $this->con->query($sql);
 
     if ($fila = $resultado->fetch_assoc()) {
+        if($fila["ultima_fecha"] == null || $fila["ultima_fecha"] == ''){
+          $fila["ultima_fecha"] = date("Y-m-d");
+        }
         $ultimaFecha = $fila['ultima_fecha']; // string tipo '2025-06-14'
         //echo "Última fecha:<br><br><br><br> " . $ultimaFecha;
 

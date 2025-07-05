@@ -162,14 +162,11 @@ if (mysqli_num_rows($resulAlert) > 0) {
         imageWidth: "100%",
         imageHeight: "auto",
         imageAlt: "Imagen de alerta",
-        showCancelButton: true,
-        cancelButtonText: "Ver más",
         confirmButtonText: "Cerrar",
         heightAuto: false,
         customClass: {
           htmlContainer: "swal2-html-container",
           confirmButton: "swal2-small-button",
-          cancelButton: "swal2-small-button"
         },
         timer: 9000,
         timerProgressBar: true,
@@ -193,7 +190,6 @@ if (mysqli_num_rows($resulAlert) > 0) {
         imageWidth: "100%",
         imageHeight: "auto",
         imageAlt: "Imagen de alerta",
-        showCancelButton: true,
         confirmButtonText: "Cerrar",
         heightAuto: false,
         customClass: {

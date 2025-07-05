@@ -28,7 +28,6 @@
      Zoom: 100% | Usa la rueda del mouse para zoom | Arrastra para mover
    </div>
  </div>
-
  <script>
  class OrganigramaViewer {
      constructor() {
@@ -63,7 +62,6 @@
 
      setupEventListeners() {
          // Eventos del mouse
-         this.container.addEventListener('wheel', this.handleWheel.bind(this));
          this.container.addEventListener('mousemove', this.handleMouseMove.bind(this));
          this.container.addEventListener('mouseleave', this.hideMagnifier.bind(this));
          this.container.addEventListener('mousedown', this.handleMouseDown.bind(this));
@@ -75,20 +73,14 @@
          this.container.addEventListener('touchmove', this.handleTouchMove.bind(this), { passive: false });
          this.container.addEventListener('touchend', this.handleTouchEnd.bind(this));
 
-         // Controles
+         // Botones de zoom
          document.getElementById('zoomIn').addEventListener('click', () => this.zoom(1.2));
          document.getElementById('zoomOut').addEventListener('click', () => this.zoom(0.8));
          document.getElementById('reset').addEventListener('click', () => this.reset());
 
-         // Prevenir comportamientos por defecto
+         // Prevenir comportamiento predeterminado
          this.container.addEventListener('contextmenu', e => e.preventDefault());
          this.mainImage.addEventListener('dragstart', e => e.preventDefault());
-     }
-
-     handleWheel(e) {
-         e.preventDefault();
-         const delta = e.deltaY > 0 ? 0.9 : 1.1;
-         this.zoom(delta, e.clientX, e.clientY);
      }
 
      handleMouseMove(e) {
@@ -104,10 +96,7 @@
          const x = e.clientX - rect.left;
          const y = e.clientY - rect.top;
 
-         // Calcular posición en la imagen original
          const imageRect = this.mainImage.getBoundingClientRect();
-         const containerRect = this.container.getBoundingClientRect();
-
          const relativeX = (e.clientX - imageRect.left) / imageRect.width;
          const relativeY = (e.clientY - imageRect.top) / imageRect.height;
 
@@ -115,8 +104,6 @@
              this.magnifier.style.display = 'block';
              this.magnifier.style.left = (x - 100) + 'px';
              this.magnifier.style.top = (y - 100) + 'px';
-
-             // Configurar imagen de fondo para la lupa
              this.magnifier.style.backgroundImage = `url(${this.mainImage.src})`;
              this.magnifier.style.backgroundPosition =
                  `${-relativeX * this.mainImage.naturalWidth * 8 + 100}px ${-relativeY * this.mainImage.naturalHeight * 8 + 100}px`;
@@ -148,7 +135,6 @@
          this.translateX += deltaX;
          this.translateY += deltaY;
 
-         this.constrainTranslation();
          this.updateTransform();
 
          this.lastX = e.clientX;
@@ -187,7 +173,6 @@
              this.translateX += deltaX;
              this.translateY += deltaY;
 
-             this.constrainTranslation();
              this.updateTransform();
 
              this.lastX = e.touches[0].clientX;
@@ -217,40 +202,14 @@
          return Math.sqrt(dx * dx + dy * dy);
      }
 
-     zoom(factor, centerX = null, centerY = null) {
-         const oldScale = this.scale;
+     zoom(factor) {
          this.setScale(this.scale * factor);
-
-         if (centerX !== null && centerY !== null) {
-             const rect = this.container.getBoundingClientRect();
-             const offsetX = centerX - rect.left - rect.width / 2;
-             const offsetY = centerY - rect.top - rect.height / 2;
-
-             this.translateX -= offsetX * (this.scale - oldScale) / oldScale;
-             this.translateY -= offsetY * (this.scale - oldScale) / oldScale;
-
-             this.constrainTranslation();
-             this.updateTransform();
-         }
      }
 
      setScale(newScale) {
          this.scale = Math.max(this.minScale, Math.min(this.maxScale, newScale));
-         this.constrainTranslation();
          this.updateTransform();
          this.updateInfo();
-     }
-
-     constrainTranslation() {
-         const containerRect = this.container.getBoundingClientRect();
-         const imageWidth = this.mainImage.naturalWidth * this.scale;
-         const imageHeight = this.mainImage.naturalHeight * this.scale;
-
-         const maxTranslateX = Math.max(0, (imageWidth - containerRect.width) / 2);
-         const maxTranslateY = Math.max(0, (imageHeight - containerRect.height) / 2);
-
-         this.translateX = Math.max(-maxTranslateX, Math.min(maxTranslateX, this.translateX));
-         this.translateY = Math.max(-maxTranslateY, Math.min(maxTranslateY, this.translateY));
      }
 
      updateTransform() {
@@ -274,13 +233,14 @@
 
      updateInfo() {
          const zoomPercent = Math.round(this.scale * 100);
-         this.info.textContent = `Zoom: ${zoomPercent}% | ${this.isTouch ? 'Pellizca para zoom' : 'Rueda del mouse para zoom'} | Arrastra para mover`;
+         this.info.textContent = `Zoom: ${zoomPercent}% | Arrastra para mover | Usa los botones para hacer zoom`;
      }
  }
 
- // Inicializar cuando la página esté cargada
  document.addEventListener('DOMContentLoaded', () => {
      new OrganigramaViewer();
  });
  </script>
+
+
 <?php require("vista/esquema/footeruni.php"); ?>

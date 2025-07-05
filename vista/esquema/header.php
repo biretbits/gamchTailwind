@@ -3,7 +3,23 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>Gobierno Autónomo Municipal de Challapata</title>
+    <title>G.A.M. Challapata</title>
+    <meta name="description" content="Portal oficial del municipio de Challapata. Información, servicios, noticias y más.">
+    <meta name="keywords" content="Challapata, Oruro, Bolivia, gobierno, municipio">
+    <meta name="author" content="Gobierno Autónomo Municipal de Challapata">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Open Graph para compartir en redes sociales -->
+    <meta property="og:title" content="Challapata - Municipio Oficial">
+    <meta property="og:description" content="Portal oficial del municipio de Challapata.">
+    <meta property="og:image" content="http://challapata.gob.bo/LEYES-MUNICIPALES"> <!-- URL de tu logo -->
+    <meta property="og:url" content="http://challapata.gob.bo/">
+    <meta property="og:type" content="website">
+
+    <!-- Favicon (ícono en pestaña del navegador) -->
+    <link rel="icon" href="/imagenes/gamch/escudoo.ico" type="image/webp">
+
+
     <script src='/vista/esquema/browser@4.js'></script>
 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -298,7 +314,7 @@
   }
 
   .animate-scroll-left {
-    animation: scroll-left 54s linear infinite;
+    animation: scroll-left 70s linear infinite;
   }
 </style>
 
