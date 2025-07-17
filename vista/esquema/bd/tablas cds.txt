@@ -1,0 +1,232 @@
+tabla farmaci
+CREATE TABLE producto (
+    cod_generico INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    codigo CHAR(20),
+    nombre char(150),
+    enfermedad char(150) DEFAULT '',
+    vitrina char(30),
+    stockmin int,
+    stockmax int,
+    cod_forma INT,
+    cod_conc INT,
+    estado CHAR(10) DEFAULT 'activo',
+    FOREIGN KEY (cod_forma) REFERENCES forma_presentacion(cod_forma)
+        ON DELETE RESTRICT
+        ON UPDATE RESTRICT,
+    FOREIGN KEY (cod_conc) REFERENCES conc_uni_med(cod_conc)
+        ON DELETE RESTRICT
+        ON UPDATE RESTRICT
+);
+
+
+CREATE TABLE entrada (
+    cod_entrada INT NOT NULL AUTO_INCREMENT,
+    cantidad INT,
+    cantidad_actual INT,
+    stock_min INT,
+    stock_max INT,
+    vitrina CHAR(30),
+    fecha DATE,
+    vencimiento DATE,
+    cod_producto INT,
+    cod_forma INT,
+    cod_conc INT,
+ 	estado CHAR(10) DEFAULT 'activo',
+    PRIMARY KEY (cod_entrada), -- Definimos solo una clave primaria
+    FOREIGN KEY (cod_producto) REFERENCES producto(cod_producto) ON DELETE RESTRICT ON UPDATE RESTRICT,
+    FOREIGN KEY (cod_forma) REFERENCES forma_presentacion(cod_forma) ON DELETE RESTRICT ON UPDATE RESTRICT,
+    FOREIGN KEY (cod_conc) REFERENCES conc_uni_med(cod_conc) ON DELETE RESTRICT ON UPDATE RESTRICT
+);
+
+create table salida(
+cod_salida int not null auto_increment primary key,
+cantidad int,
+cod_usuario int,
+cod_producto int,
+ estado CHAR(10) DEFAULT 'activo',
+foreign key(cod_usuario)references usuario(cod_usuario)on delete restrict on update restrict,
+foreign key(cod_producto)references producto(cod_producto)on delete restrict on update restrict);
+
+
+CREATE TABLE entrada_total (
+    cod_total INT NOT NULL AUTO_INCREMENT PRIMARY KEY, -- Corrección en "prmary"
+    cantidad_total INT,
+    cod_producto INT,
+ estado CHAR(10) DEFAULT 'activo',
+    FOREIGN KEY (cod_producto) REFERENCES producto(cod_producto) ON DELETE RESTRICT ON UPDATE RESTRICT
+);
+
+CREATE TABLE p (
+    cod_producto INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    codigo CHAR(10),
+    cod_generico char(200),
+    cod_forma char(200),
+    cod_conc char(200)
+);
+
+drop table nombre_generico;
+drop table conc_uni_med;
+drop table forma_presentacion;
+create table nombre_generico(cod_generico int not null auto_increment primary key,nombre char(150));
+create table conc_uni_med(cod_conc int not null auto_increment primary key,concentracion char(60));
+create table forma_presentacion(cod_forma int not null auto_increment primary key,nombre_forma char(150));
+
+LOAD DATA INFILE 'F:/unidad.csv' INTO TABLE  conc_uni_med FIELDS TERMINATED BY ','   ENCLOSED BY '"' LINES TERMINATED BY '\n'(concentracion);
+LOAD DATA INFILE 'F:/nombre_generico.txt' INTO TABLE  nombre_generico FIELDS TERMINATED BY ','   ENCLOSED BY '"' LINES TERMINATED BY '\n'(nombre);
+LOAD DATA INFILE 'F:/forma.csv' INTO TABLE  forma_presentacion FIELDS TERMINATED BY ','   ENCLOSED BY '"' LINES TERMINATED BY '\n'(nombre_forma);
+
+
+LOAD DATA INFILE 'F:/ahora.txt' INTO TABLE  p FIELDS TERMINATED BY ','   ENCLOSED BY '"' LINES TERMINATED BY '\n'(codigo,cod_generico,cod_forma,cod_conc);
+
+create table stock_producto(
+cod_stock int not null auto_increment primary key,
+cod_producto int,
+estado_stock char(10) DEFAULT 'no',
+
+
+)
+
+create table salida(
+    -> cod_salidad int not null auto_increment primary key,
+    -> cantidad_salida int,
+    -> cod_generico int,
+    -> foreign key(cod_generico)references producto(cod_generico)on delete restrict on update restrict)
+
+
+
+ss
+cod_salidad       int  pk
+cantidad_salida   int
+cod_generico      int  fk
+cod_usuario       int  mul
+cod_paciente      int  mul
+fecha             date
+estado            char
+
+create table salida(
+  cod_salida int not null auto_increment primary key,
+  nombre_receta char(200),
+  entregado char(15) default 'no',
+  cod_usuario int,
+  cod_paciente int,
+  fechaHora datetime,
+  estado char(10)default 'activo',
+  foreign key(cod_usuario)references usuario(cod_usuario)on delete restrict on update restrict,
+  foreign key(cod_paciente)references usuario(cod_usuario)on delete restrict on update restrict);
+
+   create table productoSolicitado(
+  cod_solicitado int not null auto_increment primary key,
+  cantidad_solicitada int,
+  codigos_entrada text,
+  cantidadRestado text,
+  fechaHora datetime,
+  cod_producto int,
+  cod_salida int,
+  foreign key(cod_producto)references producto(cod_generico)on delete restrict on update restrict,
+  foreign key(cod_salida)references salida(cod_salida)on delete restrict on update restrict);
+
+    cod_entrada       | int(11)  | NO   | PRI | NULL    | auto_increment |
+   | cantidad          | int(11)  | YES  |     | NULL    |                |
+   | respaldo_cantidad | int(11)  | YES  |     | NULL    |                |
+   | manipulado        | char(3)  | YES  |     | no      |                |
+   | vencimiento       | date     | YES  |     | NULL    |                |
+   | fecha             | date     | YES  |     | NULL    |                |
+   | hora              | time     | YES  |     | NULL    |                |
+   | cod_usuario       | int(11)  | YES  | MUL | NULL    |                |
+   | cod_generico      | int(11)  | YES  | MUL | NULL    |                |
+   | estado_producto   | char(50) | YES  |     | activo  |                |
+   | estado            | char(10) | YES  |     | activo  |
+
+   create table entrada(
+   cod_entrada int not null auto_increment primary key,
+   cantidad int,
+   respaldo_cantidad int,
+   manipulado char(3),
+   vencimiento date,
+   fecha date,
+   hora time,
+   cod_usuario int,
+   cod_generico int,
+   estado_producto char(50) default 'activo',
+   estado char(10) default 'activo',
+   foreign key(cod_usuario)references usuario(cod_usuario)on delete restrict on update restrict,
+   foreign key(cod_generico)references producto(cod_generico)on delete restrict on update restrict);
+
+
+create table tipoRespuesta(
+cod_tipo int not null auto_increment primary key,
+respuesta char(20)
+);
+create table consultas(
+cod_cons int not null auto_increment primary key,
+consulta text,
+respuesta_consulta text,
+cod_tipo int,
+foreign key(cod_tipo)references tipoRespuesta(cod_tipo)on delete restrict on update restrict
+);
+
+create table respuesta(
+cod_resp int not null auto_increment primary key,
+subconsulta text,
+subrespuesta text,
+cod_cons int,
+foreign key(cod_cons)references consultas(cod_cons)on delete restrict on update restrict);
+
+
+para poner un tipo de autentificacion con contraseña
+mysql -u root -p
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '1234';
+FLUSH PRIVILEGES;
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '1234';
+FLUSH PRIVILEGES;
+
+
+
+use centro;
+CREATE USER 'centro'@'localhost' IDENTIFIED BY '123';
+GRANT ALL PRIVILEGES ON cds.* TO 'centro'@'localhost';
+FLUSH PRIVILEGES;
+
+CenDeSaCalacala nombre de dominio
+sudo nano /etc/apache2/sites-available/mi-nombre-de-host.conf
+
+para apache configurar
+<VirtualHost *:80>
+    ServerAdmin webmaster@CenDeSaCalacala.local
+    ServerName CenDeSaCalacala.local
+    DocumentRoot /var/www/html/centrods
+
+    <Directory /var/www/html/centrods>
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/mi-nombre-de-host_error.log
+    CustomLog ${APACHE_LOG_DIR}/mi-nombre-de-host_access.log combined
+</VirtualHost>
+
+
+
+
+y esto es para habilitar el archivo
+sudo a2ensite mi-nombre-de-host.conf
+para desahibilitar
+sudo a2dissite 000-default.conf
+reiniciar el apache2
+sudo systemctl restart apache2
+
+
+Si estás configurando un nombre de dominio local para pruebas, edita el archivo /etc/hosts en tu máquina local para asociar el nombre de dominio con la IP de tu servidor:
+
+Editar el archivo /etc/hosts:
+
+bash
+Copiar código
+sudo nano /etc/hosts
+Agregar una línea para el nombre de dominio:
+
+lua
+Copiar código
+3.17.11.95    CenDeSaCalacala.local
+Guarda el archivo. Esto permite que tu máquina local resuelva mi-nombre-de-host.local a la IP de tu servidor.
