@@ -263,51 +263,60 @@ class DocumentoControlador{
   public static function BuscarDocumento($buscar){
     $us = new Documento();  // Creando una nueva instancia de la clase Usuario
     $resul = $us->BuscarDocumentoFiltrar($buscar);
-    echo "<div class='container-sm'>
-    <div class='row mt-4 mb-4'>";
+    echo '<div class="container mx-auto px-5 mt-5">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">';
 
-        if ($resul && mysqli_num_rows($resul) > 0) {
-            while($doc = mysqli_fetch_array($resul)) {
-                if($doc['publicar'] == 1){
-                  echo "
-                  <div class='col-md-6 mb-4'>
-                      <div class='card card-shadow h-100' data-aos='fade-right' data-aos-duration='1200'>
-                          <div class='card-body'>
-                              <div class='row'>
-                                  <div class='col-8'>
-                                      <h6 class='font-medium'>". $doc['nombre_documento'] ."</h6>
-                                      <hr>
-                                      <p class='text-muted mt-3'>". $doc['descripcion'] ."</p>
-                                  </div>
-                                  <div class='col-4 text-center'>
-                                      <a href='". $doc['archivo'] ."' target='_blank'>
-                                          <img src='/imagenes/pdf.png' alt='PDF' style='max-width: 50px;'>
-                                      </a>
-                                      <h6 class='font-medium mt-2' style='font-size: 11px;'>". $doc['fecha_creacion'] ."</h6>
-                                      <a href='". $doc['archivo'] ."' download='". $doc['nombre_documento'] .".pdf'>
-                                          <i class='fa fa-download fa-2x text-danger mt-2'></i>
-                                      </a>
+            if ($resul && mysqli_num_rows($resul) > 0) {
+              while ($doc = mysqli_fetch_array($resul)) {
+                  if ($doc["publicar"] == 1) {
+                      echo '
+                      <div class="col-md-6 mb-4" data-aos="fade-right" data-aos-duration="1200">
+                          <div class="bg-white rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300">
+                              <div class="p-6">
+                                  <div class="flex flex-col sm:flex-row gap-4">
+                                      <div class="w-full sm:w-9/12">
+                                          <h6 class="font-medium text-md text-gray-800">' . $doc['nombre_documento'] . '</h6>
+                                          <hr class="my-2">
+                                          <p class="text-sm text-gray-600 mt-3">' . $doc['descripcion'] . '</p>
+                                          <hr class="my-2">
+                                          <h6 class="font-medium text-xs text-gray-500">' . $doc['fecha_creacion'] . '</h6>
+                                      </div>
+
+                                      <div class="w-full sm:w-2/12 flex flex-col sm:flex-row items-center justify-center text-center space-y-2 sm:space-y-0 sm:space-x-2">
+                                        <a href="javascript:void(0)"
+                                           class="bg-red-600 text-white text-sm py-2 px-4 rounded shadow-sm hover:bg-orange-700 flex items-center gap-2"
+                                           data-bs-toggle="modal"
+                                           data-bs-target="#pdfModal"
+                                           onclick="ejecutar(\'' . $doc['archivo'] . '\')">
+                                          <i class="fas fa-eye"></i>
+                                          <span>Ver</span>
+                                        </a>
+
+                                        <a href="' . $doc['archivo'] . '"
+                                           download="' . $doc['nombre_documento'] . '.pdf"
+                                           class="text-red-600 hover:text-red-700 flex items-center">
+                                          <i class="fa fa-download fa-2x"></i>
+                                        </a>
+                                      </div>
+
                                   </div>
                               </div>
                           </div>
+                      </div>';
+                  }
+              }
+            } else {
+              echo '
+              <div class="col-md-6 mb-4">
+                  <div class="bg-white rounded-lg shadow-xl hover:shadow-2xl transition-all duration-300">
+                      <div class="p-6 text-center">
+                          <p class="text-gray-500 mb-0">NO SE ENCONTRARON DOCUMENTOS</p>
                       </div>
-                  </div>";
-
-                }
+                  </div>
+              </div>';
             }
-        } else {
-            echo "
-            <div class='col-md-6 mb-4'>
-                <div class='card card-shadow h-100' data-aos='fade-right' data-aos-duration='1200'>
-                    <div class='card-body text-center'>
-                        <p class='text-muted mb-0'>NO SE ENCONTRARON DOCUMENTOS</p>
-                    </div>
-                </div>
-            </div>";
-        }
-    echo "</div>
-</div>
-";
+    echo '</div>
+  </div>';
 
   }
 

@@ -22,6 +22,8 @@ require_once "controlador/transparente.controlador.php";
 require_once "controlador/secretaria.controlador.php";
 require_once "controlador/chat.controlador.php";
 require_once "controlador/baseDeDatos.controlador.php";
+require_once "controlador/nivel.controlador.php";
+require_once "controlador/cargo.controlador.php";
     //require('vista/principal/sql.php');
     //include('vista/principal/principalClinica.php');
 
@@ -190,7 +192,14 @@ if (isset($_SESSION["usuario"]) && $_SESSION["usuario"] !='') {
         UsuarioControlador::RegistrarPermiso($a); return;
     }else if($_GET["accion"] == "empleado"){
       EmpleadoControlador::VistaTablaEmpleado();return;
+    }else if($_GET["accion"] == "regNivelEmpleado"){
+       $a=array("id"=>$_POST["id"],
+       "nivel"=>$_POST["nivel"],
+       "fecha_creacion"=>$_POST["fecha_creacion"],
+      );
+       NivelesControlador::registrarNivelEmpleado($a);return;
     }
+
     if($_GET["accion"] == "buscandoCargoNuevo"){
       EmpleadoControlador::buscandoCargoDeEmpleado($_POST["buscar"]);return;
     }
@@ -284,6 +293,36 @@ if (isset($_SESSION["usuario"]) && $_SESSION["usuario"] !='') {
     if($_GET["accion"] == "ImportarBD"){
       BaseDeDatosControlador::ImportaRbd();return;
     }
+    if($_GET["accion"] == "buscarNivelEmpleado"){
+        NivelesControlador::BuscarNivelEmpleadoNuevo($_POST["pagina"], $_POST["listarDeCuanto"], $_POST["buscar"]); return;
+    }
+
+    if($_GET["accion"] == "eliminarNivelEmpleado"){
+      NivelesControlador::EliminarRegistro($_POST["id"]); return;
+    }
+
+    if($_GET["accion"] == "CargosEmple"){
+      CargosControlador::VisualizarCargos();return;
+    }
+    if($_GET["accion"] == "buscarCargo"){
+        CargosControlador::BuscarCargosEmpleadoNuevo($_POST["pagina"], $_POST["listarDeCuanto"], $_POST["buscar"]); return;
+    }
+
+    if($_GET["accion"] == "buscandoNivelJe"){
+      CargosControlador::buscandoCargoNivelJe($_POST["buscar"]);return;
+    }
+
+    if($_GET["accion"] == "regCargoNew"){
+      $a=array("id"=>$_POST["id"],
+      "id_nivel"=>$_POST["id_nivel"],
+      "cargo"=>$_POST["cargo"],
+      "fecha_creacion"=>$_POST["fecha_creacion"]);
+      CargosControlador::registrarCargo($a);return;
+   }
+
+   if($_GET["accion"] == "eliminarCARGOnEW"){
+     CargosControlador::EliminarRegistro($_POST["id"]); return;
+    }
 
 
 }
@@ -339,6 +378,8 @@ if ($_GET["accion"] == "salir") {
     NosotrosControlador::visualizarOrganigrama();
 }else if ($_GET["accion"] == "SUBALCALDIA") {
     NosotrosControlador::visualizarSUBALCALDIAS();
+}else if($_GET["accion"] == "NivelesEmple"){
+    NivelesControlador::visualizarNivelesEmpleado();
 }
 
 

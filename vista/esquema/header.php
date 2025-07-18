@@ -463,21 +463,32 @@
                     </div>
                   <?php } ?>
 
-                  <?php if(isset($_SESSION['nombre_role']) && in_array($_SESSION['nombre_role'], ['Employee', 'Admin', 'Developer'])) { ?>
+                  <?php if(isset($_SESSION['nombre_role']) && in_array($_SESSION['nombre_role'], ['Employee', 'Admin', 'Developer','Noticia'])) { ?>
                     <div data-role="employee,admin,developer">
-                      <a class="flex items-center text-gray-700 hover:text-blue-600" href="/RegNot"><i class="fas fa-plus-circle mr-3"></i> Gestión Noticias</a>
+                      <a class="flex items-center text-gray-700 hover:text-blue-600" href="/RegNot"><i class="fas fa-newspaper mr-3"></i> Gestión Noticias</a>
                     </div>
                   <?php } ?>
 
-                  <?php if(isset($_SESSION['nombre_role']) && in_array($_SESSION['nombre_role'], ['Admin', 'Developer'])) { ?>
+                  <?php if(isset($_SESSION['nombre_role']) && in_array($_SESSION['nombre_role'], ['Admin', 'Developer','Patrimonio'])) { ?>
                     <div data-role="admin,developer">
                       <a class="flex items-center text-gray-700 hover:text-blue-600" href="/gTurismo"><i class="fas fa-plane mr-3"></i> Gestión de Turismo</a>
                     </div>
                   <?php } ?>
 
-                  <?php if(isset($_SESSION['nombre_role']) && in_array($_SESSION['nombre_role'], ['Admin', 'Developer'])) { ?>
+                  <?php if(isset($_SESSION['nombre_role']) && in_array($_SESSION['nombre_role'], ['Admin', 'Developer','Patrimonio'])) { ?>
                     <div data-role="admin,developer">
                       <a class="flex items-center text-gray-700 hover:text-blue-600" href="/gCultura"><i class="fas fa-theater-masks mr-3"></i> Gestión de Cultura</a>
+                    </div>
+                  <?php } ?>
+
+                  <?php if(isset($_SESSION['nombre_role']) && in_array($_SESSION['nombre_role'], ['Niveles', 'Admin'])) { ?>
+                    <div data-role="admin,developer">
+                      <a class="flex items-center text-gray-700 hover:text-blue-600" href="/NivelesEmple"><i class="fas fa-user-tie mr-3"></i> Gestión de Nivel de Empleado</a>
+                    </div>
+                  <?php } ?>
+                  <?php if(isset($_SESSION['nombre_role']) && in_array($_SESSION['nombre_role'], ['Niveles', 'Admin'])) { ?>
+                    <div data-role="admin,developer">
+                      <a class="flex items-center text-gray-700 hover:text-blue-600" href="/CargosEmple"><i class="fas fa-user-tie mr-3"></i> Gestión de Cargos</a>
                     </div>
                   <?php } ?>
 

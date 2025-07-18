@@ -250,8 +250,10 @@
         </div>
 
         <!-- Canvas Container with scroll -->
-        <div class="container-md max-h-[60vh] overflow-auto" id="canvas-container">
-          <canvas id="pdf_canvas" class="w-full border shadow-sm rounded"></canvas>
+        <div id="pdf_container" class="w-full max-w-[1000px] mx-auto">
+          <div id="canvas-container">
+            <canvas id="pdf_canvas" class="border border-gray-300 block mx-auto"></canvas>
+          </div>
         </div>
       </div>
 
@@ -301,153 +303,153 @@ function BuscarUsuarios(page){
   }
 
 
-  pdfjsLib.GlobalWorkerOptions.workerSrc = 'vista/activos/pdf-js/pdf.worker.min.js';
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'vista/activos/pdf-js/pdf.worker.min.js';
 
-let archivoPDF = "";
+    let archivoPDF = "";
 
-// Función para ejecutar el visor PDF
-function ejecutar(ruta) {
-  document.getElementById('pdfModal').classList.remove('hidden');
-  archivoPDF = ruta; // Asigna la ruta al archivo PDF
-  loadPDF(archivoPDF); // Carga el PDF
-  const button = document.getElementById('download');
-  const buttonp = document.getElementById('print');
+    // Función para ejecutar el visor PDF
+    function ejecutar(ruta) {
+      document.getElementById('pdfModal').classList.remove('hidden');
+      archivoPDF = ruta;
+      loadPDF(archivoPDF);
+      const button = document.getElementById('download');
+      const buttonp = document.getElementById('print');
 
-  // Asignar el archivo PDF al atributo data-pdf
-  button.setAttribute('data-pdf', archivoPDF);
-  buttonp.setAttribute('data-pdf', archivoPDF);
-}
-function closeModal() {
-  document.getElementById('pdfModal').classList.add('hidden');
-}
-let pdfDoc = null,
-    pageNum = 1,
-    pageRendering = false,
-    pageNumPending = null,
-    scale = 1.5;
+      button.setAttribute('data-pdf', archivoPDF);
+      buttonp.setAttribute('data-pdf', archivoPDF);
+    }
 
-const canvas = document.getElementById("pdf_canvas");
-const ctx = canvas.getContext('2d');
+    function closeModal() {
+      document.getElementById('pdfModal').classList.add('hidden');
+    }
 
-// Función para renderizar la página
-function renderPage(num) {
-  pageRendering = true;
-
-  pdfDoc.getPage(num).then((page) => {
-    const viewport = page.getViewport({ scale: scale });
-    const outputScale = window.devicePixelRatio || 1;
-
-    canvas.width = Math.floor(viewport.width * outputScale);
-    canvas.height = Math.floor(viewport.height * outputScale);
-    canvas.style.width = `${viewport.width}px`;
-    canvas.style.height = `${viewport.height}px`;
-
-    const transform = outputScale !== 1 ? [outputScale, 0, 0, outputScale, 0, 0] : null;
-
-    const renderContext = {
-      canvasContext: ctx,
-      transform: transform,
-      viewport: viewport
-    };
-
-    const renderTask = page.render(renderContext);
-    renderTask.promise.then(() => {
-      pageRendering = false;
-      if (pageNumPending !== null) {
-        renderPage(pageNumPending);
+    let pdfDoc = null,
+        pageNum = 1,
+        pageRendering = false,
         pageNumPending = null;
+
+    const canvas = document.getElementById("pdf_canvas");
+    const ctx = canvas.getContext('2d');
+
+    // ✅ Función para renderizar la página con escala dinámica responsiva
+    function renderPage(num) {
+      pageRendering = true;
+
+      pdfDoc.getPage(num).then((page) => {
+        const container = document.getElementById("pdf_container");
+        const containerWidth = container ? container.clientWidth : window.innerWidth;
+
+        const unscaledViewport = page.getViewport({ scale: 1 });
+        const scale = containerWidth / unscaledViewport.width;
+        const viewport = page.getViewport({ scale });
+
+        const outputScale = window.devicePixelRatio || 1;
+
+        canvas.width = Math.floor(viewport.width * outputScale);
+        canvas.height = Math.floor(viewport.height * outputScale);
+        canvas.style.width = `${viewport.width}px`;
+        canvas.style.height = `${viewport.height}px`;
+
+        const transform = outputScale !== 1 ? [outputScale, 0, 0, outputScale, 0, 0] : null;
+
+        const renderContext = {
+          canvasContext: ctx,
+          transform: transform,
+          viewport: viewport
+        };
+
+        const renderTask = page.render(renderContext);
+        renderTask.promise.then(() => {
+          pageRendering = false;
+          if (pageNumPending !== null) {
+            renderPage(pageNumPending);
+            pageNumPending = null;
+          }
+        });
+      });
+
+      document.getElementById('page_num_input').value = num;
+    }
+
+    // ✅ Re-renderizar en redimensionamiento de pantalla
+    window.addEventListener("resize", () => {
+      if (pdfDoc) {
+        renderPage(pageNum);
       }
     });
-  });
 
-  document.getElementById('page_num_input').value = num;
-}
-
-// Función para agregar las páginas a la cola
-function queueRenderPage(num) {
-  if (pageRendering) {
-    pageNumPending = num;
-  } else {
-    renderPage(num);
-  }
-}
-
-// Función para ir a la página anterior
-function onPrevPage() {
-  if (pageNum <= 1) return;
-  pageNum--;
-  queueRenderPage(pageNum);
-}
-
-// Función para ir a la siguiente página
-function onNextPage() {
-  if (pageNum >= pdfDoc.numPages) return;
-  pageNum++;
-  queueRenderPage(pageNum);
-}
-
-// Cargar el archivo PDF
-function loadPDF(archivoPDF) {
-  document.getElementById('loading-message').style.display = 'block'; // Muestra el mensaje de carga
-  pdfjsLib.getDocument(archivoPDF).promise.then((pdfDoc_) => {
-    pdfDoc = pdfDoc_;
-    document.getElementById('loading-message').style.display = 'none'; // Oculta el mensaje de carga
-    document.getElementById('top-bar').style.display = 'block'; // Muestra la barra superior
-    document.getElementById('page_count').textContent = pdfDoc.numPages;
-    renderPage(pageNum);
-  }).catch((error) => {
-    document.getElementById('loading-message').style.display = 'none'; // Oculta el mensaje de carga en caso de error
-    document.getElementById('canvas-container').innerHTML = '<div class="text-danger">No se pudo cargar el PDF.</div>';
-  });
-}
-
-// Eventos para los botones de navegación
-document.getElementById('prev').addEventListener('click', onPrevPage);
-document.getElementById('next').addEventListener('click', onNextPage);
-
-// Funcionalidad para cambiar la página desde el input
-document.getElementById('page_num_input').addEventListener('keypress', function(event) {
-  if (event.key === 'Enter') {
-    const inputPageNum = parseInt(this.value, 10);
-    if (inputPageNum >= 1 && inputPageNum <= pdfDoc.numPages) {
-      pageNum = inputPageNum;
-      queueRenderPage(pageNum);
-    } else {
-      alert(`Por favor, ingrese un número válido (1 - ${pdfDoc.numPages}).`);
+    // Función para agregar las páginas a la cola
+    function queueRenderPage(num) {
+      if (pageRendering) {
+        pageNumPending = num;
+      } else {
+        renderPage(num);
+      }
     }
-  }
-});
 
-// Descargar PDF
-document.getElementById('download').addEventListener('click', () => {
-  const datapdf = document.getElementById("download").getAttribute('data-pdfd');
-  const link = document.createElement('a');
-  link.href = datapdf;
-  link.download = archivoPDF.split('/').pop();
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-});
+    function onPrevPage() {
+      if (pageNum <= 1) return;
+      pageNum--;
+      queueRenderPage(pageNum);
+    }
 
-// Imprimir PDF
-document.getElementById('print').addEventListener('click', () => {
-  const archivoPDF = document.getElementById('print').getAttribute('data-pdf');
+    function onNextPage() {
+      if (pageNum >= pdfDoc.numPages) return;
+      pageNum++;
+      queueRenderPage(pageNum);
+    }
 
-  // Abre el PDF en una nueva pestaña
-  const printWindow = window.open(archivoPDF, '_blank');
-  printWindow.focus();
+    function loadPDF(archivoPDF) {
+      document.getElementById('loading-message').style.display = 'block';
+      pdfjsLib.getDocument(archivoPDF).promise.then((pdfDoc_) => {
+        pdfDoc = pdfDoc_;
+        document.getElementById('loading-message').style.display = 'none';
+        document.getElementById('top-bar').style.display = 'block';
+        document.getElementById('page_count').textContent = pdfDoc.numPages;
+        renderPage(pageNum);
+      }).catch((error) => {
+        document.getElementById('loading-message').style.display = 'none';
+        document.getElementById('canvas-container').innerHTML = '<div class="text-danger">No se pudo cargar el PDF.</div>';
+      });
+    }
 
-  // Espera a que la ventana cargue y luego imprime
-  printWindow.onload = function() {
-    printWindow.print();
-  };
-});
+    document.getElementById('prev').addEventListener('click', onPrevPage);
+    document.getElementById('next').addEventListener('click', onNextPage);
 
-// Bloqueo clic derecho (opcional)
-document.addEventListener('contextmenu', function(event) {
-  event.preventDefault();
-});
+    document.getElementById('page_num_input').addEventListener('keypress', function(event) {
+      if (event.key === 'Enter') {
+        const inputPageNum = parseInt(this.value, 10);
+        if (inputPageNum >= 1 && inputPageNum <= pdfDoc.numPages) {
+          pageNum = inputPageNum;
+          queueRenderPage(pageNum);
+        } else {
+          alert(`Por favor, ingrese un número válido (1 - ${pdfDoc.numPages}).`);
+        }
+      }
+    });
 
+    document.getElementById('download').addEventListener('click', () => {
+      const datapdf = document.getElementById("download").getAttribute('data-pdf');
+      const link = document.createElement('a');
+      link.href = datapdf;
+      link.download = archivoPDF.split('/').pop();
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+
+    document.getElementById('print').addEventListener('click', () => {
+      const archivoPDF = document.getElementById('print').getAttribute('data-pdf');
+      const printWindow = window.open(archivoPDF, '_blank');
+      printWindow.focus();
+      printWindow.onload = function() {
+        printWindow.print();
+      };
+    });
+
+    document.addEventListener('contextmenu', function(event) {
+      event.preventDefault();
+    });
 
 </script>
 
