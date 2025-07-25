@@ -44,7 +44,7 @@ function crearDataBase(){
   crearTablaPermisosUsuario($conn);
   crearTablaDocumentos($conn);
   crearTablaNormativas($conn);
-  crearTablaGestionTransparente($conn);
+  crearTablagestiontransparente($conn);
   crearTablaDocumentos($conn);
   crearTablaNuevasPaginas($conn);
   crearTablaBorradores($conn);
@@ -420,9 +420,9 @@ function crearTablaNormativas($conn){
 }
 
 
-function crearTablaGestionTransparente($conn){
+function crearTablagestiontransparente($conn){
   // Eliminar la tabla si ya existe
-  $sql = "CREATE TABLE IF NOT EXISTS `gestionTransparente` (
+  $sql = "CREATE TABLE IF NOT EXISTS `gestiontransparente` (
     `id` INT AUTO_INCREMENT PRIMARY KEY,
     `usuario_id` INT NOT NULL,
     `categoria` VARCHAR(255),

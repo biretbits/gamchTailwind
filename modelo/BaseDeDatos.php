@@ -43,62 +43,61 @@ class BaseDeDatos
     //mysqli_close($this->con);
   }
 
-
   public function ImportarYcrearBd($ruta) {
-    // Obtiene la información de la base de datos
-    $conn = new Conexion();
-    $dBD = $conn->getDatabase();
-    $database = $dBD['database'];
+      $conn = new Conexion();
+      $dBD = $conn->getDatabase();
+      $database = $dBD['database'];
 
-    // Crear la base de datos si no existe
-    $sqlCreateDb = "CREATE DATABASE IF NOT EXISTS `$database`";
-    if ($this->con->query($sqlCreateDb) === TRUE) {
-        // Selecciona la base de datos recién creada
-        $this->con->select_db($database);
+      $sqlCreateDb = "CREATE DATABASE IF NOT EXISTS `$database`";
+      if ($this->con->query($sqlCreateDb) === TRUE) {
+          $this->con->select_db($database);
 
-        // Verifica si el archivo existe y es legible
-        if (file_exists($ruta) && is_readable($ruta)) {
-            // Lee el contenido del archivo SQL
-            $sql = file_get_contents($ruta);
+          if (file_exists($ruta) && is_readable($ruta)) {
+              $sql = file_get_contents($ruta);
 
-            // Ejecuta el archivo SQL
-            if ($this->con->multi_query($sql)) {
-                $counter = 0;  // Contador para saber cuántas consultas se han ejecutado
-                do {
-                    // Almacena resultados para evitar errores de lectura
-                    if ($result = $this->con->store_result()) {
-                        $result->free();
-                    }
+              // Dividimos las consultas usando ';' para poder mostrar la consulta que falla
+              $consultas = array_filter(array_map('trim', explode(';', $sql)));
 
-                    // Imprime la consulta actual para rastrear el progreso
-                    //echo "Ejecutando consulta: $counter\n";  // Mostrar el contador de consultas
+              if ($this->con->multi_query($sql)) {
+                  $counter = 0;
+                  do {
+                      if ($result = $this->con->store_result()) {
+                          $result->free();
+                      }
 
-                    // Muestra la consulta que se está ejecutando
-                    //echo "Consulta SQL: " . $sql . "\n";
+                      //echo "Ejecutando consulta: $counter\n";
 
-                    // Si ocurre un error, muestra detalles de la consulta y el error
-                    if ($this->con->errno) {
-                        echo "Error en la consulta: " . $this->con->error . "\n";
-                        "Consulta que falló: " . $sql . "\n";
-                        break;  // Detiene la ejecución en caso de error
-                    }
+                      // Mostrar solo la consulta actual (si existe)
+                      if (isset($consultas[$counter])) {
+                          //echo "Consulta SQL que se está ejecutando:\n" . $consultas[$counter] . ";\n";
+                      } else {
+                          //echo "Consulta SQL no encontrada para índice $counter\n";
+                      }
 
-                    $counter++;
+                      if ($this->con->errno) {
+                          //echo "Error en la consulta: " . $this->con->error . "\n";
+                          if (isset($consultas[$counter])) {
+                              //echo "Consulta que falló:\n" . $consultas[$counter] . ";\n";
+                          }
+                          break;  // Detiene la ejecución si hay error
+                      }
 
-                } while ($this->con->more_results() && $this->con->next_result());
+                      $counter++;
 
-                echo "Correcto";
-            } else {
-                // Imprime error de la ejecución del multi_query
-                echo "Error en la importación";
-            }
-        } else {
-            echo "El archivo no se encuentra o no es legible";
-        }
-    } else {
-        echo "Error al crear la base de datos";
-    }
-}
+                  } while ($this->con->more_results() && $this->con->next_result());
+
+                  echo "Correcto";
+
+              } else {
+                  echo "Error en la ejecución general del multi_query: " . $this->con->error . "\n";
+              }
+          } else {
+              echo "El archivo no se encuentra o no es legible\n";
+          }
+      } else {
+          echo "Error al crear la base de datos: " . $this->con->error . "\n";
+      }
+  }
 
 
 }
