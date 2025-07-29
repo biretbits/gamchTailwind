@@ -18,7 +18,7 @@ class Transparente
     // Convertir $buscar a minúsculas si está definido
       $buscar = strtolower(trim($buscar));
       // Base SQL
-      $sql = "SELECT * FROM gestionTransparente";
+      $sql = "SELECT * FROM gestiontransparente";
 
       // Parámetros dinámicos
       $tipos = '';         // Tipos para bind_param (s: string, i: integer)
@@ -71,7 +71,7 @@ class Transparente
     $id = $a["id"];
     if ($id != "") {
         // ACTUALIZAR
-          $sql = "UPDATE gestionTransparente SET
+          $sql = "UPDATE gestiontransparente SET
             categoria = '".$a["categoria"]."',
             cod = '".$a["cod"]."',
             descripcion = '".$a["descripcion"]."',
@@ -83,7 +83,7 @@ class Transparente
         // Solo actualizar archivo si se subió uno nuevo
         if ($r != '') {
             // Obtener archivo actual
-            $s = "SELECT archivo FROM gestionTransparente WHERE id = $id";
+            $s = "SELECT archivo FROM gestiontransparente WHERE id = $id";
             $res = $this->con->query($s);
             if ($f = mysqli_fetch_array($res)) {
                 $archivoAnterior = $f["archivo"];
@@ -101,7 +101,7 @@ class Transparente
         return $resul;
     } else {
         // INSERTAR NUEVO
-        $sql = "INSERT INTO gestionTransparente (
+        $sql = "INSERT INTO gestiontransparente (
             usuario_id, categoria, cod, descripcion, fecha_creacion,
             archivo, nombre_documento, estado, publicar, creado_en, actualizado_en
         ) VALUES (
