@@ -30,7 +30,7 @@ class Documento
           $parametros[] = '%' . strtolower($buscar) . '%';
           $parametros[] = '%' . strtolower($buscar) . '%'; // Este faltaba
       }
-        $sql .= " ORDER BY id DESC";
+        $sql .= " ORDER BY fecha_creacion DESC";
 
         if (is_numeric($inicioList) && is_numeric($listarDeCuanto)) {
           $sql .= " LIMIT ? OFFSET ?";
@@ -86,7 +86,7 @@ class Documento
         }
 
         public function SeleccionarDocumentos($ruta){
-            $sql = "select *from documentos where categoria = '$ruta' order by id desc";
+            $sql = "select *from documentos where categoria = '$ruta' order by fecha_creacion desc";
             $resul = $this->con->query($sql);
             return $resul;
         }
@@ -105,7 +105,7 @@ class Documento
               $parametros[] = '%' . strtolower($buscar) . '%';
               $parametros[] = '%' . strtolower($buscar) . '%'; // Este faltaba
           }
-            $sql .= " ORDER BY id DESC";
+            $sql .= " ORDER BY fecha_creacion DESC";
             // Preparar la consulta
             $stmt = $this->con->prepare($sql);
             // Verifica si la preparación fue exitosa

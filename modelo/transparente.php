@@ -37,7 +37,7 @@ class Transparente
       $sql.=" where categoria = '$categoria' ";
     }
 
-    $sql .= " ORDER BY id DESC";
+    $sql .= " ORDER BY fecha_creacion DESC";
 
     if (is_numeric($inicioList) && is_numeric($listarDeCuanto)) {
         $sql .= " LIMIT ? OFFSET ?";
