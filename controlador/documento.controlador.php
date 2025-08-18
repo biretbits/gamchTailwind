@@ -260,9 +260,9 @@ class DocumentoControlador{
     }
   }
 
-  public static function BuscarDocumento($buscar){
+  public static function BuscarDocumento($buscar,$ruta){
     $us = new Documento();  // Creando una nueva instancia de la clase Usuario
-    $resul = $us->BuscarDocumentoFiltrar($buscar);
+    $resul = $us->BuscarDocumentoFiltrar($buscar,$ruta);
     echo '<div class="container mx-auto px-5 mt-5">
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6">';
 
@@ -276,10 +276,17 @@ class DocumentoControlador{
                                   <div class="flex flex-col sm:flex-row gap-4">
                                       <div class="w-full sm:w-9/12">
                                           <h6 class="font-medium text-md text-gray-800">' . $doc['nombre_documento'] . '</h6>
-                                          <hr class="my-2">
-                                          <p class="text-sm text-gray-600 mt-3">' . $doc['descripcion'] . '</p>
-                                          <hr class="my-2">
-                                          <h6 class="font-medium text-xs text-gray-500">' . $doc['fecha_creacion'] . '</h6>
+                                          <hr class="my-2">';
+
+
+                                         echo "<p id='descripcion-" . $doc['id'] . "' class='text-sm text-gray-500 mt-2 line-clamp-4'>";
+                                         echo htmlspecialchars($doc['descripcion']);
+                                         echo "</p>";
+                                         // Botón para alternar entre "ver más" y "ver menos"
+                                         echo "<button id='verMasBtn-" . $doc['id'] . "' class='text-blue-500 hover:text-blue-700 mt-2' onclick='toggleDescripcion(" . $doc['id'] . ")'>Ver más</button>";
+
+                                         echo '<hr class="my-2">
+                                            <h6 class="font-medium text-xs text-gray-500">Fecha: ' . $doc['fecha_creacion'] . ' Código: '.$doc['cod'].'</h6>
                                       </div>
 
                                       <div class="w-full sm:w-2/12 flex flex-col sm:flex-row items-center justify-center text-center space-y-2 sm:space-y-0 sm:space-x-2">

@@ -7,8 +7,8 @@ window.addEventListener("load", () => {
     modal.classList.add("opacity-0", "pointer-events-none");
 
     // Esperar animación de salida (fade-out), luego quitar del DOM
-    setTimeout(() => modal.remove(), 200); // 500ms = duración de transición opcional
-  }, 400); // ⏱ 2 segundos de espera extra
+    setTimeout(() => modal.remove(), 100); // 500ms = duración de transición opcional
+  }, 50); // ⏱ 2 segundos de espera extra
 });
 
   // Captura el offcanvas, el botón de abrir y el botón de cerrar

@@ -356,7 +356,7 @@ if($_GET["accion"] == "Noticia"){
     DocumentoControlador::ViewNoticias();
 }
 else if($_GET["accion"] == "buscando"){
-    DocumentoControlador::BuscarDocumento($_POST["buscar"]);
+    DocumentoControlador::BuscarDocumento($_POST["buscar"],$_POST["ruta"]);
 }else
 if ($_GET["accion"] == "salir") {
     sesionControlador::Destroy();

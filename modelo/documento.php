@@ -91,7 +91,7 @@ class Documento
             return $resul;
         }
 
-        public function BuscarDocumentoFiltrar($buscar="") {
+        public function BuscarDocumentoFiltrar($buscar="",$ruta='') {
           // Convertir $buscar a minúsculas si está definido
             $buscar = strtolower(trim($buscar));
             // Base SQL
@@ -99,11 +99,18 @@ class Documento
             // Parámetros dinámicos
             $tipos = '';         // Tipos para bind_param (s: string, i: integer)
             $parametros = [];    // Valores a enlazar
+            $si = 'no';
             if ($buscar !== "") {
               $sql .= " WHERE (LOWER(nombre_documento) LIKE ? OR LOWER(datos_documento) LIKE ?)";
               $tipos .= 'ss';
               $parametros[] = '%' . strtolower($buscar) . '%';
               $parametros[] = '%' . strtolower($buscar) . '%'; // Este faltaba
+              $si = "si";
+          }
+          if($si == "si"){
+            $sql.=" and categoria = '$ruta'";
+          }else{
+            $sql.=" where categoria = '$ruta'";
           }
             $sql .= " ORDER BY fecha_creacion DESC";
             // Preparar la consulta
@@ -116,7 +123,7 @@ class Documento
             if (!empty($parametros)) {
               $stmt->bind_param($tipos, ...$parametros);
             }
-
+          //  echo $sql;
             // Ejecutar y obtener resultados
             $stmt->execute();
             $resul = $stmt->get_result();

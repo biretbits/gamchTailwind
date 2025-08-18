@@ -31,7 +31,7 @@
 
         <input type="text" id='buscar' name="buscar" placeholder="Buscar..." class="w-full py-3 px-4 text-lg border rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500" onkeyup="buscando()">
     </div>
-
+<input type="hidden" name="ruta" id='ruta' value="<?php echo $ruta;  ?>">
     <div id="verDatos">
         <div class="container mx-auto px-5 mt-5">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -46,10 +46,16 @@
                                     <div class="flex flex-col sm:flex-row gap-4">
                                         <div class="w-full sm:w-9/12">
                                             <h6 class="font-medium text-md text-gray-800">' . $doc['nombre_documento'] . '</h6>
-                                            <hr class="my-2">
-                                            <p class="text-sm text-gray-600 mt-3">' . $doc['descripcion'] . '</p>
-                                            <hr class="my-2">
-                                            <h6 class="font-medium text-xs text-gray-500">' . $doc['fecha_creacion'] . '</h6>
+                                            <hr class="my-2">';
+                                            echo "<p id='descripcion-" . $doc['id'] . "' class='text-sm text-gray-500 mt-2 line-clamp-4'>";
+                                            echo htmlspecialchars($doc['descripcion']);
+                                            echo "</p>";
+                                            // Botón para alternar entre "ver más" y "ver menos"
+                                            echo "<button id='verMasBtn-" . $doc['id'] . "' class='text-blue-500 hover:text-blue-700 mt-2' onclick='toggleDescripcion(" . $doc['id'] . ")'>Ver más</button>";
+
+
+                                        echo'<hr class="my-2">
+                                            <h6 class="font-medium text-xs text-gray-500">Fecha: ' . $doc['fecha_creacion'] . ' Código: '.$doc['cod'].'</h6>
                                         </div>
 
                                         <div class="w-full sm:w-2/12 flex flex-col sm:flex-row items-center justify-center text-center space-y-2 sm:space-y-0 sm:space-x-2">
@@ -161,7 +167,7 @@
         var buscar = document.getElementById("buscar").value;
         var datos = new FormData(); // Crear un objeto FormData vacío
         datos.append("buscar", buscar);
-
+        datos.append("ruta", document.getElementById("ruta").value);
         $.ajax({
             url: "/buscando",
             type: "POST",
@@ -327,7 +333,21 @@
       document.addEventListener('contextmenu', function(event) {
         event.preventDefault();
       });
+      function toggleDescripcion(id) {
+          const descripcion = document.getElementById('descripcion-' + id);
+          const btn = document.getElementById('verMasBtn-' + id);
+
+          // Si el texto está recortado, mostramos todo el texto y cambiamos el botón
+          if (descripcion.classList.contains('line-clamp-4')) {
+              descripcion.classList.remove('line-clamp-4');
+              btn.innerText = 'Ver menos';
+          } else {
+              descripcion.classList.add('line-clamp-4');
+              btn.innerText = 'Ver más';
+          }
+      }
 
 </script>
+
 
 <?php require("vista/esquema/footeruni.php"); ?>
